@@ -336,6 +336,12 @@ const number = ref('5521996641590')
   background-attachment: fixed;
 }
 
+@supports (-webkit-touch-callout: none) {
+  .fifth-container {
+    background-attachment: scroll; /* Desativa o fixed no iOS */
+  }
+}
+
 .field-contact {
   display: flex;
   flex-direction: column;
