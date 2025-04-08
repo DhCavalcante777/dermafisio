@@ -144,8 +144,7 @@ const number = ref('5521996641590')
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center -50px;
-  /*background-attachment: fixed;*/
-  background-attachment: scroll;
+  background-attachment: fixed;
   opacity: 0.09;
   z-index: 1;
 }
