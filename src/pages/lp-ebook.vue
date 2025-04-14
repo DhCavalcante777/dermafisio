@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
-    <div class="row background-ebook pb-5">
-      <div class="col-10 col-sm-6 mx-auto ">
+    <div class="row background-ebook py-5">
+      <div class="col-10 col-sm-7 mx-auto d-flex flex-column justify-content-center align-items-center">
         <p class="text-white text-center title-ebook">
           <strong>Quer ter uma vida saudável ?</strong>
         </p>
@@ -9,7 +9,7 @@
           A Susu vai te ajudar. Baixei o e-book gratuito, coma bem e de forma saudável.
         </p>
       </div>
-      <div class="col-10 mx-auto">
+      <div class="col-10 col-sm-4 mx-auto">
         <img
           src="../assets/image/e-book/e-bookCozinharAlegraAAlma.png"
           class="img-fluid"
@@ -18,13 +18,13 @@
       </div>
     </div>
     <div class="row ebook-content pb-5">
-      <div class="col-10 col-sm-6 mx-auto">
+      <div class="col-10 col-sm-10 mx-auto">
         <p class="text-center title-ebook">
           <strong>O que você vai encontrar no e-book?</strong>
         </p>
         <div class="row">
           <div
-            class="col-12 col-sm-6 d-flex justify-content-center align-items-center"
+            class="col-12 col-sm-10 mx-auto d-flex justify-content-center align-items-center"
           >
             <img
               src="../assets/image/e-book/ic-certinho.png"
@@ -38,7 +38,7 @@
         </div>
         <div class="row">
           <div
-            class="col-12 col-sm-6 d-flex justify-content-center align-items-center"
+            class="col-12 col-sm-10 mx-auto d-flex justify-content-center align-items-center"
           >
             <img
               src="../assets/image/e-book/ic-certinho.png"
@@ -52,7 +52,7 @@
         </div>
         <div class="row">
           <div
-            class="col-12 col-sm-6 d-flex justify-content-center align-items-center"
+            class="col-12 col-sm-10 mx-auto d-flex justify-content-center align-items-center"
           >
             <img
               src="../assets/image/e-book/ic-certinho.png"
@@ -66,7 +66,7 @@
         </div>
         <div class="row">
           <div
-            class="col-12 col-sm-6 d-flex justify-content-center align-items-center"
+            class="col-12 col-sm-10 mx-auto d-flex justify-content-center align-items-center"
           >
             <img
               src="../assets/image/e-book/ic-certinho.png"
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-sm-6 mx-auto gift-ebook pb-5">
+    <div class="col-12 col-sm-10 mx-auto gift-ebook pb-5">
       <p class="text-center gift-ebook-title">
         <strong>Este presente é para você!</strong>
       </p>
@@ -102,7 +102,7 @@
       id="ebook-promotion"
       class="row ebook-promotion pb-5"
     >
-      <div class="col-12 col-sm-6 mx-auto">
+      <div class="col-12 col-sm-10 mx-auto">
         <p class="text-center ebook-promotion-title text-white">
           <strong>Promoção de Inauguração!</strong>
         </p>
@@ -116,14 +116,14 @@
           </p>
         </div>
 
-        <div class="col-12 col-sm-6 mx-auto mt-4">
+        <div class="col-12 col-sm-10 mx-auto mt-4">
           <p class="text-center ebook-promotion-title text-white">
             <strong>Óleos essenciais - Aprenda a usar em casa</strong>
           </p>
-          <p class="text-center ebook-promotion-description text-white">
+          <p class="text-center ebook-promotion-description text-white pb-3">
             Este e-book exclusivo foi criado para ajudar você a entender como os óleos essenciais podem transformar sua saúde e bem-estar. Aprenda:
           </p>
-          <ul class="benefits-list text-white">
+          <ul class="benefits-list text-white pb-3 d-flex flex-column align-items-center">
             <li>Como usar óleos essenciais no dia a dia.</li>
             <li>Benefícios para a saúde física e emocional.</li>
             <li>Receitas práticas para aromaterapia.</li>
@@ -234,7 +234,6 @@ const redirectToPayment = () => {
 
 .title-ebook {
   font-size: 28px;
-  margin-top: 20px;
   margin-bottom: 20px;
 }
 
