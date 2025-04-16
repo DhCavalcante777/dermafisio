@@ -1,6 +1,16 @@
 <template>
   <div class="container-fluid px-0">
     <div class="firts-container background-image">
+      <nav class="navbar">
+      <ul class="navbar-list">
+        <li class="navbar-item">
+          <a href="/" class="navbar-link">Home</a>
+        </li>
+        <li class="navbar-item">
+          <a href="/e-book-release" class="navbar-link">E-books</a>
+        </li>
+      </ul>
+    </nav>
       <div class="home">
         <p class="description">Bem vindo a</p>
         <img class="logo" src="../assets/image/logo.png" alt="Logo" />
@@ -117,6 +127,39 @@ const message = ref('Olá. Gostaria de agendar uma consulta.');
 const number = ref('5521996641590')
 </script>
 <style scoped>
+.navbar {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  font-size: 16px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #fa5894;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar-link:hover {
+  color: #fee9a6;
+}
+
 .firts-container {
   height: 180px;
   width: 100%;
