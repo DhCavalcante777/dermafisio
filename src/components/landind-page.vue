@@ -2,19 +2,23 @@
   <div class="container-fluid px-0">
     <div class="firts-container background-image">
       <nav class="navbar">
-      <ul class="navbar-list">
-        <li class="navbar-item">
-          <a href="/" class="navbar-link">Home</a>
-        </li>
-        <li class="navbar-item">
-          <a href="/e-book-release" class="navbar-link">E-books</a>
-        </li>
-      </ul>
-    </nav>
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="/" class="navbar-link">Home</a>
+          </li>
+          <li class="navbar-item">
+            <a href="/e-book-release" class="navbar-link">E-books</a>
+          </li>
+        </ul>
+      </nav>
       <div class="home">
         <p class="description">Bem vindo a</p>
         <img class="logo" src="../assets/image/logo.png" alt="Logo" />
-        <button type="button" class="primary-button" onclick="window.location.href='#treatments'">
+        <button
+          type="button"
+          class="primary-button"
+          onclick="window.location.href='#treatments'"
+        >
           Conheça nossos serviços
         </button>
       </div>
@@ -34,60 +38,147 @@
     <img class="separation" src="../assets/image/separation.png" alt="bolas" />
     <div class="third-container">
       <p class="reference-title">Referência em excelência</p>
-      <div class="depoimento">
-        <img src="../assets/image/campoDeTextoMobile.png" alt="" class="field-text" />
-        <div class="depoimento-text">
-          <p>Fomos acreditados pela ANCEC devido ao alto padrão dos nossos tratamentos.</p>
-          <p>Os resultados comprovam nossa qualidade</p>
+      <div class="depoimento-container">
+        <div class="depoimento animated-left">
+          <img
+            src="../assets/image/campoDeTextoMobile.png"
+            alt=""
+            class="field-text"
+          />
+          <div class="depoimento-text">
+            <p>
+              Fomos acreditados pela ANCEC devido ao alto padrão dos nossos
+              tratamentos.
+            </p>
+            <p>Os resultados comprovam nossa qualidade</p>
+          </div>
         </div>
+        <img
+          class="depoimento-img animated-right"
+          src="../assets/image/suelen-depoimento.png"
+          alt="suelen"
+        />
       </div>
-      <img class="depoimento-img" src="../assets/image/suelen-depoimento.png" alt="suelen" />
-      <p class="title-premios">
-        Selo Referência Nacional
-      </p>
+      <p class="title-premios">Selo Referência Nacional</p>
       <div class="premios">
-        <img class="selo-rubi" src="../assets/image/seloRubiDeitado.png" alt="">
-        <img class="selo-diamante" src="../assets/image/seloDiamanteLaranja.png" alt="">
+        <img
+          class="selo-rubi"
+          src="../assets/image/seloRubiDeitado.png"
+          alt=""
+        />
+        <img
+          class="selo-diamante"
+          src="../assets/image/seloDiamanteLaranja.png"
+          alt=""
+        />
       </div>
     </div>
     <div class="fourth-container" id="treatments">
-      <p class="results-title">
-        Nossos tratamentos
-      </p>
-      <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <p class="results-title">Nossos tratamentos</p>
+      <div
+        id="carouselExampleDark"
+        class="carousel carousel-dark slide"
+        data-bs-ride="carousel"
+      >
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="5" aria-label="Slide 3"></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="3"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="4"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="5"
+            aria-label="Slide 3"
+          ></button>
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="2000">
-            <img src="../assets/image/terapiaCapilar.png" class="d-block w-100" alt="...">
+            <img
+              src="../assets/image/terapiaCapilar.png"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
           <div class="carousel-item" data-bs-interval="2000">
-            <img src="../assets/image/tratamentoDeEstrias.png" class="d-block w-100" alt="...">
+            <img
+              src="../assets/image/tratamentoDeEstrias.png"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
           <div class="carousel-item" data-bs-interval="2000">
-            <img src="../assets/image/tratamentosCorporais.png" class="d-block w-100" alt="...">
+            <img
+              src="../assets/image/tratamentosCorporais.png"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
           <div class="carousel-item" data-bs-interval="2000">
-            <img src="../assets/image/liftingDePapada.png" class="d-block w-100" alt="...">
+            <img
+              src="../assets/image/liftingDePapada.png"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
           <div class="carousel-item" data-bs-interval="2000">
-            <img src="../assets/image/tratamentosFaciais.png" class="d-block w-100" alt="...">
+            <img
+              src="../assets/image/tratamentosFaciais.png"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
           <div class="carousel-item" data-bs-interval="2000">
-            <img src="../assets/image/fisioterapiaPelvica.png" class="d-block w-100" alt="...">
+            <img
+              src="../assets/image/fisioterapiaPelvica.png"
+              class="d-block w-100"
+              alt="..."
+            />
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="prev"
+        >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="next"
+        >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -96,42 +187,92 @@
     <div class="fifth-container">
       <div class="field-contact">
         <p class="title-contact">Descubra o poder da transformação!</p>
-        <p class="description-contact">Revitalize seu cabelo, diminua marcas indesejadas, e realce sua beleza natural.</p>
-        <p class="description-contact">Cuide da sua pele e do seu corpo com tratamentos que promovem firmeza e aumentam sua autoestima.</p>
-        <p class="description-contact">Traga leveza e rejuvenescimento ao seu rosto, enquanto cuida da saúde íntima e melhora sua qualidade de vida.</p>
+        <p class="description-contact">
+          Revitalize seu cabelo, diminua marcas indesejadas, e realce sua beleza
+          natural.
+        </p>
+        <p class="description-contact">
+          Cuide da sua pele e do seu corpo com tratamentos que promovem firmeza
+          e aumentam sua autoestima.
+        </p>
+        <p class="description-contact">
+          Traga leveza e rejuvenescimento ao seu rosto, enquanto cuida da saúde
+          íntima e melhora sua qualidade de vida.
+        </p>
         <div class="contact-us">
           <p class="icons-title">Agende sua consulta!</p>
           <div class="icons-contact">
-            <a :href="`https://api.whatsapp.com/send/?phone=${number}&text=${message}&type=phone_number&app_absent=0`" target="_blank" rel="noopener noreferrer">
-              <img class="icon" src="../assets/image/whatsapp-icon.png" alt="whatsapp" />
+            <a
+              :href="`https://api.whatsapp.com/send/?phone=${number}&text=${message}&type=phone_number&app_absent=0`"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="icon"
+                src="../assets/image/whatsapp-icon.png"
+                alt="whatsapp"
+              />
             </a>
-            <a href="mailto:susu.scfisio@gmail.com?subject=Agendamento%20de%20Consulta&body=Olá,%20gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener noreferrer">
-              <img class="icon-email" src="../assets/image/email-icon.png" alt="email" />
+            <a
+              href="mailto:susu.scfisio@gmail.com?subject=Agendamento%20de%20Consulta&body=Olá,%20gostaria%20de%20agendar%20uma%20consulta."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="icon-email"
+                src="../assets/image/email-icon.png"
+                alt="email"
+              />
             </a>
-            <a href="https://www.instagram.com/susucoelhodermafisio/" target="_blank" rel="noopener noreferrer">
-              <img class="icon" src="../assets/image/instagram-icon.png" alt="instagram" />
+            <a
+              href="https://www.instagram.com/susucoelhodermafisio/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                class="icon"
+                src="../assets/image/instagram-icon.png"
+                alt="instagram"
+              />
             </a>
           </div>
         </div>
-
       </div>
     </div>
     <Footer />
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
-import Footer from './footer.vue';
+import { ref, onMounted} from "vue";
+import Footer from "./footer.vue";
 
-const message = ref('Olá. Gostaria de agendar uma consulta.');
-const number = ref('5521996641590')
+const message = ref("Olá. Gostaria de agendar uma consulta.");
+const number = ref("5521996641590");
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate"); // Adiciona a classe para ativar a animação
+          observer.unobserve(entry.target); // Para de observar o elemento após a animação
+        }
+      });
+    },
+    { rootMargin: "0px 0px -30% 0px" } // Ajusta o ponto de ativação
+  );
+
+  // Observe os elementos
+  const elements = document.querySelectorAll(".animated-left, .animated-right");
+  elements.forEach((el) => observer.observe(el));
+});
 </script>
 <style scoped>
 .navbar {
   display: flex;
   justify-content: center;
   background-color: transparent;
-  padding: 10px 0;
+  margin-top: 30px;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -147,6 +288,10 @@ const number = ref('5521996641590')
 
 .navbar-item {
   font-size: 16px;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
 }
 
 .navbar-link {
@@ -186,6 +331,13 @@ const number = ref('5521996641590')
   background-attachment: fixed;
   opacity: 0.09;
   z-index: 1;
+
+  @media (min-width: 768px) {
+    height: 100%;
+    width: 100%;
+    background-position: center -150px;
+    background-size: 100% 100%; /* Estica a imagem para caber no espaço delimitado */
+  }
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -200,6 +352,7 @@ const number = ref('5521996641590')
   justify-content: center;
   align-items: center;
   height: 100%;
+  margin-top: -50px;
   position: relative;
   z-index: 2;
 }
@@ -208,6 +361,11 @@ const number = ref('5521996641590')
   width: 203px;
   height: 64px;
   margin-bottom: 10px;
+
+  @media (min-width: 768px) {
+    width: 390px;
+    height: 110px;
+  }
 }
 
 .description {
@@ -216,6 +374,11 @@ const number = ref('5521996641590')
   color: #fa5894;
   font-size: 16px;
   margin-bottom: 5px;
+
+  @media (min-width: 768px) {
+    font-size: 25px;
+    width: 200px;
+  }
 }
 
 .primary-button {
@@ -226,6 +389,10 @@ const number = ref('5521996641590')
   padding: 10px 20px;
   font-size: 14px;
   cursor: pointer;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+  }
 }
 
 .second-container {
@@ -249,6 +416,10 @@ const number = ref('5521996641590')
 .title-about-us {
   text-align: center;
   font-size: 46px;
+
+  @media (min-width: 768px) {
+    font-size: 56px;
+  }
 }
 
 .description-about-us {
@@ -258,10 +429,19 @@ const number = ref('5521996641590')
   width: 251px;
   margin: auto;
   text-align: center;
+
+  @media (min-width: 768px) {
+    font-size: 18px;
+    width: 314px;
+  }
 }
 
 .separation {
   width: 100%;
+
+  @media (min-width: 768px) {
+    height: 360px;
+  }
 }
 
 .third-container {
@@ -280,16 +460,36 @@ const number = ref('5521996641590')
   color: black;
 }
 
+.depoimento-container {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    margin: auto;
+    width: 670px;
+  }
+}
+
 .depoimento {
   display: flex;
   justify-content: center;
   width: 100%;
   position: relative;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 .field-text {
   width: 254px;
   height: 248px;
+
+  @media (min-width: 768px) {
+    width: 346px;
+    height: 340px;
+  }
 }
 
 .depoimento-img {
@@ -302,22 +502,72 @@ const number = ref('5521996641590')
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   margin: auto;
   margin-top: 44px;
+
+  @media (min-width: 768px) {
+    width: 199px;
+    height: 284px;
+  }
 }
 
 .depoimento-text {
   position: absolute;
-    top: 31px;
-    width: 246px;
-    height: 207px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    font-size: 17px;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    box-sizing: border-box;
+  top: 31px;
+  width: 246px;
+  height: 207px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 17px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  box-sizing: border-box;
+
+  @media (min-width: 768px) {
+    width: 335px;
+    height: 285px;
+    top: 42px;
+    font-size: 20px;
+  }
+}
+
+.animated-left {
+  opacity: 0;
+  transform: translateX(-100%); /* Começa fora da tela, à esquerda */
+  transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.animated-right {
+  opacity: 0;
+  transform: translateX(100%); /* Começa fora da tela, à direita */
+  transition: transform 1s ease-out, opacity 1s ease-out;
+}
+
+.animated-left.animate {
+  opacity: 1;
+  transform: translateX(0); /* Move para o local correto */
+}
+
+.animated-right.animate {
+  opacity: 1;
+  transform: translateX(0); /* Move para o local correto */
+}
+
+/* Definição da animação para a div "depoimento" */
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0); /* Move para o local correto */
+  }
+}
+
+/* Definição da animação para a imagem "depoimento-img" */
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0); /* Move para o local correto */
+  }
 }
 
 .premios {
@@ -372,8 +622,7 @@ const number = ref('5521996641590')
   flex-direction: column;
   align-items: center;
   padding: 100px 0 100px 0;
-  background-image: 
-    linear-gradient(#fa589426, #fa589426),
+  background-image: linear-gradient(#fa589426, #fa589426),
     url(/src/assets/image/contactUs.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -393,7 +642,7 @@ const number = ref('5521996641590')
   align-items: center;
   justify-content: center;
   width: 294px;
-  border: 2px solid #fee9a6a3;;
+  border: 2px solid #fee9a6a3;
   border-radius: 31px;
   box-shadow: 13px 13px 8px rgba(0, 0, 0, 0.2);
   background: #fa589480;
@@ -405,7 +654,7 @@ const number = ref('5521996641590')
   font-size: 23px;
   font-weight: 700;
   text-align: center;
-  color:#fff;
+  color: #fff;
   padding-top: 25px;
 }
 
@@ -433,7 +682,7 @@ const number = ref('5521996641590')
   font-size: 12px;
   text-align: center;
   color: #fff;
-  margin:5px 0 0 0
+  margin: 5px 0 0 0;
 }
 
 .icons-contact {
@@ -446,12 +695,12 @@ const number = ref('5521996641590')
 .icon {
   width: 30px;
   height: 30px;
-  margin: 10px 0
+  margin: 10px 0;
 }
 
 .icon-email {
   width: 30px;
   height: 22px;
-  margin: 10px 0
+  margin: 10px 0;
 }
 </style>
