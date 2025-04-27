@@ -632,9 +632,13 @@ onMounted(() => {
 }
 
 .carousel {
-  width: 600px;
+  width: 300px;
   border: 3px solid #fac0d0;
   border-radius: 5px;
+
+  @media (min-width: 758px) {
+    width: 600px;
+  }
 }
 
 .fifth-container {
