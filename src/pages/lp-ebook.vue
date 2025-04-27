@@ -6,7 +6,7 @@
           <strong>Quer ter uma vida saudável ?</strong>
         </p>
         <p class="text-white text-center title-ebook">
-          A Susu vai te ajudar. Baixei o e-book gratuito, coma bem e de forma saudável.
+          A Susu vai te ajudar. Baixe o e-book gratuito, coma bem e de forma saudável.
         </p>
       </div>
       <div class="col-10 col-sm-4 mx-auto">
