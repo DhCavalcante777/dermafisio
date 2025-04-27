@@ -626,9 +626,13 @@ onMounted(() => {
 }
 
 .results-title {
-  font-size: 30px;
+  font-size: 20px;
   text-align: center;
   color: #ff9fba;
+
+  @media (min-width: 758px) {
+    font-size: 30px;
+  }
 }
 
 .carousel {
