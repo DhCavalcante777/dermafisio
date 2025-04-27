@@ -254,15 +254,14 @@ onMounted(() => {
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("animate"); // Adiciona a classe para ativar a animação
-          observer.unobserve(entry.target); // Para de observar o elemento após a animação
+          entry.target.classList.add("animate");
+          observer.unobserve(entry.target);
         }
       });
     },
-    { rootMargin: "0px 0px -30% 0px" } // Ajusta o ponto de ativação
+    { rootMargin: "0px 0px -30% 0px" } 
   );
 
-  // Observe os elementos
   const elements = document.querySelectorAll(".animated-left, .animated-right");
   elements.forEach((el) => observer.observe(el));
 });
@@ -289,7 +288,7 @@ onMounted(() => {
 .navbar-item {
   font-size: 16px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     font-size: 18px;
   }
 }
@@ -332,7 +331,7 @@ onMounted(() => {
   opacity: 0.09;
   z-index: 1;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     height: 100%;
     width: 100%;
     background-position: center -150px;
@@ -362,7 +361,7 @@ onMounted(() => {
   height: 64px;
   margin-bottom: 10px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     width: 390px;
     height: 110px;
   }
@@ -375,7 +374,7 @@ onMounted(() => {
   font-size: 16px;
   margin-bottom: 5px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     font-size: 25px;
     width: 200px;
   }
@@ -390,7 +389,7 @@ onMounted(() => {
   font-size: 14px;
   cursor: pointer;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     font-size: 18px;
   }
 }
@@ -417,7 +416,7 @@ onMounted(() => {
   text-align: center;
   font-size: 46px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     font-size: 56px;
   }
 }
@@ -430,7 +429,7 @@ onMounted(() => {
   margin: auto;
   text-align: center;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     font-size: 18px;
     width: 314px;
   }
@@ -439,7 +438,7 @@ onMounted(() => {
 .separation {
   width: 100%;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     height: 360px;
   }
 }
@@ -464,7 +463,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     flex-direction: row;
     margin: auto;
     width: 670px;
@@ -477,7 +476,7 @@ onMounted(() => {
   width: 100%;
   position: relative;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     flex-direction: row;
   }
 }
@@ -486,7 +485,7 @@ onMounted(() => {
   width: 254px;
   height: 248px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     width: 346px;
     height: 340px;
   }
@@ -503,7 +502,7 @@ onMounted(() => {
   margin: auto;
   margin-top: 44px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     width: 199px;
     height: 284px;
   }
@@ -524,7 +523,7 @@ onMounted(() => {
   padding: 15px;
   box-sizing: border-box;
 
-  @media (min-width: 768px) {
+  @media (min-width: 758px) {
     width: 335px;
     height: 285px;
     top: 42px;
@@ -571,23 +570,40 @@ onMounted(() => {
 }
 
 .premios {
-  width: 254px;
   background: white;
-  height: 386px;
+  display: flex;
+  flex-direction: column;
   margin: auto;
   padding: 0;
   border-radius: 18px;
   padding: 10px;
+  gap: 10px;
+
+  @media (min-width: 758px) {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+  }
 }
 .selo-rubi {
   width: 100%;
   height: 180px;
-  margin-bottom: 10px;
+
+  @media (min-width: 758px) {
+    width: 50%;
+    height: 180px;
+    margin-bottom: 0px;
+  }
 }
 
 .selo-diamante {
   width: 100%;
   height: 180px;
+
+  @media (min-width: 758px) {
+    width: 50%;
+    height: 180px;
+  }
 }
 
 .title-premios {
@@ -596,6 +612,10 @@ onMounted(() => {
   color: black;
   margin-top: 100px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+
+  @media (min-width: 758px) {
+    font-size: 25px;
+  }
 }
 
 .fourth-container {
@@ -606,13 +626,13 @@ onMounted(() => {
 }
 
 .results-title {
-  font-size: 20px;
+  font-size: 30px;
   text-align: center;
   color: #ff9fba;
 }
 
 .carousel {
-  width: 300px;
+  width: 600px;
   border: 3px solid #fac0d0;
   border-radius: 5px;
 }
@@ -648,6 +668,10 @@ onMounted(() => {
   background: #fa589480;
   padding: 0px 46px 29px 46px;
   position: relative;
+
+  @media (min-width: 758px) {
+    width: 600px;
+  }
 }
 
 .title-contact {
@@ -656,6 +680,10 @@ onMounted(() => {
   text-align: center;
   color: #fff;
   padding-top: 25px;
+
+  @media (min-width: 758px) {
+    font-size: 30px;
+  }
 }
 
 .description-contact {
@@ -663,6 +691,10 @@ onMounted(() => {
   text-align: center;
   color: #fff;
   margin-bottom: 0px;
+
+  @media (min-width: 758px) {
+    font-size: 23px;
+  }
 }
 
 .contact-us {
@@ -676,6 +708,10 @@ onMounted(() => {
   background: #9380b7;
   border: 2px solid #fee9a6;
   border-radius: 39px;
+
+  @media (min-width: 758px) {
+    bottom: -60px;
+  }
 }
 
 .icons-title {
@@ -683,6 +719,10 @@ onMounted(() => {
   text-align: center;
   color: #fff;
   margin: 5px 0 0 0;
+
+  @media (min-width: 758px) {
+    font-size: 15px;
+  }
 }
 
 .icons-contact {
