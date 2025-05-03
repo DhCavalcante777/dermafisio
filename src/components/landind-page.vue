@@ -462,6 +462,7 @@ onMounted(() => {
 .depoimento-container {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   @media (min-width: 758px) {
     flex-direction: row;
