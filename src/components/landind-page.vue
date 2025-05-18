@@ -325,19 +325,12 @@ onMounted(() => {
   height: 100%;
   width: 100%;
   background-image: url(/src/assets/image/suelen-2.png);
-  background-size: cover;
+  background-size: 100% 100% !important;
   background-repeat: no-repeat;
-  background-position: center -50px;
+  background-position: center -150px !important;
   background-attachment: fixed;
   opacity: 0.09;
   z-index: 1;
-
-  @media (min-width: 758px) {
-    height: 100% !important;
-    width: 100% !important;
-    background-position: center -150px !important;
-    background-size: 100% 100% !important;
-  }
 }
 
 @supports (-webkit-touch-callout: none) {
