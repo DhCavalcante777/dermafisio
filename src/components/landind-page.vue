@@ -35,7 +35,8 @@
         </div>
       </div>
     </div>
-    <img class="separation" src="../assets/image/separation.png" alt="bolas" />
+    <img class="separation-mobile" src="../assets/image/separation.png" alt="bolas" />
+    <img class="separation-desktop" src="../assets/image/BolasFlutuandoGrande.png" alt="bolas" />
     <div class="third-container">
       <p class="reference-title">Referência em excelência</p>
       <div class="depoimento-container">
@@ -435,11 +436,25 @@ onMounted(() => {
   }
 }
 
-.separation {
+.separation-mobile {
   width: 100%;
 
   @media (min-width: 758px) {
     height: 360px;
+  }
+  
+  @media (min-width: 800px) {
+    display: none;
+  }
+}
+
+.separation-desktop {
+  display: none;
+  
+  @media (min-width: 800px) {
+    display: block;
+    width: 100%;
+    height: 439px;
   }
 }
 
