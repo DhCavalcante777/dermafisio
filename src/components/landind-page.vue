@@ -333,10 +333,10 @@ onMounted(() => {
   z-index: 1;
 
   @media (min-width: 758px) {
-    height: 100%;
-    width: 100%;
-    background-position: center -150px;
-    background-size: 100% 100%; /* Estica a imagem para caber no espaço delimitado */
+    height: 100% !important;
+    width: 100% !important;
+    background-position: center -150px !important;
+    background-size: 100% 100% !important;
   }
 }
 
