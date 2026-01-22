@@ -12,6 +12,11 @@ const routes = [
     name: "EbookRelease",
     component: () => import("@/pages/lp-ebook.vue"),
   },
+  {
+    path: "/v2",
+    name: "LandingPage",
+    component: () => import("@/pages/landing-page.vue"),
+  }
 ];
 
 // Crie o roteador

@@ -1,0 +1,63 @@
+/* 
+  Variáveis de Cores para o Projeto SL DERMAFÍSIO (Dashboard)
+  Utilize estas variáveis em seu projeto Vue.js para garantir a consistência visual.
+  Recomendado usar SCSS/SASS para importação.
+*/
+
+:root {
+    /* ====================================================================
+       CORES BASE E FUNDO (Dark Theme)
+       ==================================================================== */
+    
+    /* Fundo principal (o preto texturizado) */
+    --color-background-primary: #1A1A1A; 
+    
+    /* Fundo de cards, painéis e sidebar (o cinza escuro do menu) */
+    --color-background-secondary: #2C2C2C; 
+    
+    /* Fundo de inputs e elementos de UI (um tom mais escuro) */
+    --color-background-input: #121212; 
+
+    /* ====================================================================
+       CORES DE ACENTO E MARCA
+       ==================================================================== */
+    
+    /* Dourado Principal (para texto, ícones e estado ativo) */
+    --color-accent-gold: #C8A967; 
+    
+    /* Rosa/Vermelho (para o botão Buscar e detalhes de UI) */
+    --color-accent-pink: #D37A88; 
+    
+    /* ====================================================================
+       CORES DE TEXTO
+       ==================================================================== */
+    
+    /* Texto principal (claro sobre fundo escuro) */
+    --color-text-light: #E0E0E0; 
+    
+    /* Texto secundário ou de placeholder */
+    --color-text-muted: #9E9E9E; 
+
+    /* ====================================================================
+       CORES SEMÂNTICAS (Status)
+       ==================================================================== */
+    
+    /* Status: Completa (Verde) */
+    --color-status-complete: #4CAF50; 
+    
+    /* Status: Em Andamento (Rosa/Vermelho) */
+    --color-status-progress: #D32F2F; 
+    
+    /* Status: Pendente (Cinza) */
+    --color-status-pending: #757575; 
+}
+
+/* Exemplo de uso em SCSS:
+.sidebar {
+    background-color: var(--color-background-secondary);
+}
+
+.active-tab {
+    color: var(--color-accent-gold);
+}
+*/
