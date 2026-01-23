@@ -1,11 +1,13 @@
 <template>
   <div class="container-fluid">
     <navbar />
+    <introSection />
   </div>
 </template>
 <script setup>
 import { ref } from "vue";
 import navbar from "@/components/navbar.vue";
+import introSection from "@/components/introSection.vue";
 
 const fullName = ref("");
 const email = ref("");
