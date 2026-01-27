@@ -1,14 +1,8 @@
 <template>
   <div class="container background">
     <div class="row justify-content-center align-items-center gap-1 pt-2">
-      <div class="col-2">
-        <div class="left-line" />
-      </div>
       <div class="col-auto text-center my-4">
         <p class="title">Por que escolher a <span class="highlight">SL DERMAFÍSIO</span>?</p>
-      </div>
-      <div class="col-2">
-        <div class="right-line" />
       </div>
     </div>
     <div class="row justify-content-center align-items-center pb-4">
@@ -71,6 +65,7 @@
   font-family: "Playfair Display", serif;
   font-weight: 600;
   letter-spacing: 2px;
+  padding-left: 10px;
 }
 
 .left-line {
