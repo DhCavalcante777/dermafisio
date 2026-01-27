@@ -1,5 +1,5 @@
 <template>
-  <div class="container background">
+  <div class="container background line-bottom">
     <div class="row justify-content-center align-items-center gap-1 pt-2">
       <div class="col-2">
         <div class="left-line" />
@@ -168,5 +168,9 @@
       transparent 100%
     );
   }
+}
+
+.line-bottom {
+    border-bottom: 1px solid burlywood;
 }
 </style>

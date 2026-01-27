@@ -3,6 +3,7 @@
     <navbar />
     <introSection />
     <servicesSection />
+    <whyChooseUsSection />
   </div>
 </template>
 <script setup>
@@ -10,6 +11,7 @@ import { ref } from "vue";
 import navbar from "@/components/navbar.vue";
 import introSection from "@/components/introSection.vue";
 import servicesSection from "@/components/servicesSection.vue";
+import whyChooseUsSection from "@/components/whyChooseUsSection.vue";
 
 const fullName = ref("");
 const email = ref("");
