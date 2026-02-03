@@ -23,7 +23,7 @@ const message = ref("");
 
 const sendMailto = () => {
   if (!fullName.value || !email.value) {
-    alert("Por favor, preencha todos os campos obrigatórios.");
+    alert("Por favor, preencha todos os campos obrigatórios");
     return;
   }
 

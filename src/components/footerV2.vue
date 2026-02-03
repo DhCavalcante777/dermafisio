@@ -10,7 +10,7 @@
           <h3 class="footer-title">Contato</h3>
           <p><strong>Telefone:</strong> (21) 99664-1590</p>
           <p><strong>E-mail:</strong> contato@sldermafisio.com</p>
-          <p><strong>Endereço:</strong> Rua Dr. Getúlio Vargas, n° 121 - Rio de Janeiro, RJ</p>
+          <!-- <p><strong>Endereço:</strong> Rua Dr. Getúlio Vargas, n° 121 - Rio de Janeiro, RJ</p> -->
         </div>
 
         <!-- Redes Sociais -->
