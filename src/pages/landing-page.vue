@@ -4,6 +4,7 @@
     <introSection />
     <servicesSection />
     <whyChooseUsSection />
+    <faqSection />
     <footerV2 />
   </div>
 </template>
@@ -13,6 +14,7 @@ import navbar from "@/components/navbar.vue";
 import introSection from "@/components/introSection.vue";
 import servicesSection from "@/components/servicesSection.vue";
 import whyChooseUsSection from "@/components/whyChooseUsSection.vue";
+import faqSection from "@/components/faqSection.vue";
 import footerV2 from "@/components/footerV2.vue";
 
 const fullName = ref("");

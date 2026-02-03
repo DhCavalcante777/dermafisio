@@ -1,5 +1,5 @@
 <template>
-  <div class="container background">
+  <div class="container background line-bottom">
     <div class="row justify-content-center align-items-center gap-1 pt-2">
       <div class="col-auto text-center my-4">
         <p class="title">Por que escolher a <span class="highlight">SL DERMAFÍSIO</span>?</p>
@@ -105,6 +105,10 @@
   color: burlywood;
   font-size: 18px;
   font-family: "Poppins", sans-serif;
+}
+
+.line-bottom {
+    border-bottom: 1px solid burlywood;
 }
 
 @media (max-width: 768px) {
