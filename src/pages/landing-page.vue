@@ -4,6 +4,7 @@
     <introSection />
     <servicesSection />
     <whyChooseUsSection />
+    <footerV2 />
   </div>
 </template>
 <script setup>
@@ -12,6 +13,7 @@ import navbar from "@/components/navbar.vue";
 import introSection from "@/components/introSection.vue";
 import servicesSection from "@/components/servicesSection.vue";
 import whyChooseUsSection from "@/components/whyChooseUsSection.vue";
+import footerV2 from "@/components/footerV2.vue";
 
 const fullName = ref("");
 const email = ref("");
