@@ -12,7 +12,7 @@
       </div>
 
       <div class="row align-items-center">
-        <div class="col-lg-7">
+        <div class="col-xl-6">
           <div class="row g-4">
             <div
               v-for="(testimonial, index) in testimonials"
@@ -37,7 +37,7 @@
           </div>
         </div>
 
-        <div class="col-lg-5 mt-5 mt-lg-0">
+        <div class="col-xl-6 mt-5 mt-lg-0">
           <div class="specialist-container d-flex align-items-center">
             <div class="specialist-info pe-4">
               <h3 class="specialist-subtitle">Conheça nossa</h3>
@@ -253,7 +253,8 @@ const testimonials = [
 }
 
 /* Responsividade */
-@media (max-width: 991px) {
+
+@media (max-width: 1199px) {
   .specialist-container {
     flex-direction: column;
     text-align: center;
@@ -267,7 +268,7 @@ const testimonials = [
     background: linear-gradient(to right, transparent, burlywood, transparent);
   }
   .specialist-img {
-    width: 180px;
+    width: 300px;
   }
 }
 
