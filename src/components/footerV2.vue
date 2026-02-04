@@ -1,30 +1,24 @@
 <template>
   <footer class="container-fluid background footer-container">
-    <!-- Linha Burlywood no topo do Footer -->
     <div class="top-line"></div>
 
     <div class="container py-5">
       <div class="row align-items-center">
-        <!-- Informações de Contato -->
         <div class="col-md-8 contact-info">
           <h3 class="footer-title">Contato</h3>
           <p><strong>Telefone:</strong> (21) 99664-1590</p>
           <p><strong>E-mail:</strong> contato@sldermafisio.com</p>
-          <!-- <p><strong>Endereço:</strong> Rua Dr. Getúlio Vargas, n° 121 - Rio de Janeiro, RJ</p> -->
+          <p><strong>Endereço:</strong> Rua Dr. Getúlio Vargas, n° 121 - Rio de Janeiro, RJ</p>
         </div>
 
-        <!-- Redes Sociais -->
         <div class="col-md-4 d-flex justify-content-md-end justify-content-center mt-4 mt-md-0">
           <div class="social-icons">
-            <!-- Instagram -->
             <a href="https://instagram.com/seu_perfil" target="_blank" class="social-link">
               <img src="@/assets/image/icons/social_instagram.png" alt="Instagram" class="social-img">
             </a>
-            <!-- E-mail -->
             <a href="mailto:contato@sldermafisio.com" class="social-link">
               <img src="@/assets/image/icons/social_email.png" alt="E-mail" class="social-img">
             </a>
-            <!-- WhatsApp -->
             <a href="https://wa.me/5521996641590" target="_blank" class="social-link">
               <img src="@/assets/image/icons/social_whatsapp.png" alt="WhatsApp" class="social-img">
             </a>
@@ -32,7 +26,6 @@
         </div>
       </div>
       
-      <!-- Copyright opcional -->
       <div class="row mt-5">
         <div class="col-12 text-center">
           <p class="copyright">© 2024 SL DERMAFÍSIO. Todos os direitos reservados.</p>

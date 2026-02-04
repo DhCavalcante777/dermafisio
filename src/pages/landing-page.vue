@@ -4,6 +4,8 @@
     <introSection />
     <servicesSection />
     <whyChooseUsSection />
+    <!-- <treatmentsSection /> -->
+    <reportClientsSection />
     <faqSection />
     <footerV2 />
   </div>
@@ -14,6 +16,8 @@ import navbar from "@/components/navbar.vue";
 import introSection from "@/components/introSection.vue";
 import servicesSection from "@/components/servicesSection.vue";
 import whyChooseUsSection from "@/components/whyChooseUsSection.vue";
+// import treatmentsSection from "@/components/treatmentsSection.vue";
+import reportClientsSection from "@/components/reportClientsSection.vue";
 import faqSection from "@/components/faqSection.vue";
 import footerV2 from "@/components/footerV2.vue";
 

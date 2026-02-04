@@ -1,7 +1,6 @@
 <template>
   <section class="container-fluid background faq-section py-5">
     <div class="container">
-      <!-- Título com Ornamentos -->
       <div class="row mb-5">
         <div class="col-12 text-center d-flex align-items-center justify-content-center gap-3">
           <div class="ornament-line"></div>
@@ -11,7 +10,6 @@
       </div>
 
       <div class="row align-items-center">
-        <!-- Lado Esquerdo: Acordeão de Dúvidas -->
         <div class="col-lg-6 mb-5 mb-lg-0">
           <div class="accordion" id="faqAccordion">
             <div v-for="(item, index) in faqs" :key="index" class="accordion-item custom-faq-item mb-3">
@@ -35,7 +33,6 @@
           </div>
         </div>
 
-        <!-- Lado Direito: Agendamento -->
         <div class="col-lg-6 text-center">
           <div class="cta-container">
             <h3 class="cta-title">Agende sua Avaliação</h3>
