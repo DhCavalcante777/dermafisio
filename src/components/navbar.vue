@@ -157,4 +157,22 @@ const menuAberto = ref(false)
     padding: 1rem 0;
   }
 }
+
+@media (max-width: 768px) {
+  .logo {
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    padding-left: 100px;
+  }
+}
+
+@media (max-width: 320px) {
+  .logo {
+    height: 80px;
+  }
+}
 </style>
