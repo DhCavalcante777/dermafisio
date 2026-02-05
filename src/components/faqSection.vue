@@ -35,7 +35,7 @@
 
         <div class="col-lg-6 text-center">
           <div class="cta-container">
-            <h3 class="cta-title">Agende sua Avaliação</h3>
+            <h3 class="cta-title">Agende sua avaliação</h3>
             <div class="cta-line mb-4"></div>
             <button class="btn-agendar">AGENDAR AGORA</button>
           </div>
@@ -120,6 +120,7 @@ const faqs = [
   font-family: "Great Vibes", cursive;
   font-size: 54px;
   margin-bottom: 10px;
+  word-spacing: 8px;
 }
 
 .cta-line {
