@@ -37,7 +37,7 @@
           <div class="cta-container">
             <h3 class="cta-title">Agende sua avaliação</h3>
             <div class="cta-line mb-4"></div>
-            <button class="btn-agendar">AGENDAR AGORA</button>
+            <a href="https://wa.me/5521996641590" target="_blank" class="btn-agendar">AGENDAR AGORA</a>
           </div>
         </div>
       </div>
@@ -139,6 +139,8 @@ const faqs = [
   letter-spacing: 2px;
   border-radius: 5px;
   transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-agendar:hover {

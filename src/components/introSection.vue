@@ -4,7 +4,7 @@
             <div class="content">
                 <p>Realce sua beleza</p>
                 <p>cuide do seu bem-estar</p>
-                <button class="btn-agendar">Agendar Consulta</button>
+                <a href="https://wa.me/5521996641590" target="_blank" class="btn-agendar">Agendar Consulta</a>
             </div>
         </section>
     </div>
@@ -90,6 +90,8 @@
     margin-top: 15px;
     font-size: 18px;
     padding: 12px 30px;
+    text-decoration: none;
+    display: inline-block;
     
     @media (min-width: 769px) {
         padding: 15px 40px;
