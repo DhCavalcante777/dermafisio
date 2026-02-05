@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light background">
+    <nav class="navbar navbar-expand-lg navbar-light background" :class="{ 'navbar-fixed': isScrolled }">
       <div class="container-fluid linha-burlywood">
         <div class="row w-100 align-items-center">
           <div class="col-5 d-flex justify-content-center">
@@ -48,15 +48,37 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const menuAberto = ref(false)
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 120
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <style scoped>
 .logo {
   height: 100px;
 }
+
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
 .background {
   background-color: #272427;
   background-image: repeating-linear-gradient(

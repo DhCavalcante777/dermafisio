@@ -5,14 +5,14 @@
         <div class="left-line" />
       </div>
       <div class="col-auto text-center my-4">
-        <p class="title">Nossos Serviços</p>
+        <p class="title">Nossos serviços</p>
       </div>
       <div class="col-2">
         <div class="right-line" />
       </div>
     </div>
     <div class="row justify-content-center align-items-center gap-2">
-      <div class="col-2 service-item">
+      <div class="col-lg-3 service-item">
         <div class="row justify-content-center">
           <img
             class="img-size"
@@ -24,7 +24,7 @@
           <p class="description text-center">Estética Facial</p>
         </div>
       </div>
-      <div class="col-2 service-item">
+      <div class="col-lg-3 service-item">
         <div class="row justify-content-center">
           <img
             class="img-size"
@@ -36,7 +36,7 @@
           <p class="description text-center">Estética Corporal</p>
         </div>
       </div>
-      <div class="col-2 service-item">
+      <div class="col-lg-3 service-item">
         <div class="row justify-content-center">
           <img
             class="img-size"
@@ -84,6 +84,7 @@
   font-size: 35px;
   font-family: "Great Vibes", cursive;
   margin: 0;
+  word-spacing: 8px;
 }
 
 .left-line {
@@ -136,9 +137,10 @@
   font-family: "Great Vibes", cursive;
   font-size: 40px;
   margin-top: 20px;
+  word-spacing: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .row.gap-2 {
     flex-direction: column;
     align-items: center;
