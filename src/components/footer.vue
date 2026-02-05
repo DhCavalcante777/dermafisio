@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div id="contato" class="footer">
     <img class="logo-footer" src="../assets/image/logo.png" alt="Logo" />
     <p class="footer-description"><strong>Tel:</strong> (21)99664-1590</p>
     <p class="footer-description">

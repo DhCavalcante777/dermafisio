@@ -1,5 +1,5 @@
 <template>
-  <footer class="container-fluid background footer-container">
+  <footer id="contato" class="container-fluid background footer-container">
     <div class="top-line"></div>
 
     <div class="container py-5">

@@ -36,7 +36,7 @@
                   <a class="font-navbar" href="#">Sobre</a>
                 </li>
                 <li class="nav-item">
-                  <a class="font-navbar" href="#">Contato</a>
+                  <a class="font-navbar" href="#contato">Contato</a>
                 </li>
               </ul>
             </div>
