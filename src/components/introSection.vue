@@ -16,7 +16,7 @@
 .background {
     background-image: url('@/assets/image/estetica_plano_aberto_2560x400.png');
     background-size: cover;
-    background-position: right center;
+    background-position: center;
     background-repeat: no-repeat;
     min-height: 40vh;
     display: flex;
@@ -44,6 +44,7 @@
     color: white;
     width: 100%;
     text-align: center;
+    padding: 20px;
 
     @media (min-width: 769px) {
         max-width: 600px;

@@ -89,13 +89,11 @@ const menuAberto = ref(false)
   border-bottom: 2px solid burlywood;
 }
 
-/* Botão toggler com cor burlywood */
 .navbar-toggler {
   border-color: burlywood;
   padding: 8px;
 }
 
-/* Hamburger animado */
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -115,7 +113,6 @@ const menuAberto = ref(false)
   transform-origin: center;
 }
 
-/* Animação para X */
 .hamburger.is-active .line-1 {
   transform: translateY(8px) rotate(45deg);
 }
@@ -129,7 +126,6 @@ const menuAberto = ref(false)
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* Menu mobile expandido */
 @media (max-width: 991.98px) {
   .navbar-collapse {
     position: absolute;
