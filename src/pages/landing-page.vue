@@ -6,6 +6,7 @@
     <whyChooseUsSection />
     <!-- <treatmentsSection /> -->
     <reportClientsSection />
+    <awardsSection />
     <faqSection />
     <footerV2 />
   </div>
@@ -18,6 +19,7 @@ import servicesSection from "@/components/servicesSection.vue";
 import whyChooseUsSection from "@/components/whyChooseUsSection.vue";
 // import treatmentsSection from "@/components/treatmentsSection.vue";
 import reportClientsSection from "@/components/reportClientsSection.vue";
+import awardsSection from "@/components/awardsSection.vue";
 import faqSection from "@/components/faqSection.vue";
 import footerV2 from "@/components/footerV2.vue";
 
