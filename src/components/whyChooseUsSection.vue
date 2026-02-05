@@ -1,5 +1,5 @@
 <template>
-  <div class="container background line-bottom">
+  <div class="container background line-bottom py-4">
     <div class="row justify-content-center align-items-center gap-1 pt-2">
       <div class="col-auto text-center my-4">
         <p class="title">Por que escolher a <span class="highlight">SL DERMAFÍSIO</span>?</p>
@@ -62,8 +62,8 @@
 
 .highlight {
   color: #d4a574;
+  font-weight: 500;
   font-family: "Playfair Display", serif;
-  font-weight: 600;
   letter-spacing: 2px;
   padding-left: 10px;
 }

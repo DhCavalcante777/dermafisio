@@ -13,7 +13,7 @@
 
         <div class="col-md-4 d-flex justify-content-md-end justify-content-center mt-4 mt-md-0">
           <div class="social-icons">
-            <a href="https://instagram.com/seu_perfil" target="_blank" class="social-link">
+            <a href="https://www.instagram.com/susucoelhodermafisio/" target="_blank" class="social-link">
               <img src="@/assets/image/icons/social_instagram.png" alt="Instagram" class="social-img">
             </a>
             <a href="mailto:contato@sldermafisio.com" class="social-link">

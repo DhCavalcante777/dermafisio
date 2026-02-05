@@ -128,22 +128,21 @@ const faqs = [
 }
 
 .btn-agendar {
-  background: linear-gradient(to bottom, #d4a574, #b8860b);
-  color: #272427;
+  background-color: #c9a86c;
+  color: white;
   border: none;
   padding: 15px 60px;
-  font-family: "Playfair Display", serif;
   font-weight: bold;
   font-size: 18px;
   letter-spacing: 2px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
   transition: all 0.3s ease;
 }
 
 .btn-agendar:hover {
+  background-color: #b8975b;
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(212, 165, 116, 0.4);
+  box-shadow: 0 6px 20px rgba(201, 168, 108, 0.4);
   filter: brightness(1.1);
 }
 

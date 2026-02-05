@@ -284,4 +284,10 @@ const testimonials = [
 .line-bottom {
     border-bottom: 1px solid burlywood;
 }
+
+@media (max-width: 576px) {
+  .specialist-image-wrapper {
+    margin: 0;
+  }
+}
 </style>
