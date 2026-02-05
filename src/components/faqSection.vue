@@ -4,7 +4,7 @@
       <div class="row mb-5">
         <div class="col-12 text-center d-flex align-items-center justify-content-center gap-3">
           <div class="ornament-line"></div>
-          <h2 class="section-title">Dúvidas Frequentes</h2>
+          <h2 class="section-title">Dúvidas frequentes</h2>
           <div class="ornament-line"></div>
         </div>
       </div>
@@ -69,6 +69,7 @@ const faqs = [
   font-family: "Great Vibes", cursive;
   font-size: 42px;
   margin: 0;
+  word-spacing: 8px;
 }
 
 .ornament-line {
