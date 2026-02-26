@@ -16,7 +16,17 @@ const routes = [
     path: "/v2",
     name: "LandingPage",
     component: () => import("@/pages/landing-page.vue"),
-  }
+  },
+  {
+    path: "/areaRestrita",
+    name: "AreaRestrita",
+    component: () => import("@/pages/areaRestrita.vue"),
+  },
+  {
+    path: "/anamnese",
+    name: "AnamnesePage",
+    component: () => import("@/pages/anamnesePage.vue"),
+  },
 ];
 
 // Crie o roteador
