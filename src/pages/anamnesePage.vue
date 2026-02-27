@@ -22,9 +22,22 @@
                 placeholder="Digite seu nome"
               />
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
               <label class="form-label">Data de Nasc.</label>
               <input type="date" v-model="form.dataNasc" class="custom-input" />
+            </div> -->
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Data de Nascimento</label>
+              <input
+                type="text"
+                v-model="dateDisplay"
+                @input="handleDateInput"
+                placeholder="DD/MM/AAAA"
+                maxlength="10"
+                inputmode="numeric"
+                class="custom-input"
+                required
+              />
             </div>
             <div class="col-md-3">
               <label class="form-label">Idade</label>
@@ -291,10 +304,11 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 
 import AnamneseService from "@/services/anamneseService";
 
+const dateDisplay = ref("");
 const form = reactive({
   nome: "",
   dataNasc: "",
@@ -325,17 +339,37 @@ const form = reactive({
   metais: "",
 });
 
+const handleDateInput = (e) => {
+  let value = e.target.value.replace(/\D/g, '');
+  if (value.length > 8) value = value.slice(0, 8);
+
+  // Máscara visual para a cliente
+  if (value.length >= 5) {
+    dateDisplay.value = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4)}`;
+  } else if (value.length >= 3) {
+    dateDisplay.value = `${value.slice(0, 2)}/${value.slice(2)}`;
+  } else {
+    dateDisplay.value = value;
+  }
+
+  // Conversão silenciosa para o objeto 'form' (formato MySQL)
+  if (value.length === 8) {
+    const day = value.slice(0, 2);
+    const month = value.slice(2, 4);
+    const year = value.slice(4);
+    form.dataNasc = `${year}-${month}-${day}`; // Salva AAAA-MM-DD no form
+  }
+};
+
 const submitForm = async () => {
   try {
     console.log("Enviando dados para o Railway...", form);
 
-    // 3. Chame o serviço passando o objeto 'form'
     const response = await AnamneseService.create(form);
 
     console.log("Resposta da API:", response.data);
     alert("Ficha enviada com sucesso para a SL DERMAFÍSIO!");
 
-    // Opcional: Limpar o formulário após o sucesso
     Object.assign(form, {
       nome: "",
       dataNasc: "",
@@ -365,6 +399,7 @@ const submitForm = async () => {
       gravida: "",
       metais: "",
     });
+    dateDisplay.value = "";
   } catch (error) {
     console.error("Erro ao salvar:", error);
     const msgErro =
