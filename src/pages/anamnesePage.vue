@@ -293,6 +293,8 @@
 <script setup>
 import { reactive } from "vue";
 
+import AnamneseService from "@/services/anamneseService";
+
 const form = reactive({
   nome: "",
   dataNasc: "",
@@ -323,9 +325,52 @@ const form = reactive({
   metais: "",
 });
 
-const submitForm = () => {
-  console.log("Dados da Anamnese:", form);
-  alert("Ficha enviada com sucesso! Obrigado.");
+const submitForm = async () => {
+  try {
+    console.log("Enviando dados para o Railway...", form);
+
+    // 3. Chame o serviço passando o objeto 'form'
+    const response = await AnamneseService.create(form);
+
+    console.log("Resposta da API:", response.data);
+    alert("Ficha enviada com sucesso para a SL DERMAFÍSIO!");
+
+    // Opcional: Limpar o formulário após o sucesso
+    Object.assign(form, {
+      nome: "",
+      dataNasc: "",
+      idade: "",
+      endereco: "",
+      profissao: "",
+      telefone: "",
+      comoConheceu: "",
+      queixaPrincipal: "",
+      medicacao: "",
+      exames: "",
+      alergia: "nao",
+      alergiaQual: "",
+      intestino: "",
+      cicloMenstrual: "sim",
+      anticoncepcional: "nao",
+      hipotensao: "nao",
+      doencasPre: "nao",
+      doencasPreQual: "",
+      atividadeFisica: "",
+      alimentacao: "",
+      liquido: "",
+      fuma: "",
+      alcool: "",
+      procedimentoEstetico: "",
+      cirurgia: "",
+      gravida: "",
+      metais: "",
+    });
+  } catch (error) {
+    console.error("Erro ao salvar:", error);
+    const msgErro =
+      error.response?.data?.error || "Erro ao conectar com o servidor.";
+    alert("Ops! " + msgErro);
+  }
 };
 </script>
 
