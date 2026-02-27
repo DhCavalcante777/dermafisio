@@ -1,15 +1,17 @@
 <template>
   <div class="anamnese-page background min-vh-100 py-5">
     <div class="container">
-      <!-- Cabeçalho -->
       <div class="text-center mb-5">
         <h1 class="page-title">Ficha de Anamnese</h1>
         <div class="title-line mx-auto"></div>
-        <p class="brand-name">SL DERMAFÍSIO</p>
+        <img
+          class="logo"
+          src="../assets/image/logo-lateralizado.png"
+          alt="Logo"
+        />
       </div>
 
       <form @submit.prevent="submitForm" class="anamnese-form">
-        <!-- SEÇÃO 1: DADOS PESSOAIS -->
         <div class="form-section mb-5">
           <h3 class="section-subtitle">Dados Pessoais</h3>
           <div class="row g-3">
@@ -22,10 +24,6 @@
                 placeholder="Digite seu nome"
               />
             </div>
-            <!-- <div class="col-md-3">
-              <label class="form-label">Data de Nasc.</label>
-              <input type="date" v-model="form.dataNasc" class="custom-input" />
-            </div> -->
             <div class="col-md-3 mb-3">
               <label class="form-label">Data de Nascimento</label>
               <input
@@ -64,9 +62,12 @@
               <label class="form-label">Telefone</label>
               <input
                 type="tel"
-                v-model="form.telefone"
+                v-model="telefoneDisplay"
+                @input="handleTelefoneInput"
                 class="custom-input"
                 placeholder="(00) 00000-0000"
+                maxlength="15"
+                inputmode="numeric"
               />
             </div>
             <div class="col-md-12">
@@ -80,7 +81,6 @@
           </div>
         </div>
 
-        <!-- SEÇÃO 2: QUEIXA PRINCIPAL -->
         <div class="form-section mb-5">
           <h3 class="section-subtitle">Queixa Principal</h3>
           <div class="row">
@@ -98,7 +98,6 @@
           </div>
         </div>
 
-        <!-- SEÇÃO 3: HISTÓRICO PATOLÓGICO -->
         <div class="form-section mb-5">
           <h3 class="section-subtitle">Histórico Patológico</h3>
           <div class="row g-4">
@@ -231,7 +230,6 @@
           </div>
         </div>
 
-        <!-- SEÇÃO 4: HISTÓRICO SOCIAL -->
         <div class="form-section mb-5">
           <h3 class="section-subtitle">Histórico Social</h3>
           <div class="row g-3">
@@ -292,7 +290,6 @@
           </div>
         </div>
 
-        <!-- Botão de Envio -->
         <div class="text-center mt-5">
           <button type="submit" class="btn-enviar">
             Finalizar e Enviar Ficha
@@ -309,6 +306,7 @@ import { reactive, ref } from "vue";
 import AnamneseService from "@/services/anamneseService";
 
 const dateDisplay = ref("");
+const telefoneDisplay = ref("");
 const form = reactive({
   nome: "",
   dataNasc: "",
@@ -340,10 +338,9 @@ const form = reactive({
 });
 
 const handleDateInput = (e) => {
-  let value = e.target.value.replace(/\D/g, '');
+  let value = e.target.value.replace(/\D/g, "");
   if (value.length > 8) value = value.slice(0, 8);
 
-  // Máscara visual para a cliente
   if (value.length >= 5) {
     dateDisplay.value = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4)}`;
   } else if (value.length >= 3) {
@@ -352,13 +349,38 @@ const handleDateInput = (e) => {
     dateDisplay.value = value;
   }
 
-  // Conversão silenciosa para o objeto 'form' (formato MySQL)
   if (value.length === 8) {
-    const day = value.slice(0, 2);
-    const month = value.slice(2, 4);
-    const year = value.slice(4);
-    form.dataNasc = `${year}-${month}-${day}`; // Salva AAAA-MM-DD no form
+    const day = parseInt(value.slice(0, 2), 10);
+    const month = parseInt(value.slice(2, 4), 10);
+    const year = parseInt(value.slice(4), 10);
+    form.dataNasc = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+
+    const today = new Date();
+    let age = today.getFullYear() - year;
+    const monthDiff = today.getMonth() + 1 - month;
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < day)) {
+      age--;
+    }
+    form.idade = age;
   }
+};
+
+const handleTelefoneInput = (e) => {
+  let value = e.target.value.replace(/\D/g, "");
+  if (value.length > 11) value = value.slice(0, 11);
+
+  if (value.length > 6) {
+    telefoneDisplay.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+  } else if (value.length > 2) {
+    telefoneDisplay.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+  } else if (value.length > 0) {
+    telefoneDisplay.value = `(${value}`;
+  } else {
+    telefoneDisplay.value = "";
+  }
+
+  form.telefone = value;
 };
 
 const submitForm = async () => {
@@ -400,6 +422,7 @@ const submitForm = async () => {
       metais: "",
     });
     dateDisplay.value = "";
+    telefoneDisplay.value = "";
   } catch (error) {
     console.error("Erro ao salvar:", error);
     const msgErro =
@@ -410,6 +433,11 @@ const submitForm = async () => {
 </script>
 
 <style scoped>
+.logo {
+  height: 130px;
+  margin: 40px 0;
+}
+
 .background {
   background-color: #272427;
   background-image:
@@ -500,14 +528,14 @@ const submitForm = async () => {
 }
 
 .btn-enviar {
-  background: linear-gradient(to right, #d4a574, #b8860b);
-  color: #272427;
+  background-color: #c9a86c;
+  color: white;
   border: none;
   padding: 15px 60px;
   font-family: "Playfair Display", serif;
   font-weight: bold;
   font-size: 18px;
-  border-radius: 30px;
+  border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
