@@ -23,6 +23,27 @@ const routes = [
     component: () => import("@/pages/areaRestrita.vue"),
   },
   {
+    path: "/dashboard",
+    component: () => import("@/pages/dashboard.vue"),
+    children: [
+      {
+        path: "",
+        name: "DashboardHome",
+        component: () => import("@/components/dashboardHome.vue"),
+      },
+      {
+        path: "anamnese",
+        name: "AnamneseList",
+        component: () => import("@/components/anamneseList.vue"),
+      },
+      {
+        path: "financial",
+        name: "FinancialPage",
+        component: () => import("@/components/financialPage.vue"),
+      }
+    ]
+  },
+  {
     path: "/anamnese",
     name: "AnamnesePage",
     component: () => import("@/pages/anamnesePage.vue"),

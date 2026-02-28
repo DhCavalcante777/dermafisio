@@ -11,7 +11,6 @@ export default {
         return api.post('/anamnese', anamnese);
     },
     update: anamnese => {
-        // Aqui usamos o id que vem dentro do objeto anamnese
         return api.put(`/anamnese/${anamnese.id}`, anamnese);
     },
     delete: id => {

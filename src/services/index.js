@@ -7,5 +7,4 @@ const api = axios.create({
   }
 } );
 
-// Você pode adicionar interceptadores aqui no futuro (ex: para tratar erro 401)
 export default api;
