@@ -291,8 +291,8 @@
         </div>
 
         <div class="text-center mt-5">
-          <button type="submit" class="btn-enviar">
-            Finalizar e Enviar Ficha
+          <button type="submit" class="btn-enviar" :disabled="isSubmitting">
+            {{ isSubmitting ? 'Enviando...' : 'Finalizar e Enviar Ficha' }}
           </button>
         </div>
       </form>
@@ -307,6 +307,7 @@ import AnamneseService from "@/services/anamneseService";
 
 const dateDisplay = ref("");
 const telefoneDisplay = ref("");
+const isSubmitting = ref(false);
 const form = reactive({
   nome: "",
   dataNasc: "",
@@ -384,6 +385,8 @@ const handleTelefoneInput = (e) => {
 };
 
 const submitForm = async () => {
+  if (isSubmitting.value) return;
+  isSubmitting.value = true;
   try {
     console.log("Enviando dados para o Railway...", form);
 
@@ -428,6 +431,8 @@ const submitForm = async () => {
     const msgErro =
       error.response?.data?.error || "Erro ao conectar com o servidor.";
     alert("Ops! " + msgErro);
+  } finally {
+    isSubmitting.value = false;
   }
 };
 </script>
@@ -540,10 +545,14 @@ const submitForm = async () => {
   transition: all 0.3s ease;
 }
 
-.btn-enviar:hover {
+.btn-enviar:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   filter: brightness(1.1);
+}
+.btn-enviar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @media (max-width: 768px) {

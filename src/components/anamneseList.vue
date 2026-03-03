@@ -101,7 +101,11 @@
           <h2 class="modal-title-luxury">
             Ficha Completa: {{ selectedAnamnese.nome }}
           </h2>
-          <button class="btn-close-luxury" @click="closeModal">&times;</button>
+          <button class="btn-close-luxury hamburger is-active" @click="closeModal">
+            <span class="line line-1"></span>
+            <span class="line line-2"></span>
+            <span class="line line-3"></span>
+          </button>
         </div>
 
         <div class="modal-body-luxury custom-scrollbar">
@@ -288,18 +292,40 @@
               </p>
             </div>
             <div class="col-md-6">
-              <label class="label-luxury">Fuma / Álcool</label>
-              <p class="text-luxury">
-                Fuma: {{ selectedAnamnese.fuma }} | Álcool:
-                {{ selectedAnamnese.alcool }}
-              </p>
+              <div class="d-flex gap-2">
+                <div class="flex-grow-1">
+                  <label class="label-luxury">Fuma</label>
+                  <input v-if="isEditing" v-model="selectedAnamnese.fuma" class="input-luxury" placeholder="Fuma?" />
+                  <p v-else class="text-luxury">
+                    {{ selectedAnamnese.fuma || "Não fuma" }}
+                  </p>
+                </div>
+                <div class="flex-grow-1">
+                  <label class="label-luxury">Álcool</label>
+                  <input v-if="isEditing" v-model="selectedAnamnese.alcool" class="input-luxury" placeholder="Álcool?" />
+                  <p v-else class="text-luxury">
+                    {{ selectedAnamnese.alcool || "Não consome" }}
+                  </p>
+                </div>
+              </div>
             </div>
             <div class="col-12">
-              <label class="label-luxury">Cirurgias / Metais no corpo</label>
-              <p class="text-luxury">
-                Cirurgias: {{ selectedAnamnese.cirurgia || "Nenhuma" }} |
-                Metais: {{ selectedAnamnese.metais || "Nenhum" }}
-              </p>
+              <div class="d-flex gap-2">
+                <div class="flex-grow-1">
+                  <label class="label-luxury">Cirurgias</label>
+                  <input v-if="isEditing" v-model="selectedAnamnese.cirurgia" class="input-luxury" placeholder="Cirurgias" />
+                  <p v-else class="text-luxury">
+                    {{ selectedAnamnese.cirurgia || "Nenhuma" }}
+                  </p>
+                </div>
+                <div class="flex-grow-1">
+                  <label class="label-luxury">Metais</label>
+                  <input v-if="isEditing" v-model="selectedAnamnese.metais" class="input-luxury" placeholder="Metais no corpo" />
+                  <p v-else class="text-luxury">
+                    {{ selectedAnamnese.metais || "Nenhum" }}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -417,7 +443,7 @@ onMounted(fetchAnamneses);
 <style scoped>
 .page-title {
   font-family: "Playfair Display", serif;
-  color: #d4af37;
+  color: #f6aeb8;
   font-style: italic;
 }
 .custom-input {
@@ -455,7 +481,7 @@ onMounted(fetchAnamneses);
 }
 .custom-table th {
   background: #1a1a1a;
-  color: #d4af37;
+  color: burlywood;
   border-bottom: 1px solid rgba(212, 165, 116, 0.2);
   padding: 15px;
   text-transform: uppercase;
@@ -467,7 +493,6 @@ onMounted(fetchAnamneses);
   font-size: 14px;
 }
 
-/* Hover de Luxo na Tabela */
 .clickable-row {
   cursor: pointer;
   transition: all 0.3s ease;
@@ -475,7 +500,7 @@ onMounted(fetchAnamneses);
 }
 .clickable-row:hover {
   background: rgba(212, 165, 116, 0.08) !important;
-  border-left-color: #d4af37;
+  border-left-color: burlywood;
   transform: translateX(5px);
 }
 
@@ -506,17 +531,16 @@ onMounted(fetchAnamneses);
   border: 1px solid rgba(212, 165, 116, 0.1);
 }
 .card-label {
-  color: #d4af37;
+  color: #f6aeb8;
   font-size: 14px;
   text-transform: uppercase;
 }
 .card-value {
   font-size: 56px;
   font-family: "Playfair Display", serif;
-  color: #f9e4b7;
+  color: #e0e0e0;
 }
 
-/* Modal de Luxo Expandido */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -531,7 +555,7 @@ onMounted(fetchAnamneses);
   backdrop-filter: blur(8px);
 }
 .modal-content-luxury {
-  background: #121212;
+  background-size: 6px 6px;
   width: 95%;
   max-width: 850px;
   max-height: 90vh;
@@ -545,9 +569,10 @@ onMounted(fetchAnamneses);
 }
 .modal-header-luxury {
   padding: 25px 30px;
-  border-bottom: 1px solid rgba(212, 165, 116, 0.2);
-  background: #1a1a1a;
+  border-bottom: 2px solid burlywood;
+  color: burlywood;
 }
+
 .modal-body-luxury {
   padding: 30px;
   overflow-y: auto;
@@ -556,20 +581,41 @@ onMounted(fetchAnamneses);
 .modal-footer-luxury {
   padding: 20px 30px;
   background: #1a1a1a;
-  border-top: 1px solid rgba(212, 165, 116, 0.2);
+  border-top: 2px solid burlywood;
+}
+
+.modal-content-luxury,
+.modal-header-luxury,
+.modal-footer-luxury {
+  background-color: #272427;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      168deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
 }
 
 .section-title-luxury {
-  color: #d4af37;
+  color: burlywood;
   font-family: "Playfair Display", serif;
   font-size: 20px;
   font-style: italic;
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba(212, 165, 116, 0.3);
+  border-bottom: 1px solid burlywood;
   padding-bottom: 5px;
 }
 .label-luxury {
-  color: #d4af37;
+  color: burlywood;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -594,26 +640,46 @@ onMounted(fetchAnamneses);
 
 .btn-edit-luxury {
   background: transparent;
-  border: 1px solid #d4af37;
-  color: #d4af37;
+  border: 1px solid burlywood;
+  color: burlywood;
   padding: 10px 30px;
   border-radius: 5px;
   transition: 0.3s;
 }
 .btn-edit-luxury:hover {
-  background: #d4af37;
+  background: burlywood;
+  color: #121212;
+}
+.btn-cancel-luxury {
+  background: transparent;
+  border: 1px solid #d67a7a;
+  color: #d67a7a;
+  padding: 10px 30px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.btn-cancel-luxury:hover {
+  background: #d67a7a;
   color: #121212;
 }
 .btn-save-luxury {
-  background: linear-gradient(to right, #d4af37, #b8860b);
-  border: none;
-  color: #121212;
+  background: transparent;
+  border: 1px solid burlywood;
+  color: burlywood;
   padding: 10px 30px;
   border-radius: 5px;
   font-weight: 600;
+  transition: 0.3s;
+}
+.btn-save-luxury:hover:not(:disabled) {
+  background: burlywood;
+  color: #121212;
+}
+.btn-save-luxury:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-/* Scrollbar Customizada */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -621,7 +687,45 @@ onMounted(fetchAnamneses);
   background: #0a0a0a;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #d4af37;
+  background: burlywood;
   border-radius: 10px;
+}
+
+.hamburger {
+  background: transparent;
+  border: 1px solid rgba(222, 184, 135, 0.3);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 8px;
+  transition: border-color 0.3s;
+}
+.hamburger:hover {
+  border-color: burlywood;
+}
+.hamburger .line {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: burlywood;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.hamburger.is-active .line-1 {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.is-active .line-2 {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.is-active .line-3 {
+  transform: translateY(-8px) rotate(-45deg);
 }
 </style>
