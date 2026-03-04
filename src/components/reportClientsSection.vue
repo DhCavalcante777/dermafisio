@@ -53,7 +53,7 @@
             </div>
             <div class="specialist-image-wrapper">
               <img
-                src="../assets/image/especialista.png"
+                src="../assets/image/suelen-perfil.png"
                 alt="Dra. Suelen Coelho"
                 class="specialist-img"
               />
@@ -72,18 +72,18 @@ import clientImage3 from "../assets/image/persona/cliente_etnia_indiana.png";
 
 const testimonials = [
   {
-    name: "Mariana S.",
-    text: "Excelente atendimento e resultados incríveis!",
+    name: "Ana Carolina Soares",
+    text: "Atendimento impecável! Profissionalismo, cuidado e atenção em cada detalhe.",
     image: clientImage1,
   },
   {
-    name: "Cláudia R.",
-    text: "Senti-me renovada após o procedimento. Recomendo!",
+    name: "Cinthia Pimenta",
+    text: "Atendimento excepcional! Você e sua equipe sempre de parabéns!",
     image: clientImage2,
   },
   {
-    name: "Fernanda L.",
-    text: "Profissionalismo e cuidado em cada detalhe!",
+    name: "Thayrine Lino",
+    text: "Experiência maravilhosa, fiz um combo de procedimento para casamento e fiquei magrinha rsrs",
     image: clientImage3,
   },
 ];

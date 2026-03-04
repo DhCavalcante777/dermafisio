@@ -21,22 +21,22 @@
 
         <div class="carousel-inner rounded-4 shadow-lg">
           <div class="carousel-item active" data-bs-interval="3000">
-            <img src="../assets/image/terapiaCapilar.png" class="d-block w-100" alt="Terapia Capilar" />
+            <img src="../assets/image/terapiaCapilarBlack.png" class="d-block w-100" alt="Terapia Capilar" />
           </div>
           <div class="carousel-item" data-bs-interval="3000">
-            <img src="../assets/image/tratamentoDeEstrias.png" class="d-block w-100" alt="Tratamento de Estrias" />
+            <img src="../assets/image/tratamentoDeEstriasBlack.png" class="d-block w-100" alt="Tratamento de Estrias" />
           </div>
           <div class="carousel-item" data-bs-interval="3000">
-            <img src="../assets/image/tratamentosCorporais.png" class="d-block w-100" alt="Tratamentos Corporais" />
+            <img src="../assets/image/tratamentosCorporaisBlack.png" class="d-block w-100" alt="Tratamentos Corporais" />
           </div>
           <div class="carousel-item" data-bs-interval="3000">
-            <img src="../assets/image/liftingDePapada.png" class="d-block w-100" alt="Lifting de Papada" />
+            <img src="../assets/image/liftingDePapadaBlack.png" class="d-block w-100" alt="Lifting de Papada" />
           </div>
           <div class="carousel-item" data-bs-interval="3000">
-            <img src="../assets/image/tratamentosFaciais.png" class="d-block w-100" alt="Tratamentos Faciais" />
+            <img src="../assets/image/tratamentosFaciaisBlack.png" class="d-block w-100" alt="Tratamentos Faciais" />
           </div>
           <div class="carousel-item" data-bs-interval="3000">
-            <img src="../assets/image/fisioterapiaPelvica.png" class="d-block w-100" alt="Fisioterapia Pélvica" />
+            <img src="../assets/image/fisioterapiaPelvicaBlack.png" class="d-block w-100" alt="Fisioterapia Pélvica" />
           </div>
         </div>
 
@@ -71,7 +71,7 @@
 
 /* Estilização do Carrossel */
 .custom-carousel {
-  max-width: 900px;
+  max-width: 500px;
   margin: 0 auto;
 }
 

@@ -1,5 +1,4 @@
 <template>
-  
   <button class="hamburger-btn" @click="isOpen = true">
     <div class="hamburger" :class="{ 'is-active': isOpen }">
       <span class="line line-1"></span>

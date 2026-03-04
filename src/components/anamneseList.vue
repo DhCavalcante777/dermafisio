@@ -21,7 +21,7 @@
       </button>
     </div>
 
-    <div class="row">
+    <div class="row g-4">
       <div class="col-lg-8">
         <div class="table-card shadow">
           <table class="table table-dark custom-table">
@@ -101,7 +101,7 @@
           <h2 class="modal-title-luxury">
             Ficha Completa: {{ selectedAnamnese.nome }}
           </h2>
-          <button class="btn-close-luxury hamburger is-active" @click="closeModal">
+          <button class="btn-close-luxury close-button is-active" @click="closeModal">
             <span class="line line-1"></span>
             <span class="line line-2"></span>
             <span class="line line-3"></span>
@@ -691,7 +691,7 @@ onMounted(fetchAnamneses);
   border-radius: 10px;
 }
 
-.hamburger {
+.close-button {
   background: transparent;
   border: 1px solid rgba(222, 184, 135, 0.3);
   border-radius: 8px;
@@ -706,10 +706,10 @@ onMounted(fetchAnamneses);
   padding: 8px;
   transition: border-color 0.3s;
 }
-.hamburger:hover {
+.close-button:hover {
   border-color: burlywood;
 }
-.hamburger .line {
+.close-button .line {
   display: block;
   height: 2px;
   width: 100%;
@@ -718,14 +718,14 @@ onMounted(fetchAnamneses);
   transition: all 0.3s ease;
   transform-origin: center;
 }
-.hamburger.is-active .line-1 {
+.close-button.is-active .line-1 {
   transform: translateY(8px) rotate(45deg);
 }
-.hamburger.is-active .line-2 {
+.close-button.is-active .line-2 {
   opacity: 0;
   transform: scaleX(0);
 }
-.hamburger.is-active .line-3 {
+.close-button.is-active .line-3 {
   transform: translateY(-8px) rotate(-45deg);
 }
 </style>
