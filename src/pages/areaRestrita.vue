@@ -3,16 +3,17 @@
     class="login-page min-vh-100 d-flex align-items-center justify-content-center"
   >
     <div class="login-card shadow-lg">
-      <!-- Logo Centralizado -->
       <div class="text-center mb-4">
         <div class="logo-container">
-          <span class="logo-sl">SL</span>
-          <h2 class="brand-name">DERMAFÍSIO</h2>
+          <img
+            class="login-logo"
+            src="@/assets/image/logo-sldermafisio.png"
+            alt="SL Dermafísio"
+          />
         </div>
       </div>
 
       <form @submit.prevent="handleLogin" class="login-form">
-        <!-- Campo E-mail -->
         <div class="input-group-custom mb-3">
           <div class="icon-box">
             <i class="fas fa-envelope"></i>
@@ -26,7 +27,6 @@
           />
         </div>
 
-        <!-- Campo Senha -->
         <div class="input-group-custom mb-4">
           <div class="icon-box">
             <i class="fas fa-lock"></i>
@@ -40,16 +40,17 @@
           />
         </div>
 
-        <!-- Botão Entrar -->
-        <button type="submit" class="btn-login">Entrar no Painel</button>
+        <button type="submit" class="btn-login" :disabled="isLoading">
+          {{ isLoading ? 'Entrando...' : 'Entrar no Painel' }}
+        </button>
 
-        <!-- Esqueci minha senha -->
+        <p v-if="errorMsg" class="error-msg text-center mt-3">{{ errorMsg }}</p>
+
         <div class="text-center mt-3">
           <a href="#" class="forgot-password">Esqueci minha senha</a>
         </div>
       </form>
 
-      <!-- Detalhe Decorativo Inferior -->
       <div class="footer-decoration mt-4">
         <div class="deco-line"></div>
         <div class="deco-diamond"></div>
@@ -61,16 +62,30 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+import AuthService from "@/services/authService";
 
+const router = useRouter();
 const email = ref("");
 const password = ref("");
+const isLoading = ref(false);
+const errorMsg = ref("");
 
-const handleLogin = () => {
-  console.log("Tentativa de login:", {
-    email: email.value,
-    password: password.value,
-  });
-  // Lógica de autenticação aqui
+const handleLogin = async () => {
+  try {
+    errorMsg.value = "";
+    isLoading.value = true;
+    await AuthService.login(email.value, password.value);
+    router.push("/dashboard");
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      errorMsg.value = "E-mail ou senha incorretos.";
+    } else {
+      errorMsg.value = "Erro ao conectar. Tente novamente.";
+    }
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 
@@ -78,9 +93,22 @@ const handleLogin = () => {
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap");
 
 .login-page {
-  background-color: #0a0a0a;
-  /* Textura de fundo estilo couro/premium */
-  background-image: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+  background-color: #272427;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      168deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
   font-family: "Poppins", sans-serif;
 }
 
@@ -90,7 +118,7 @@ const handleLogin = () => {
   max-width: 450px;
   padding: 50px 40px;
   border-radius: 15px;
-  border: 1px solid rgba(212, 165, 116, 0.15);
+  border: 1px solid rgba(222, 184, 135, 0.2);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
   position: relative;
   overflow: hidden;
@@ -103,23 +131,9 @@ const handleLogin = () => {
   align-items: center;
 }
 
-.logo-sl {
-  font-family: "Playfair Display", serif;
-  font-size: 60px;
-  background: linear-gradient(135deg, #d4af37 0%, #f9e4b7 50%, #b8860b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1;
-  margin-bottom: 5px;
-}
-
-.brand-name {
-  color: #d4af37;
-  font-family: "Playfair Display", serif;
-  font-size: 22px;
-  letter-spacing: 6px;
-  margin: 0;
-  font-weight: 400;
+.login-logo {
+  max-width: 200px;
+  height: auto;
 }
 
 /* Inputs Customizados */
@@ -127,22 +141,22 @@ const handleLogin = () => {
   display: flex;
   align-items: center;
   background: #0a0a0a;
-  border: 1px solid rgba(212, 165, 116, 0.3);
+  border: 1px solid rgba(222, 184, 135, 0.3);
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .input-group-custom:focus-within {
-  border-color: #d4af37;
-  box-shadow: 0 0 10px rgba(212, 165, 116, 0.2);
+  border-color: burlywood;
+  box-shadow: 0 0 10px rgba(222, 184, 135, 0.2);
 }
 
 .icon-box {
   padding: 12px 15px;
-  color: #ff69b4; /* Cor rosa sutil conforme a imagem */
+  color: #f6aeb8;
   font-size: 18px;
-  border-right: 1px solid rgba(212, 165, 116, 0.1);
+  border-right: 1px solid rgba(222, 184, 135, 0.1);
 }
 
 .login-input {
@@ -162,14 +176,14 @@ const handleLogin = () => {
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* Botão Dourado Metálico */
+/* Botão de Login */
 .btn-login {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(to bottom, #e5c06d 0%, #b8860b 100%);
+  background: linear-gradient(to right, #d67a7a, #b35d5d);
   border: none;
   border-radius: 8px;
-  color: #1a1a1a;
+  color: white;
   font-weight: 600;
   font-size: 18px;
   cursor: pointer;
@@ -180,11 +194,22 @@ const handleLogin = () => {
 .btn-login:hover {
   filter: brightness(1.1);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(184, 134, 11, 0.3);
+  box-shadow: 0 6px 20px rgba(214, 122, 122, 0.3);
+}
+.btn-login:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error-msg {
+  color: #d67a7a;
+  font-size: 14px;
+  margin-bottom: 0;
 }
 
 .forgot-password {
-  color: #ff69b4;
+  color: #f6aeb8;
   font-size: 13px;
   text-decoration: none;
   opacity: 0.8;
@@ -193,6 +218,7 @@ const handleLogin = () => {
 
 .forgot-password:hover {
   opacity: 1;
+  color: burlywood;
 }
 
 /* Decoração Inferior */
@@ -206,13 +232,13 @@ const handleLogin = () => {
 .deco-line {
   height: 1px;
   flex: 1;
-  background: linear-gradient(to right, transparent, #d4af37, transparent);
+  background: linear-gradient(to right, transparent, burlywood, transparent);
 }
 
 .deco-diamond {
   width: 8px;
   height: 8px;
-  background: #d4af37;
+  background: burlywood;
   transform: rotate(45deg);
 }
 

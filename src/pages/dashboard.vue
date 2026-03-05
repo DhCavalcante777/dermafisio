@@ -2,7 +2,6 @@
   <div class="dashboard-container d-flex">
     <sidebar />
 
-    <!-- Conteúdo Principal -->
     <main class="main-content flex-grow-1 p-4 background">
       <router-view />
     </main>

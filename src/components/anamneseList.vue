@@ -67,7 +67,6 @@
         </div>
       </div>
 
-      <!-- Coluna de Resumo -->
       <div class="col-lg-4">
         <div class="info-card mb-4 text-center">
           <h3 class="card-label">Total de Anamneses</h3>
@@ -91,7 +90,6 @@
       </div>
     </div>
 
-    <!-- Modal de Visualização/Edição Completa -->
     <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
       <div class="modal-content-luxury shadow-lg">
         <div
@@ -108,7 +106,6 @@
         </div>
 
         <div class="modal-body-luxury custom-scrollbar">
-          <!-- Seção: Dados Pessoais -->
           <div class="section-title-luxury">Dados Pessoais</div>
           <div class="row g-3 mb-4">
             <div class="col-md-6">
@@ -171,7 +168,6 @@
             </div>
           </div>
 
-          <!-- Seção: Queixa Principal -->
           <div class="section-title-luxury">Queixa Principal</div>
           <div class="row g-3 mb-4">
             <div class="col-12">
@@ -190,7 +186,6 @@
             </div>
           </div>
 
-          <!-- Seção: Histórico Patológico -->
           <div class="section-title-luxury">Histórico Patológico</div>
           <div class="row g-3 mb-4">
             <div class="col-md-6">
@@ -276,7 +271,6 @@
             </div>
           </div>
 
-          <!-- Seção: Histórico Social -->
           <div class="section-title-luxury">Histórico Social</div>
           <div class="row g-3 mb-4">
             <div class="col-md-6">

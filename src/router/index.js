@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import AuthService from "@/services/authService";
 
 // Defina suas rotas
 const routes = [
@@ -25,6 +26,7 @@ const routes = [
   {
     path: "/dashboard",
     component: () => import("@/pages/dashboard.vue"),
+    meta: { requiresAuth: true },
     children: [
       {
         path: "",
@@ -59,6 +61,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+});
+
+// Guard: protege todas as rotas que exigem autenticação
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+
+  if (requiresAuth && !AuthService.isAuthenticated()) {
+    next({ name: "AreaRestrita" });
+  } else {
+    next();
+  }
 });
 
 export default router;

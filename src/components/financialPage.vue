@@ -5,7 +5,6 @@
       <div class="date-range-display">Janeiro - Junho 2026</div>
     </header>
 
-    <!-- Cards de Resumo -->
     <div class="row g-4 mb-5">
       <div class="col-md-6">
         <div class="finance-card income-card shadow-lg">
@@ -21,7 +20,6 @@
       </div>
     </div>
 
-    <!-- Gráfico de Performance -->
     <div class="chart-container-luxury mb-5 shadow-lg">
       <div class="chart-header d-flex justify-content-between align-items-center mb-4">
         <h3 class="section-title-luxury m-0">Income vs. Expenses</h3>
@@ -35,7 +33,6 @@
       </div>
     </div>
 
-    <!-- Tabela de Transações Recentes -->
     <div class="transactions-container shadow-lg">
       <h3 class="section-title-luxury mb-4">Recent Transactions</h3>
       <table class="table table-dark custom-finance-table">
@@ -64,7 +61,6 @@
       </table>
     </div>
 
-    <!-- Botões de Ação -->
     <div class="d-flex justify-content-between mt-5">
       <button class="btn-outline-luxury">EXPORT PDF</button>
       <button class="btn-outline-luxury">EXPORT EXCEL</button>

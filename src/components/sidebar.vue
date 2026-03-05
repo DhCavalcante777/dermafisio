@@ -44,7 +44,7 @@
     </nav>
 
     <div class="sidebar-footer text-center py-4">
-      <button class="btn-logout">
+      <button class="btn-logout" @click="handleLogout">
         <i class="fas fa-sign-out-alt me-2"></i> <span>Sair</span>
       </button>
     </div>
@@ -53,7 +53,16 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import AuthService from '@/services/authService';
+
 const isOpen = ref(false);
+const router = useRouter();
+
+const handleLogout = () => {
+  AuthService.logout();
+  router.push('/areaRestrita');
+};
 </script>
 
 <style scoped>
