@@ -32,9 +32,9 @@
       <router-link to="/dashboard/calendar" class="nav-link" active-class="active" @click="isOpen = false">
         <i class="fas fa-calendar-alt me-3"></i> <span>Agenda</span>
       </router-link>
-      <router-link to="/dashboard/clientes" class="nav-link" active-class="active" @click="isOpen = false">
+      <!-- <router-link to="/dashboard/clientes" class="nav-link" active-class="active" @click="isOpen = false">
         <i class="fas fa-users me-3"></i> <span>Clientes</span>
-      </router-link>
+      </router-link> -->
       <router-link to="/dashboard/anamnese" class="nav-link" active-class="active" @click="isOpen = false">
         <i class="fas fa-clock me-3"></i> <span>Anamneses</span>
       </router-link>

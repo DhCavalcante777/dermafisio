@@ -183,7 +183,6 @@ onMounted(fetchEvents);
 </script>
 
 <style scoped>
-/* Estilos de Luxo para o Calendário */
 .agenda-page {
   overflow-x: hidden;
   max-width: 100%;
@@ -205,7 +204,6 @@ onMounted(fetchEvents);
   max-width: 100%;
 }
 
-/* Customização do FullCalendar para o tema Dark/Gold */
 :deep(.fc) {
   --fc-border-color: rgba(212, 165, 116, 0.1);
   --fc-today-bg-color: rgba(212, 165, 116, 0.05);
@@ -255,7 +253,6 @@ onMounted(fetchEvents);
   box-shadow: 0 5px 15px rgba(214, 122, 122, 0.4);
 }
 
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -435,7 +432,6 @@ onMounted(fetchEvents);
   border-radius: 10px;
 }
 
-/* Responsivo Mobile */
 @media (max-width: 768px) {
   .agenda-page {
     padding: 0;
@@ -463,7 +459,6 @@ onMounted(fetchEvents);
     border-radius: 10px;
   }
 
-  /* FullCalendar Mobile */
   :deep(.fc-toolbar) {
     gap: 10px;
   }
@@ -495,7 +490,6 @@ onMounted(fetchEvents);
     font-size: 11px;
   }
 
-  /* Modal Mobile */
   .modal-content-luxury {
     width: 95%;
     max-width: 100%;

@@ -16,6 +16,9 @@
           />
         </div>
       </div>
+      <button class="btn-copy-link" @click="copyLink">
+        <i class="fas fa-copy me-2"></i>{{ linkCopiado ? 'Link Copiado!' : 'Copiar Link Anamnese' }}
+      </button>
       <button class="btn-buscar" @click="fetchAnamneses">
         Atualizar Lista
       </button>
@@ -28,9 +31,9 @@
             <thead>
               <tr>
                 <th>Cliente</th>
+                <th>Telefone</th>
                 <th>Data</th>
                 <th>Tipo de Tratamento</th>
-                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -49,13 +52,9 @@
                 class="clickable-row"
               >
                 <td>{{ item.nome }}</td>
+                <td>{{ item.telefone }}</td>
                 <td>{{ formatDate(item.dataCriacao) }}</td>
                 <td>{{ item.queixaPrincipal || "Avaliação Geral" }}</td>
-                <td>
-                  <span :class="['status-badge', getStatusClass(item)]">
-                    {{ getStatusText(item) }}
-                  </span>
-                </td>
               </tr>
 
               <tr v-if="!loading && filteredAnamneses.length === 0">
@@ -369,6 +368,17 @@ const showModal = ref(false);
 const isEditing = ref(false);
 const selectedAnamnese = ref(null);
 const originalData = ref(null);
+const linkCopiado = ref(false);
+
+const copyLink = async () => {
+  try {
+    await navigator.clipboard.writeText('https://sldermafisio.com.br/anamnese');
+    linkCopiado.value = true;
+    setTimeout(() => { linkCopiado.value = false; }, 2000);
+  } catch {
+    alert('Erro ao copiar o link.');
+  }
+};
 
 const fetchAnamneses = async () => {
   try {
@@ -426,10 +436,6 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString("pt-BR");
 };
 
-const getStatusClass = (item) =>
-  item.queixaPrincipal ? "status-complete" : "status-pending";
-const getStatusText = (item) =>
-  item.queixaPrincipal ? "Completa" : "Pendente";
 const totalAnamneses = computed(() => anamneses.value.length);
 const ultimasAtualizacoes = computed(() =>
   [...anamneses.value]
@@ -472,6 +478,21 @@ onMounted(fetchAnamneses);
   border-radius: 5px;
   font-weight: 600;
 }
+.btn-copy-link {
+  background: transparent;
+  border: 1px solid burlywood;
+  color: burlywood;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-copy-link:hover {
+  background: burlywood;
+  color: #121212;
+}
 
 .table-card {
   background: #121212;
@@ -502,26 +523,6 @@ onMounted(fetchAnamneses);
   background: rgba(212, 165, 116, 0.08) !important;
   border-left-color: burlywood;
   transform: translateX(5px);
-}
-
-.status-badge {
-  padding: 5px 15px;
-  border-radius: 5px;
-  font-size: 11px;
-  display: inline-block;
-  min-width: 100px;
-  text-align: center;
-  font-weight: 600;
-}
-.status-complete {
-  background: rgba(76, 175, 80, 0.15);
-  color: #81c784;
-  border: 1px solid rgba(76, 175, 80, 0.3);
-}
-.status-pending {
-  background: rgba(158, 158, 158, 0.15);
-  color: #bdbdbd;
-  border: 1px solid rgba(158, 158, 158, 0.3);
 }
 
 .info-card {
