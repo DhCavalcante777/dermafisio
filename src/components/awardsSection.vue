@@ -1,7 +1,6 @@
 <template>
   <section class="container-fluid background py-5 overflow-hidden">
     <div class="container">
-      <!-- Título -->
       <div class="row mb-5">
         <div class="col-12 text-center d-flex align-items-center justify-content-center gap-3">
           <div class="ornament-line"></div>
@@ -10,7 +9,6 @@
         </div>
       </div>
 
-      <!-- Carrossel Infinito -->
       <div class="slider-container">
         <div class="slider-track">
           <!-- Duplicamos a lista para criar o efeito infinito -->

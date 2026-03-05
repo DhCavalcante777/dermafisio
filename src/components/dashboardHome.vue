@@ -36,7 +36,6 @@
     </div> -->
 
     <div class="row g-4">
-      <!-- Gráfico de Performance (Neon Gold) -->
       <div class="col-lg-8">
         <div class="chart-card shadow-lg">
           <div class="d-flex justify-content-between align-items-center mb-4">
@@ -53,7 +52,6 @@
         </div>
       </div>
 
-      <!-- Próximos Atendimentos -->
       <div class="col-lg-4">
         <div class="appointments-card shadow-lg">
           <h3 class="section-title-luxury mb-4">Próximos Atendimentos</h3>

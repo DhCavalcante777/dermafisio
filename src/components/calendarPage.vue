@@ -25,9 +25,15 @@
 
         <div class="modal-body-luxury custom-scrollbar">
           <form @submit.prevent="saveAppointment">
-            <div class="mb-3">
-              <label class="label-luxury">Nome da Cliente</label>
-              <input v-model="form.nomeCliente" type="text" class="input-luxury" required>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="label-luxury">Nome da Cliente</label>
+                <input v-model="form.nomeCliente" type="text" class="input-luxury" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="label-luxury">Telefone</label>
+                <input v-model="telefoneDisplay" @input="handleTelefoneInput" type="tel" class="input-luxury" placeholder="(00) 00000-0000" maxlength="15" inputmode="numeric">
+              </div>
             </div>
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -42,6 +48,10 @@
             <div class="mb-3">
               <label class="label-luxury">Procedimento</label>
               <input v-model="form.procedimento" type="text" class="input-luxury" placeholder="Ex: Limpeza de Pele, Botox..." required>
+            </div>
+            <div class="mb-3">
+              <label class="label-luxury">Observações</label>
+              <textarea v-model="form.observacoes" class="input-luxury" rows="3" placeholder="Anotações sobre o atendimento..."></textarea>
             </div>
             <div class="modal-footer-luxury d-flex justify-content-end gap-3">
               <button type="button" @click="showModal = false" class="btn-cancel-luxury">Cancelar</button>
@@ -64,13 +74,15 @@ import CalendarService from '@/services/calendarService';
 
 const showModal = ref(false);
 const isEditing = ref(false);
+const telefoneDisplay = ref('');
 const form = reactive({
   id: null,
   nomeCliente: '',
+  telefoneCliente: '',
   dataInicio: '',
   dataFim: '',
   procedimento: '',
-  corEvento: '#d4af37'
+  observacoes: '',
 });
 
 const calendarOptions = reactive({
@@ -82,6 +94,7 @@ const calendarOptions = reactive({
     right: 'dayGridMonth,timeGridWeek,timeGridDay'
   },
   locale: 'pt-br',
+  height: 630,
   slotMinTime: '01:00:00',
   slotMaxTime: '24:00:00',
   allDaySlot: false,
@@ -99,8 +112,6 @@ const fetchEvents = async () => {
       title: `${event.nomeCliente} - ${event.procedimento}`,
       start: event.dataInicio,
       end: event.dataFim,
-      backgroundColor: event.corEvento,
-      borderColor: event.corEvento,
       extendedProps: { ...event }
     }));
   } catch (error) {
@@ -111,16 +122,29 @@ const fetchEvents = async () => {
 const resetForm = () => {
   form.id = null;
   form.nomeCliente = '';
+  form.telefoneCliente = '';
   form.dataInicio = '';
   form.dataFim = '';
   form.procedimento = '';
-  form.corEvento = '#d4af37';
+  form.observacoes = '';
 };
 
 const openNewAppointmentModal = () => {
   resetForm();
+  telefoneDisplay.value = '';
   isEditing.value = false;
   showModal.value = true;
+};
+
+const formatDateForMySQL = (date) => {
+  const d = new Date(date);
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const hours = String(d.getHours()).padStart(2, '0');
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  const seconds = String(d.getSeconds()).padStart(2, '0');
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
 const formatDateForInput = (isoDate) => {
@@ -134,14 +158,42 @@ const formatDateForInput = (isoDate) => {
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
 
+const formatTelefoneDisplay = (value) => {
+  if (!value) return '';
+  const digits = value.replace(/\D/g, '');
+  if (digits.length > 6) return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+  if (digits.length > 2) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length > 0) return `(${digits}`;
+  return '';
+};
+
+const handleTelefoneInput = (e) => {
+  let value = e.target.value.replace(/\D/g, '');
+  if (value.length > 11) value = value.slice(0, 11);
+
+  if (value.length > 7) {
+    telefoneDisplay.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+  } else if (value.length > 2) {
+    telefoneDisplay.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+  } else if (value.length > 0) {
+    telefoneDisplay.value = `(${value}`;
+  } else {
+    telefoneDisplay.value = '';
+  }
+
+  form.telefoneCliente = value;
+};
+
 const handleEventClick = (info) => {
   const event = info.event.extendedProps;
   form.id = info.event.id;
   form.nomeCliente = event.nomeCliente;
+  form.telefoneCliente = event.telefoneCliente || '';
+  telefoneDisplay.value = formatTelefoneDisplay(event.telefoneCliente);
   form.dataInicio = formatDateForInput(event.dataInicio);
   form.dataFim = formatDateForInput(event.dataFim);
   form.procedimento = event.procedimento;
-  form.corEvento = event.corEvento || '#d4af37';
+  form.observacoes = event.observacoes || '';
   isEditing.value = true;
   showModal.value = true;
 };
@@ -152,8 +204,8 @@ const handleEventDrop = async (info) => {
     const updatedEvent = {
       id: event.id,
       ...event.extendedProps,
-      dataInicio: event.start.toISOString(),
-      dataFim: event.end ? event.end.toISOString() : event.start.toISOString(),
+      dataInicio: formatDateForMySQL(event.start),
+      dataFim: event.end ? formatDateForMySQL(event.end) : formatDateForMySQL(event.start),
     };
     await CalendarService.update(updatedEvent);
     fetchEvents();
@@ -165,10 +217,20 @@ const handleEventDrop = async (info) => {
 
 const saveAppointment = async () => {
   try {
+    const payload = {
+      id: form.id,
+      nomeCliente: form.nomeCliente,
+      telefoneCliente: form.telefoneCliente,
+      dataInicio: formatDateForMySQL(form.dataInicio),
+      dataFim: formatDateForMySQL(form.dataFim),
+      procedimento: form.procedimento,
+      observacoes: form.observacoes,
+    };
+
     if (isEditing.value) {
-      await CalendarService.update(form);
+      await CalendarService.update(payload);
     } else {
-      await CalendarService.create(form);
+      await CalendarService.create(payload);
     }
     showModal.value = false;
     resetForm();
@@ -226,6 +288,10 @@ onMounted(fetchEvents);
 :deep(.fc-button:hover),
 :deep(.fc-button-active) {
   color: #121212 !important;
+}
+
+:deep(.fc-timegrid-slot) {
+  height: 50px !important;
 }
 
 :deep(.fc-col-header-cell-cushion), :deep(.fc-timegrid-slot-label-cushion) {
@@ -553,6 +619,39 @@ onMounted(fetchEvents);
 
   .calendar-card {
     padding: 8px;
+  }
+}
+
+/* Tablet em pé (portrait): prev/next/today abaixo do month/week/day */
+@media (min-width: 577px) and (max-width: 1024px) and (orientation: portrait) {
+  :deep(.fc-toolbar.fc-header-toolbar) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* Título ocupa toda a largura primeiro */
+  :deep(.fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:nth-child(2)) {
+    order: 1;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Botões month/week/day vêm em segundo */
+  :deep(.fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:nth-child(3)) {
+    order: 2;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Botões prev/next/today por último, embaixo */
+  :deep(.fc-toolbar.fc-header-toolbar .fc-toolbar-chunk:nth-child(1)) {
+    order: 3;
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 }
 </style>
