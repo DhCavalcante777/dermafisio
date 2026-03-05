@@ -184,6 +184,11 @@ onMounted(fetchEvents);
 
 <style scoped>
 /* Estilos de Luxo para o Calendário */
+.agenda-page {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 .page-title {
   font-family: "Playfair Display", serif;
   color: #f6aeb8;
@@ -196,6 +201,8 @@ onMounted(fetchEvents);
   border-radius: 15px;
   border: 1px solid rgba(212, 165, 116, 0.1);
   color: #f9e4b7;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 /* Customização do FullCalendar para o tema Dark/Gold */
@@ -426,5 +433,132 @@ onMounted(fetchEvents);
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: burlywood;
   border-radius: 10px;
+}
+
+/* Responsivo Mobile */
+@media (max-width: 768px) {
+  .agenda-page {
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: 1.3rem;
+  }
+
+  .btn-luxury-gold {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 100%;
+  }
+
+  .calendar-card {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  /* FullCalendar Mobile */
+  :deep(.fc-toolbar) {
+    gap: 10px;
+  }
+
+  :deep(.fc-toolbar-title) {
+    font-size: 1rem !important;
+  }
+
+  :deep(.fc-button) {
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+
+  :deep(.fc-button-group) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  :deep(.fc-timegrid-slot-label) {
+    font-size: 10px;
+  }
+
+  :deep(.fc-event-title) {
+    font-size: 10px;
+  }
+
+  :deep(.fc-col-header-cell-cushion) {
+    font-size: 11px;
+  }
+
+  /* Modal Mobile */
+  .modal-content-luxury {
+    width: 95%;
+    max-width: 100%;
+    margin: 10px;
+    max-height: 95vh;
+  }
+
+  .modal-header-luxury {
+    padding: 15px 20px;
+  }
+
+  .modal-title-luxury {
+    font-size: 1.2rem;
+  }
+
+  .modal-body-luxury {
+    padding: 20px;
+  }
+
+  .label-luxury {
+    font-size: 10px;
+  }
+
+  .input-luxury {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .modal-footer-luxury {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-cancel-luxury,
+  .btn-save-luxury {
+    padding: 10px 20px;
+    font-size: 13px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .close-button {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 1.1rem;
+  }
+
+  :deep(.fc-toolbar-title) {
+    font-size: 0.9rem !important;
+  }
+
+  :deep(.fc-button) {
+    padding: 5px 8px !important;
+    font-size: 10px !important;
+  }
+
+  .calendar-card {
+    padding: 8px;
+  }
 }
 </style>

@@ -208,8 +208,10 @@ const isOpen = ref(false);
     left: 0;
     width: 270px;
     height: 100vh;
+    min-height: 100vh;
     transform: translateX(-100%);
     z-index: 1100;
+    overflow-y: auto;
   
     .brand-name,
     .nav-link span,

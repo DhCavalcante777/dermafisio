@@ -74,7 +74,7 @@
               <div class="appt-status-dot"></div>
             </div>
           </div>
-          <button class="btn-view-all mt-4">Ver Agenda Completa</button>
+          <button @click="goToCalendar" class="btn-view-all mt-4">Ver Agenda Completa</button>
         </div>
       </div>
     </div>
@@ -83,6 +83,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { Line } from 'vue-chartjs';
 import { 
   Chart as ChartJS, Title, Tooltip, Legend, LineElement, 
@@ -91,6 +92,12 @@ import {
 import CalendarService from '@/services/calendarService';
 
 ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, CategoryScale, LinearScale, Filler);
+
+const router = useRouter();
+
+const goToCalendar = () => {
+  router.push({ name: 'CalendarPage' });
+};
 
 const currentFormattedDate = computed(() => {
   return new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -235,7 +242,12 @@ onMounted(() => {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap' );
 
-.dashboard-home { font-family: 'Poppins', sans-serif; color: white; }
+.dashboard-home { 
+  font-family: 'Poppins', sans-serif; 
+  color: white; 
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 .page-title {
   font-family: "Playfair Display", serif;
@@ -277,9 +289,15 @@ onMounted(() => {
   padding: 35px;
   border-radius: 15px;
   height: 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
-.chart-wrapper { height: 300px; }
+.chart-wrapper { 
+  height: 300px; 
+  width: 100%;
+  max-width: 100%;
+}
 .section-title-luxury { font-family: 'Playfair Display', serif; color: #f6aeb8; font-style: italic; font-size: 22px; }
 .chart-period { font-size: 12px; color: rgba(255, 255, 255, 0.4); }
 
@@ -323,4 +341,82 @@ onMounted(() => {
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: burlywood; border-radius: 10px; }
+
+/* Responsivo Mobile */
+@media (max-width: 768px) {
+  .dashboard-home {
+    padding: 0 10px;
+  }
+  
+  header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+  }
+  
+  .current-date-badge {
+    padding: 6px 15px;
+    font-size: 12px;
+  }
+  
+  .chart-card, .appointments-card {
+    padding: 20px;
+  }
+  
+  .section-title-luxury {
+    font-size: 18px;
+  }
+  
+  .chart-wrapper {
+    height: 250px;
+  }
+  
+  .chart-period {
+    font-size: 10px;
+  }
+  
+  .appointment-item {
+    padding: 12px 0;
+  }
+  
+  .appt-time {
+    width: 60px;
+    font-size: 11px;
+  }
+  
+  .appt-name {
+    font-size: 14px;
+  }
+  
+  .appt-service {
+    font-size: 11px;
+  }
+  
+  .btn-view-all {
+    padding: 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 1.3rem;
+  }
+  
+  .chart-card, .appointments-card {
+    padding: 15px;
+  }
+  
+  .section-title-luxury {
+    font-size: 16px;
+  }
+  
+  .chart-wrapper {
+    height: 200px;
+  }
+}
 </style>

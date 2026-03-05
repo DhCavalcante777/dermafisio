@@ -22,6 +22,12 @@ import sidebar from '@/components/sidebar.vue';
   min-height: 100vh;
   color: #e0e0e0;
   font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+.main-content {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .background {
@@ -47,6 +53,8 @@ import sidebar from '@/components/sidebar.vue';
 @media (max-width: 767px) {
   .main-content {
     padding-top: 75px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 }
 </style>
