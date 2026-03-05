@@ -32,6 +32,11 @@ const routes = [
         component: () => import("@/components/dashboardHome.vue"),
       },
       {
+        path: "calendar",
+        name: "CalendarPage",
+        component: () => import("@/components/calendarPage.vue"),
+      },
+      {
         path: "anamnese",
         name: "AnamneseList",
         component: () => import("@/components/anamneseList.vue"),

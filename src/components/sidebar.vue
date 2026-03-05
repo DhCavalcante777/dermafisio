@@ -29,7 +29,7 @@
       <router-link to="/dashboard" class="nav-link" exact-active-class="active" @click="isOpen = false">
         <i class="fas fa-th-large me-3"></i> <span>Dashboard</span>
       </router-link>
-      <router-link to="/dashboard/agenda" class="nav-link" active-class="active" @click="isOpen = false">
+      <router-link to="/dashboard/calendar" class="nav-link" active-class="active" @click="isOpen = false">
         <i class="fas fa-calendar-alt me-3"></i> <span>Agenda</span>
       </router-link>
       <router-link to="/dashboard/clientes" class="nav-link" active-class="active" @click="isOpen = false">
