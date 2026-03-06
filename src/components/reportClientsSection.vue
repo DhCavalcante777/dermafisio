@@ -66,9 +66,9 @@
 </template>
 
 <script setup>
-import clientImage1 from "../assets/image/persona/cliente_etnia_negra.png";
-import clientImage2 from "../assets/image/persona/cliente_etnia_asiatica.png";
-import clientImage3 from "../assets/image/persona/cliente_etnia_indiana.png";
+import clientImage1 from "../assets/image/persona/cliente2.png";
+import clientImage2 from "../assets/image/persona/cliente3.png";
+import clientImage3 from "../assets/image/persona/cliente1.png";
 
 const testimonials = [
   {

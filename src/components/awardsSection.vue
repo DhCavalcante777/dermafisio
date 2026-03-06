@@ -47,6 +47,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import seloEsmeralda from '../assets/image/seloEsmeralda.png'
 import seloRubi from '../assets/image/seloRubiDeitado.png'
 import seloDiamanteLaranja from '../assets/image/seloDiamanteLaranja.png'
 
@@ -65,22 +66,26 @@ const awards = [
     image: seloDiamanteLaranja,
     description: 'Prêmio concedido às clínicas que mantêm os mais altos padrões de tecnologia e atendimento personalizado.'
   },
-  // Adicione mais prêmios aqui...
+  {
+    title: 'Categoria Esmeralda', 
+    year: '2025', 
+    image: seloEsmeralda,
+    description: 'Certificação que atesta a qualidade dos serviços e a satisfação dos clientes, baseada em avaliações rigorosas.'
+  }
 ];
 
 const openModal = (award) => {
   selectedAward.value = award;
-  document.body.style.overflow = 'hidden'; // Trava o scroll da página
+  document.body.style.overflow = 'hidden';
 };
 
 const closeModal = () => {
   selectedAward.value = null;
-  document.body.style.overflow = 'auto'; // Libera o scroll
+  document.body.style.overflow = 'auto';
 };
 </script>
 
 <style scoped>
-/* Background e Títulos (Mantendo o padrão) */
 .background {
   background-color: #272427;
   background-image: repeating-linear-gradient(87deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px),
@@ -91,20 +96,14 @@ const closeModal = () => {
 .section-title { color: burlywood; font-family: "Great Vibes", cursive; font-size: 38px; }
 .ornament-line { height: 1px; width: 60px; background: linear-gradient(to right, transparent, burlywood, transparent); }
 
-/* Lógica do Slider Infinito */
 .slider-container {
   width: 100%;
   overflow: hidden;
 	display: flex;
-  /*padding: 40px 0;*/
-  /*position: relative;*/
-  /* Cria um efeito de desvanecimento nas bordas para ficar mais elegante */
-  /*mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);*/
 }
 
 .slider-track {
   display: flex;
-  /* A largura deve ser automática para caber todos os itens duplicados */
   width: max-content; 
   animation: scroll 10s linear infinite;
 }
@@ -118,14 +117,11 @@ const closeModal = () => {
     transform: translateX(0);
   }
   100% {
-    /* O segredo: movemos exatamente METADE da largura total do track */
-    /* Como duplicamos a lista no v-for, a metade é onde a lista se repete */
     transform: translateX(-33.33%);
   }
 }
 
 .award-slide {
-  /* Defina uma largura fixa para cada item para facilitar o cálculo */
   width: 350px; 
   flex-shrink: 0;
   display: flex;
@@ -149,7 +145,6 @@ const closeModal = () => {
 
 .award-label { color: burlywood; margin-top: 10px; font-family: "Playfair Display", serif; }
 
-/* Estilo do Modal */
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;

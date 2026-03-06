@@ -11,17 +11,19 @@
           <input
             type="text"
             v-model="filterText"
-            class="custom-input ps-5"
+            class="custom-input ps-3"
             placeholder="Filtrar por Cliente..."
           />
         </div>
       </div>
-      <button class="btn-copy-link" @click="copyLink">
-        <i class="fas fa-copy me-2"></i>{{ linkCopiado ? 'Link Copiado!' : 'Copiar Link Anamnese' }}
-      </button>
-      <button class="btn-buscar" @click="fetchAnamneses">
-        Atualizar Lista
-      </button>
+      <div class="btn-actions-group">
+        <button class="btn-buscar btn-copy-link" @click="copyLink">
+          <i class="fas fa-copy me-2"></i>{{ linkCopiado ? 'Link Copiado!' : 'Copiar Link' }}
+        </button>
+        <button class="btn-buscar" @click="fetchAnamneses">
+          Atualizar Lista
+        </button>
+      </div>
     </div>
 
     <div class="row g-4">
@@ -468,18 +470,19 @@ onMounted(fetchAnamneses);
   background: linear-gradient(to right, #d67a7a, #b35d5d);
   border: none;
   color: white;
-  padding: 10px 40px;
+  padding: 10px 20px;
   border-radius: 5px;
   font-weight: 600;
+}
+.btn-actions-group {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
 }
 .btn-copy-link {
   background: transparent;
   border: 1px solid burlywood;
   color: burlywood;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: 600;
-  white-space: nowrap;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -722,5 +725,20 @@ onMounted(fetchAnamneses);
 }
 .close-button.is-active .line-3 {
   transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (min-width: 320px) and (max-width: 868px) {
+  .filter-bar {
+    flex-wrap: wrap;
+  }
+  .filter-bar .flex-grow-1 {
+    flex: 1 1 100%;
+  }
+  .btn-actions-group {
+    flex: 1 1 100%;
+  }
+  .btn-actions-group .btn-buscar {
+    flex: 1;
+  }
 }
 </style>
