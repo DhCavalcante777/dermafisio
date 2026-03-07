@@ -53,9 +53,14 @@
               <label class="label-luxury">Observações</label>
               <textarea v-model="form.observacoes" class="input-luxury" rows="3" placeholder="Anotações sobre o atendimento..."></textarea>
             </div>
-            <div class="modal-footer-luxury d-flex justify-content-end gap-3">
-              <button type="button" @click="showModal = false" class="btn-cancel-luxury">Cancelar</button>
-              <button type="submit" class="btn-save-luxury">Salvar Agendamento</button>
+            <div class="modal-footer-luxury d-flex justify-content-between align-items-center gap-3">
+              <button v-if="isEditing" type="button" @click="deleteAppointment" class="btn-delete-luxury">
+                <i class="fas fa-trash me-1"></i> Excluir
+              </button>
+              <div class="d-flex gap-3 ms-auto">
+                <button type="button" @click="showModal = false" class="btn-cancel-luxury">Cancelar</button>
+                <button type="submit" class="btn-save-luxury">Salvar Agendamento</button>
+              </div>
             </div>
           </form>
         </div>
@@ -212,6 +217,18 @@ const handleEventDrop = async (info) => {
   } catch (error) {
     console.error("Erro ao atualizar evento:", error);
     info.revert();
+  }
+};
+
+const deleteAppointment = async () => {
+  if (!confirm(`Deseja mesmo excluir o agendamento de "${form.nomeCliente}"?`)) return;
+  try {
+    await CalendarService.delete(form.id);
+    showModal.value = false;
+    resetForm();
+    fetchEvents();
+  } catch (error) {
+    alert('Erro ao excluir agendamento.');
   }
 };
 
@@ -431,7 +448,7 @@ onMounted(fetchEvents);
   background: transparent;
   border: 1px solid burlywood;
   color: burlywood;
-  padding: 10px 30px;
+  padding: 10px 20px;
   border-radius: 5px;
   font-weight: 600;
   transition: 0.3s;
@@ -440,6 +457,20 @@ onMounted(fetchEvents);
 .btn-save-luxury:hover:not(:disabled) {
   background: burlywood;
   color: #121212;
+}
+
+.btn-delete-luxury {
+  background: transparent;
+  border: 1px solid #c0392b;
+  color: #c0392b;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.btn-delete-luxury:hover {
+  background: #c0392b;
+  color: #fff;
 }
 
 .close-button {
@@ -589,8 +620,19 @@ onMounted(fetchEvents);
     gap: 10px;
   }
 
+  .modal-footer-luxury {
+    flex-direction: column;
+  }
+
+  .modal-footer-luxury .ms-auto {
+    width: 100%;
+    flex-direction: column;
+    margin-left: 0 !important;
+  }
+
   .btn-cancel-luxury,
-  .btn-save-luxury {
+  .btn-save-luxury,
+  .btn-delete-luxury {
     padding: 10px 20px;
     font-size: 13px;
     width: 100%;

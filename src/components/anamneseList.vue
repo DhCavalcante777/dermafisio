@@ -325,7 +325,15 @@
           </div>
         </div>
 
-        <div class="modal-footer-luxury d-flex justify-content-end gap-3 mt-4">
+        <div class="modal-footer-luxury d-flex justify-content-between align-items-center gap-3 mt-4">
+          <button
+            v-if="!isEditing"
+            class="btn-delete-luxury"
+            @click="handleDelete"
+          >
+            <i class="fas fa-trash me-1"></i> Excluir
+          </button>
+          <div class="d-flex gap-3 ms-auto">
           <button
             v-if="!isEditing"
             class="btn-edit-luxury"
@@ -347,6 +355,7 @@
           >
             Salvar Alterações
           </button>
+          </div>
         </div>
       </div>
     </div>
@@ -403,6 +412,19 @@ const closeModal = () => {
 const cancelEdit = () => {
   selectedAnamnese.value = { ...originalData.value };
   isEditing.value = false;
+};
+
+const handleDelete = async () => {
+  if (!confirm(`Deseja mesmo excluir a anamnese de "${selectedAnamnese.value.nome}"?`)) return;
+  try {
+    await AnamneseService.delete(selectedAnamnese.value.id);
+    alert('Anamnese excluída com sucesso!');
+    closeModal();
+    fetchAnamneses();
+  } catch (error) {
+    alert('Erro ao excluir a anamnese.');
+    console.error(error);
+  }
 };
 
 const handleUpdate = async () => {
@@ -676,6 +698,18 @@ onMounted(fetchAnamneses);
 .btn-save-luxury:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+.btn-delete-luxury {
+  background: transparent;
+  border: 1px solid #c0392b;
+  color: #c0392b;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.btn-delete-luxury:hover {
+  background: #c0392b;
+  color: #fff;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
