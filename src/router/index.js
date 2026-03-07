@@ -4,7 +4,7 @@ import AuthService from "@/services/authService";
 // Defina suas rotas
 const routes = [
   {
-    path: "/",
+    path: "/v2",
     name: "Home",
     component: () => import("@/components/landind-page.vue"),
   },
@@ -14,7 +14,7 @@ const routes = [
     component: () => import("@/pages/lp-ebook.vue"),
   },
   {
-    path: "/v2",
+    path: "/",
     name: "LandingPage",
     component: () => import("@/pages/landing-page.vue"),
   },
