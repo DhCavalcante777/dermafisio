@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AuthService from "@/services/authService";
 
-// Defina suas rotas
 const routes = [
   {
     path: "/v2",
@@ -37,6 +36,11 @@ const routes = [
         path: "calendar",
         name: "CalendarPage",
         component: () => import("@/components/calendarPage.vue"),
+      },
+      {
+        path: "clients",
+        name: "ClientsList",
+        component: () => import("@/components/clientPage.vue"),
       },
       {
         path: "anamnese",

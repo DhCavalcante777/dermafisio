@@ -334,29 +334,113 @@
             <i class="fas fa-trash me-1"></i> Excluir
           </button>
           <div class="d-flex gap-3 ms-auto">
-          <button
-            v-if="!isEditing"
-            class="btn-edit-luxury"
-            @click="isEditing = true"
-          >
-            Editar Ficha
-          </button>
-          <button
-            v-if="isEditing"
-            class="btn-cancel-luxury"
-            @click="cancelEdit"
-          >
-            Cancelar
-          </button>
-          <button
-            v-if="isEditing"
-            class="btn-save-luxury"
-            @click="handleUpdate"
-          >
-            Salvar Alterações
-          </button>
+            <button
+              v-if="!isEditing && !selectedAnamnese.clienteId"
+              class="btn-link-luxury"
+              @click="openLinkModal"
+            >
+              <i class="fas fa-link me-1"></i> Vincular Cliente
+            </button>
+            <button
+              v-if="!isEditing && selectedAnamnese.clienteId"
+              class="btn-unlink-luxury"
+              @click="unlinkClient"
+            >
+              <i class="fas fa-unlink me-1"></i> Desvincular
+            </button>
+            <button
+              v-if="!isEditing && selectedAnamnese.clienteId"
+              class="btn-profile-luxury"
+              @click="goToClientProfile"
+            >
+              <i class="fas fa-user me-1"></i> Ver Perfil
+            </button>
+            <button
+              v-if="!isEditing"
+              class="btn-edit-luxury"
+              @click="isEditing = true"
+            >
+              Editar Ficha
+            </button>
+            <button
+              v-if="isEditing"
+              class="btn-cancel-luxury"
+              @click="cancelEdit"
+            >
+              Cancelar
+            </button>
+            <button
+              v-if="isEditing"
+              class="btn-save-luxury"
+              @click="handleUpdate"
+            >
+              Salvar Alterações
+            </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Vincular Cliente -->
+  <div v-if="showLinkModal" class="modal-overlay" @click.self="closeLinkModal">
+    <div class="link-modal-content shadow-lg">
+      <div class="modal-header-luxury d-flex justify-content-between align-items-center">
+        <h2 class="modal-title-luxury">Vincular à Cliente</h2>
+        <button class="btn-close-luxury close-button is-active" @click="closeLinkModal">
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+      </div>
+      <div class="p-4">
+        <div class="search-input-wrapper mb-3">
+          <i class="fas fa-search search-icon"></i>
+          <input
+            v-model="clientFilter"
+            class="custom-input ps-5"
+            placeholder="Buscar cliente pelo nome..."
+          />
+        </div>
+        <!-- Confirmação de vínculo -->
+        <div v-if="pendingClient" class="confirm-link-card">
+          <div class="confirm-link-avatar">{{ pendingClient.nome.charAt(0).toUpperCase() }}</div>
+          <div class="confirm-link-name">{{ pendingClient.nome }}</div>
+          <div class="confirm-link-phone">{{ pendingClient.telefone || 'Sem telefone' }}</div>
+          <p class="confirm-link-question">Você gostaria de vincular a ficha à cliente <strong>{{ pendingClient.nome }}</strong>?</p>
+          <div class="d-flex gap-3 justify-content-center mt-3">
+            <button class="btn-cancel-luxury" @click="pendingClient = null">Não, voltar</button>
+            <button class="btn-save-luxury" @click="confirmLinkClient">Sim, vincular</button>
+          </div>
+        </div>
+
+        <!-- Lista de clientes -->
+        <template v-else>
+          <div class="client-list-link custom-scrollbar">
+            <div v-if="loadingClients" class="text-center py-4">
+              <div class="spinner-border text-warning" role="status"></div>
+            </div>
+            <div
+              v-else
+              v-for="client in filteredClients"
+              :key="client.id"
+              class="client-link-item"
+              @click="pendingClient = client"
+            >
+              <div class="client-link-avatar">{{ client.nome.charAt(0).toUpperCase() }}</div>
+              <div>
+                <div class="client-link-name">{{ client.nome }}</div>
+                <div class="client-link-phone">{{ client.telefone || 'Sem telefone' }}</div>
+              </div>
+            </div>
+            <div
+              v-if="!loadingClients && filteredClients.length === 0"
+              class="text-center text-muted py-4"
+            >
+              Nenhuma cliente encontrada.
+            </div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -364,7 +448,11 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue";
+import { useRouter } from "vue-router";
 import AnamneseService from "@/services/anamneseService";
+import ClientService from "@/services/clientService";
+
+const router = useRouter();
 
 const anamneses = ref([]);
 const loading = ref(true);
@@ -374,6 +462,12 @@ const isEditing = ref(false);
 const selectedAnamnese = ref(null);
 const originalData = ref(null);
 const linkCopiado = ref(false);
+
+const showLinkModal = ref(false);
+const clients = ref([]);
+const clientFilter = ref("");
+const loadingClients = ref(false);
+const pendingClient = ref(null);
 
 const copyLink = async () => {
   try {
@@ -438,9 +532,78 @@ const handleUpdate = async () => {
   } catch (error) {
     alert("Erro ao atualizar a ficha.");
     console.log(error);
-    
   }
 };
+
+const openLinkModal = async () => {
+  showLinkModal.value = true;
+  clientFilter.value = "";
+  loadingClients.value = true;
+  try {
+    const response = await ClientService.getAll();
+    clients.value = response.data;
+  } catch (error) {
+    alert("Erro ao carregar clientes.");
+    console.error(error);
+  } finally {
+    loadingClients.value = false;
+  }
+};
+
+const closeLinkModal = () => {
+  showLinkModal.value = false;
+  pendingClient.value = null;
+};
+
+const confirmLinkClient = () => {
+  if (pendingClient.value) linkClient(pendingClient.value);
+};
+
+const linkClient = async (client) => {
+  try {
+    const dataToSend = { ...selectedAnamnese.value, clienteId: client.id };
+    delete dataToSend.dataCriacao;
+    await AnamneseService.update(dataToSend);
+    selectedAnamnese.value.clienteId = client.id;
+    selectedAnamnese.value.clienteNome = client.nome;
+    originalData.value = { ...selectedAnamnese.value };
+    pendingClient.value = null;
+    closeLinkModal();
+    fetchAnamneses();
+    alert(`Ficha vinculada à cliente "${client.nome}" com sucesso!`);
+  } catch (error) {
+    alert("Erro ao vincular cliente.");
+    console.error(error);
+  }
+};
+
+const unlinkClient = async () => {
+  if (!confirm("Deseja desvincular esta ficha da cliente?")) return;
+  try {
+    const dataToSend = { ...selectedAnamnese.value, clienteId: null };
+    delete dataToSend.dataCriacao;
+    await AnamneseService.update(dataToSend);
+    selectedAnamnese.value.clienteId = null;
+    originalData.value = { ...selectedAnamnese.value };
+    fetchAnamneses();
+    alert("Vínculo removido com sucesso!");
+  } catch (error) {
+    alert("Erro ao desvincular cliente.");
+    console.error(error);
+  }
+};
+
+const goToClientProfile = () => {
+  closeModal();
+  router.push({ name: 'ClientsList' });
+};
+
+const filteredClients = computed(() => {
+  if (!clientFilter.value) return clients.value;
+  return clients.value.filter((c) =>
+    c.nome.toLowerCase().includes(clientFilter.value.toLowerCase())
+  );
+});
 
 const filteredAnamneses = computed(() => {
   if (!filterText.value) return anamneses.value;
@@ -759,6 +922,164 @@ onMounted(fetchAnamneses);
 }
 .close-button.is-active .line-3 {
   transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Botões Vincular / Desvincular / Ver Perfil */
+.btn-link-luxury {
+  background: transparent;
+  border: 1px solid #7ec8e3;
+  color: #7ec8e3;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.btn-link-luxury:hover {
+  background: #7ec8e3;
+  color: #121212;
+}
+.btn-unlink-luxury {
+  background: transparent;
+  border: 1px solid rgba(212, 165, 116, 0.4);
+  color: rgba(212, 165, 116, 0.6);
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s;
+  font-size: 13px;
+}
+.btn-unlink-luxury:hover {
+  border-color: #c0392b;
+  color: #c0392b;
+}
+.btn-profile-luxury {
+  background: transparent;
+  border: 1px solid #a8d8a8;
+  color: #a8d8a8;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.btn-profile-luxury:hover {
+  background: #a8d8a8;
+  color: #121212;
+}
+
+/* Modal Vincular Cliente */
+.link-modal-content {
+  width: 90%;
+  max-width: 480px;
+  border-radius: 15px;
+  border: 1px solid #d4af37;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #272427;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      168deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+}
+.client-list-link {
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.client-link-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 165, 116, 0.15);
+  cursor: pointer;
+  transition: all 0.25s;
+  background: rgba(0, 0, 0, 0.2);
+}
+.client-link-item:hover {
+  border-color: burlywood;
+  background: rgba(222, 184, 135, 0.08);
+  transform: translateX(4px);
+}
+.client-link-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, burlywood, #b38b6d);
+  color: #121212;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.client-link-name {
+  color: #e0e0e0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.client-link-phone {
+  color: rgba(212, 165, 116, 0.7);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* Confirmação de vínculo */
+.confirm-link-card {
+  border: 1px solid rgba(212, 165, 116, 0.3);
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.25);
+  animation: fadeInUp 0.2s ease;
+}
+.confirm-link-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, burlywood, #b38b6d);
+  color: #121212;
+  font-weight: 700;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.confirm-link-name {
+  color: #e0e0e0;
+  font-size: 16px;
+  font-weight: 600;
+}
+.confirm-link-phone {
+  color: rgba(212, 165, 116, 0.7);
+  font-size: 13px;
+  margin-top: 4px;
+}
+.confirm-link-question {
+  color: #ccc;
+  font-size: 14px;
+  margin-top: 18px;
+  line-height: 1.6;
+}
+.confirm-link-question strong {
+  color: burlywood;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (min-width: 320px) and (max-width: 868px) {
