@@ -48,7 +48,7 @@
 
               <tr
                 v-else
-                v-for="item in filteredAnamneses"
+                v-for="item in paginatedAnamneses"
                 :key="item.id"
                 @click="openModal(item)"
                 class="clickable-row"
@@ -66,6 +66,24 @@
               </tr>
             </tbody>
           </table>
+        </div>
+        <div v-if="totalPages > 1" class="pagination-bar d-flex justify-content-between align-items-center mt-3 px-1">
+          <span class="pagination-info">{{ (currentPage - 1) * itemsPerPage + 1 }}–{{ Math.min(currentPage * itemsPerPage, filteredAnamneses.length) }} de {{ filteredAnamneses.length }}</span>
+          <div class="d-flex gap-1 align-items-center">
+            <button class="btn-page" :disabled="currentPage === 1" @click="currentPage--">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button
+              v-for="page in visiblePages"
+              :key="page"
+              class="btn-page"
+              :class="{ active: page === currentPage }"
+              @click="currentPage = page"
+            >{{ page }}</button>
+            <button class="btn-page" :disabled="currentPage === totalPages" @click="currentPage++">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -159,6 +177,16 @@
                 {{ selectedAnamnese.comoConheceu }}
               </p>
             </div>
+            <div class="col-md-6">
+              <label class="label-luxury">Data de Criação</label>
+              <input
+                v-if="isEditing"
+                v-model="editableDate"
+                type="date"
+                class="input-luxury"
+              />
+              <p v-else class="text-luxury">{{ formatDate(selectedAnamnese.dataCriacao) }}</p>
+            </div>
             <div class="col-12">
               <label class="label-luxury">Endereço</label>
               <input
@@ -184,6 +212,22 @@
                   selectedAnamnese.queixaPrincipal ||
                   "Nenhuma queixa registrada."
                 }}
+              </p>
+            </div>
+          </div>
+
+          <div class="section-title-luxury">Tratamento</div>
+          <div class="row g-3 mb-4">
+            <div class="col-12">
+              <textarea
+                v-if="isEditing"
+                v-model="selectedAnamnese.tratamento"
+                class="input-luxury"
+                rows="3"
+                placeholder="Descreva o tratamento..."
+              ></textarea>
+              <p v-else class="text-luxury">
+                {{ selectedAnamnese.tratamento || "Nenhum tratamento registrado." }}
               </p>
             </div>
           </div>
@@ -447,7 +491,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import { useRouter } from "vue-router";
 import AnamneseService from "@/services/anamneseService";
 import ClientService from "@/services/clientService";
@@ -462,6 +506,10 @@ const isEditing = ref(false);
 const selectedAnamnese = ref(null);
 const originalData = ref(null);
 const linkCopiado = ref(false);
+
+const editableDate = ref('');
+const currentPage = ref(1);
+const itemsPerPage = 10;
 
 const showLinkModal = ref(false);
 const clients = ref([]);
@@ -494,6 +542,7 @@ const fetchAnamneses = async () => {
 const openModal = (item) => {
   selectedAnamnese.value = { ...item };
   originalData.value = { ...item };
+  editableDate.value = item.dataCriacao ? item.dataCriacao.split('T')[0] : '';
   showModal.value = true;
   isEditing.value = false;
 };
@@ -505,6 +554,7 @@ const closeModal = () => {
 
 const cancelEdit = () => {
   selectedAnamnese.value = { ...originalData.value };
+  editableDate.value = originalData.value.dataCriacao ? originalData.value.dataCriacao.split('T')[0] : '';
   isEditing.value = false;
 };
 
@@ -524,7 +574,7 @@ const handleDelete = async () => {
 const handleUpdate = async () => {
   try {
     const dataToSend = { ...selectedAnamnese.value };
-    delete dataToSend.dataCriacao;
+    dataToSend.dataCriacao = editableDate.value ? new Date(editableDate.value).toISOString() : null;
     await AnamneseService.update(dataToSend);
     alert("Ficha atualizada com sucesso!");
     fetchAnamneses();
@@ -612,9 +662,26 @@ const filteredAnamneses = computed(() => {
   );
 });
 
+const totalPages = computed(() => Math.ceil(filteredAnamneses.value.length / itemsPerPage));
+
+const paginatedAnamneses = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return filteredAnamneses.value.slice(start, start + itemsPerPage);
+});
+
+const visiblePages = computed(() => {
+  const start = Math.max(1, currentPage.value - 2);
+  const end = Math.min(totalPages.value, start + 4);
+  const pages = [];
+  for (let i = start; i <= end; i++) pages.push(i);
+  return pages;
+});
+
+watch(filterText, () => { currentPage.value = 1; });
+
 const formatDate = (dateString) => {
   if (!dateString) return "";
-  return new Date(dateString).toLocaleDateString("pt-BR");
+  return new Date(dateString).toLocaleDateString("pt-BR", { timeZone: 'UTC' });
 };
 
 const totalAnamneses = computed(() => anamneses.value.length);
@@ -1080,6 +1147,40 @@ onMounted(fetchAnamneses);
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+.pagination-info {
+  color: rgba(212, 165, 116, 0.6);
+  font-size: 13px;
+}
+.btn-page {
+  background: transparent;
+  border: 1px solid rgba(212, 165, 116, 0.25);
+  color: rgba(212, 165, 116, 0.7);
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.btn-page:hover:not(:disabled) {
+  border-color: burlywood;
+  color: burlywood;
+}
+.btn-page.active {
+  background: burlywood;
+  border-color: burlywood;
+  color: #121212;
+  font-weight: 700;
+}
+.btn-page:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 @media (min-width: 320px) and (max-width: 868px) {
