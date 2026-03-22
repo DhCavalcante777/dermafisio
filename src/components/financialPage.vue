@@ -3,7 +3,14 @@
     <header class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
       <h1 class="page-title">Gestão Financeira</h1>
       <div class="d-flex gap-3 align-items-center flex-wrap">
-        <div class="date-range-display" v-if="dateRangeLabel">{{ dateRangeLabel }}</div>
+        <div class="period-filter">
+          <button
+            v-for="p in periods" :key="p.value"
+            class="period-btn"
+            :class="{ active: selectedPeriod === p.value }"
+            @click="selectedPeriod = p.value"
+          >{{ p.label }}</button>
+        </div>
         <button class="btn-add-luxury" @click="openModal()">
           <i class="fas fa-plus me-2"></i>Nova Transação
         </button>
@@ -12,29 +19,29 @@
 
     <div class="row g-4 mb-5">
       <div class="col-md-4">
-        <div class="finance-card income-card shadow-lg">
-          <div class="card-header-luxury">Total Receitas</div>
+        <div class="finance-card shadow-lg">
+          <div class="card-header-luxury">Total Pagamento</div>
           <div class="card-value-luxury">{{ formatCurrency(totalReceitas) }}</div>
-          <div class="card-sub-luxury">soma de todos os registros</div>
+          <div class="card-sub-luxury">total de pagamentos recebidos</div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="finance-card shadow-lg">
-          <div class="card-header-luxury">Ticket Médio</div>
-          <div class="card-value-luxury">{{ formatCurrency(ticketMedio) }}</div>
-          <div class="card-sub-luxury">média por transação</div>
+          <div class="card-header-luxury">Total Despesas</div>
+          <div class="card-value-luxury text-expense">{{ formatCurrency(totalDespesas) }}</div>
+          <div class="card-sub-luxury">total de despesas lançadas</div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="finance-card shadow-lg">
-          <div class="card-header-luxury">Registros</div>
-          <div class="card-value-luxury">{{ transactions.length }}</div>
-          <div class="card-sub-luxury">total de transações</div>
+          <div class="card-header-luxury">Saldo</div>
+          <div class="card-value-luxury" :class="saldo >= 0 ? '' : 'text-expense'">{{ formatCurrency(saldo) }}</div>
+          <div class="card-sub-luxury">receitas − despesas</div>
         </div>
       </div>
     </div>
 
-    <div class="chart-container-luxury mb-5 shadow-lg" v-if="!loading && transactions.length > 0">
+    <div class="chart-container-luxury mb-5 shadow-lg" v-if="!loading && filteredTransactions.length > 0">
       <div class="chart-header d-flex justify-content-between align-items-center mb-4">
         <h3 class="section-title-luxury m-0">Receitas vs. Despesas</h3>
         <div class="chart-legend d-flex gap-3">
@@ -67,14 +74,14 @@
               <div class="spinner-border text-warning" role="status"></div>
             </td>
           </tr>
-          <tr v-else-if="transactions.length === 0">
-            <td colspan="4" class="text-center py-5 text-muted">Nenhuma transação encontrada.</td>
+          <tr v-else-if="filteredTransactions.length === 0">
+            <td colspan="4" class="text-center py-5 text-muted">Nenhuma transação encontrada neste período.</td>
           </tr>
-          <tr v-else v-for="t in transactions" :key="t.id">
+          <tr v-else v-for="t in filteredTransactions" :key="t.id">
             <td>{{ formatDate(t.data) }}</td>
             <td>{{ t.descricao }}</td>
-            <td class="text-end fw-bold text-gold">
-              + {{ formatCurrency(t.valor) }}
+            <td class="text-end fw-bold" :class="t.tipo === 'despesa' ? 'text-expense' : 'text-gold'">
+              {{ t.tipo === 'despesa' ? '- ' : '+ ' }}{{ formatCurrency(t.valor) }}
             </td>
             <td class="text-center">
               <button class="btn-icon-luxury me-2" @click="openModal(t)" title="Editar">
@@ -106,6 +113,13 @@
           <div class="col-12">
             <label class="label-luxury">Descrição</label>
             <input v-model="form.descricao" class="input-luxury" placeholder="Ex: Consulta, Produto..." />
+          </div>
+          <div class="col-md-6">
+            <label class="label-luxury">Tipo</label>
+            <select v-model="form.tipo" class="input-luxury">
+              <option value="pagamento">Pagamento</option>
+              <option value="despesa">Despesa</option>
+            </select>
           </div>
           <div class="col-md-6">
             <label class="label-luxury">Valor (R$)</label>
@@ -141,10 +155,60 @@ const showModal = ref(false);
 const saving = ref(false);
 const editingId = ref(null);
 
+const selectedPeriod = ref('mes');
+const periods = [
+  { value: 'semana',    label: 'Semana' },
+  { value: 'mes',       label: 'Mês' },
+  { value: 'bimestre',  label: 'Bimestre' },
+  { value: 'trimestre', label: 'Trimestre' },
+  { value: 'semestre',  label: 'Semestre' },
+  { value: 'ano',       label: 'Ano' },
+];
+
+const filteredTransactions = computed(() => {
+  const now = new Date();
+  const end = new Date(now);
+  end.setHours(23, 59, 59, 999);
+  const start = new Date(now);
+  start.setHours(0, 0, 0, 0);
+
+  switch (selectedPeriod.value) {
+    case 'semana': {
+      const dow = start.getDay();
+      start.setDate(start.getDate() - (dow === 0 ? 6 : dow - 1));
+      break;
+    }
+    case 'mes':
+      start.setDate(1);
+      break;
+    case 'bimestre':
+      start.setMonth(start.getMonth() - 1);
+      start.setDate(1);
+      break;
+    case 'trimestre':
+      start.setMonth(start.getMonth() - 2);
+      start.setDate(1);
+      break;
+    case 'semestre':
+      start.setMonth(start.getMonth() - 5);
+      start.setDate(1);
+      break;
+    case 'ano':
+      start.setMonth(start.getMonth() - 11);
+      start.setDate(1);
+      break;
+  }
+
+  return transactions.value.filter(t => {
+    const d = new Date(t.data.split('T')[0] + 'T12:00:00');
+    return d >= start && d <= end;
+  });
+});
+
 const emptyForm = () => ({
   descricao: '',
   valor: '',
-  tipo: 'entrada',
+  tipo: 'pagamento',
   metodo: 'Pix',
   data: new Date().toISOString().split('T')[0],
 });
@@ -220,11 +284,16 @@ const deleteTransaction = async (t) => {
 };
 
 const totalReceitas = computed(() =>
-  transactions.value.reduce((sum, t) => sum + Number(t.valor), 0)
+  filteredTransactions.value
+    .filter(t => t.tipo !== 'despesa')
+    .reduce((sum, t) => sum + Number(t.valor), 0)
 );
-const ticketMedio = computed(() =>
-  transactions.value.length ? totalReceitas.value / transactions.value.length : 0
+const totalDespesas = computed(() =>
+  filteredTransactions.value
+    .filter(t => t.tipo === 'despesa')
+    .reduce((sum, t) => sum + Number(t.valor), 0)
 );
+const saldo = computed(() => totalReceitas.value - totalDespesas.value);
 
 const dateRangeLabel = computed(() => {
   if (!transactions.value.length) return '';
@@ -241,13 +310,13 @@ const dateRangeLabel = computed(() => {
 const chartData = computed(() => {
   const monthMap = {};
   const MONTHS = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  transactions.value.forEach(t => {
-    const d = new Date(t.data + (t.data.includes('T') ? '' : 'T12:00:00'));
+  filteredTransactions.value.forEach(t => {
+    const d = new Date(t.data.split('T')[0] + 'T12:00:00');
     const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
     const label = `${MONTHS[d.getMonth()]}/${String(d.getFullYear()).slice(2)}`;
     if (!monthMap[key]) monthMap[key] = { label, income: 0, expense: 0 };
-    if (t.tipo === 'entrada') monthMap[key].income += Number(t.valor);
-    else monthMap[key].expense += Number(t.valor);
+    if (t.tipo === 'despesa') monthMap[key].expense += Number(t.valor);
+    else monthMap[key].income += Number(t.valor);
   });
   const sorted = Object.keys(monthMap).sort();
   return {
@@ -357,9 +426,9 @@ onMounted(fetchTransactions);
 }
 
 .btn-add-luxury {
-  background: transparent;
-  border: 1px solid burlywood;
-  color: burlywood;
+  background: linear-gradient(to right, #d67a7a, #b35d5d);
+  border: none;
+  color: white;
   padding: 10px 22px;
   border-radius: 8px;
   font-size: 13px;
@@ -367,7 +436,7 @@ onMounted(fetchTransactions);
   cursor: pointer;
   transition: 0.3s;
 }
-.btn-add-luxury:hover { background: burlywood; color: #121212; }
+.btn-add-luxury:hover { opacity: 0.85; }
 
 .btn-icon-luxury {
   background: transparent;
@@ -422,12 +491,39 @@ onMounted(fetchTransactions);
   border-radius: 5px;
 }
 .input-luxury:focus { outline: none; border-color: burlywood; }
+.input-luxury option { background: #121212; color: white; }
 
 .btn-cancel-luxury { background: transparent; border: 1px solid #d67a7a; color: #d67a7a; padding: 10px 24px; border-radius: 5px; transition: 0.3s; cursor: pointer; }
 .btn-cancel-luxury:hover { background: #d67a7a; color: #121212; }
 .btn-save-luxury { background: transparent; border: 1px solid burlywood; color: burlywood; padding: 10px 24px; border-radius: 5px; font-weight: 600; transition: 0.3s; cursor: pointer; }
 .btn-save-luxury:hover:not(:disabled) { background: burlywood; color: #121212; }
 .btn-save-luxury:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.period-filter {
+  display: flex;
+  gap: 4px;
+  background: rgba(222, 184, 135, 0.05);
+  border: 1px solid rgba(222, 184, 135, 0.15);
+  border-radius: 10px;
+  padding: 4px;
+  flex-wrap: wrap;
+}
+.period-btn {
+  background: transparent;
+  border: none;
+  color: rgba(222, 184, 135, 0.6);
+  padding: 6px 14px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
+}
+.period-btn:hover { color: burlywood; }
+.period-btn.active { background: rgba(222, 184, 135, 0.15); color: burlywood; }
 
 .close-button {
   background: transparent;

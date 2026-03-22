@@ -7,7 +7,6 @@
     <div class="filter-bar d-flex gap-3 mb-4 align-items-end">
       <div class="flex-grow-1">
         <div class="search-input-wrapper">
-          <i class="fas fa-search search-icon"></i>
           <input
             type="text"
             v-model="filterText"
@@ -138,15 +137,19 @@
               <p v-else class="text-luxury">{{ selectedAnamnese.nome }}</p>
             </div>
             <div class="col-md-3">
-              <label class="label-luxury">Idade</label>
+              <label class="label-luxury">Data de Nascimento</label>
               <input
                 v-if="isEditing"
-                v-model="selectedAnamnese.idade"
+                v-model="editableDataNasc"
+                type="date"
                 class="input-luxury"
+                @change="calcularIdade"
               />
-              <p v-else class="text-luxury">
-                {{ selectedAnamnese.idade }} anos
-              </p>
+              <p v-else class="text-luxury">{{ selectedAnamnese.dataNasc ? formatDate(selectedAnamnese.dataNasc) : '—' }}</p>
+            </div>
+            <div class="col-md-3">
+              <label class="label-luxury">Idade</label>
+              <p class="text-luxury">{{ selectedAnamnese.idade !== null && selectedAnamnese.idade !== undefined ? selectedAnamnese.idade + ' anos' : '—' }}</p>
             </div>
             <div class="col-md-3">
               <label class="label-luxury">Telefone</label>
@@ -508,6 +511,7 @@ const originalData = ref(null);
 const linkCopiado = ref(false);
 
 const editableDate = ref('');
+const editableDataNasc = ref('');
 const currentPage = ref(1);
 const itemsPerPage = 10;
 
@@ -543,6 +547,7 @@ const openModal = (item) => {
   selectedAnamnese.value = { ...item };
   originalData.value = { ...item };
   editableDate.value = item.dataCriacao ? item.dataCriacao.split('T')[0] : '';
+  editableDataNasc.value = item.dataNasc ? item.dataNasc.split('T')[0] : '';
   showModal.value = true;
   isEditing.value = false;
 };
@@ -555,7 +560,18 @@ const closeModal = () => {
 const cancelEdit = () => {
   selectedAnamnese.value = { ...originalData.value };
   editableDate.value = originalData.value.dataCriacao ? originalData.value.dataCriacao.split('T')[0] : '';
+  editableDataNasc.value = originalData.value.dataNasc ? originalData.value.dataNasc.split('T')[0] : '';
   isEditing.value = false;
+};
+
+const calcularIdade = () => {
+  if (!editableDataNasc.value) return;
+  const [year, month, day] = editableDataNasc.value.split('-').map(Number);
+  const today = new Date();
+  let age = today.getFullYear() - year;
+  const monthDiff = today.getMonth() + 1 - month;
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < day)) age--;
+  selectedAnamnese.value.idade = age;
 };
 
 const handleDelete = async () => {
@@ -575,6 +591,7 @@ const handleUpdate = async () => {
   try {
     const dataToSend = { ...selectedAnamnese.value };
     dataToSend.dataCriacao = editableDate.value ? new Date(editableDate.value).toISOString() : null;
+    dataToSend.dataNasc = editableDataNasc.value ? editableDataNasc.value + 'T00:00:00.000Z' : null;
     await AnamneseService.update(dataToSend);
     alert("Ficha atualizada com sucesso!");
     fetchAnamneses();
