@@ -268,43 +268,43 @@ onMounted(fetchEvents);
 }
 
 .page-title {
-  font-family: "Playfair Display", serif;
-  color: #f6aeb8;
+  font-family: var(--font-serif);
+  color: var(--color-pink);
   font-style: italic;
 }
 
 .calendar-card {
-  background: #121212;
+  background: var(--color-bg-card);
   padding: 25px;
-  border-radius: 15px;
-  border: 1px solid rgba(212, 165, 116, 0.1);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gold-bg-hover);
   color: #f9e4b7;
   overflow-x: auto;
   max-width: 100%;
 }
 
 :deep(.fc) {
-  --fc-border-color: rgba(212, 165, 116, 0.1);
-  --fc-today-bg-color: rgba(212, 165, 116, 0.05);
+  --fc-border-color: var(--color-gold-bg-hover);
+  --fc-today-bg-color: var(--color-gold-bg-subtle);
   --fc-button-bg-color: transparent;
-  --fc-button-border-color: burlywood;
-  --fc-button-hover-bg-color: burlywood;
-  --fc-button-active-bg-color: burlywood;
-  --fc-button-text-color: burlywood;
+  --fc-button-border-color: var(--color-gold);
+  --fc-button-hover-bg-color: var(--color-gold);
+  --fc-button-active-bg-color: var(--color-gold);
+  --fc-button-text-color: var(--color-gold);
 }
 
 :deep(.fc-toolbar-title) {
-  font-family: 'Playfair Display', serif;
-  color: #f6aeb8;
+  font-family: var(--font-serif);
+  color: var(--color-pink);
 }
 
 :deep(.fc-button) {
-  color: burlywood !important;
+  color: var(--color-gold) !important;
 }
 
 :deep(.fc-button:hover),
 :deep(.fc-button-active) {
-  color: #121212 !important;
+  color: var(--color-bg-card) !important;
 }
 
 :deep(.fc-timegrid-slot) {
@@ -312,28 +312,28 @@ onMounted(fetchEvents);
 }
 
 :deep(.fc-col-header-cell-cushion), :deep(.fc-timegrid-slot-label-cushion) {
-  color: burlywood;
+  color: var(--color-gold);
   text-decoration: none;
 }
 
 :deep(.fc-daygrid-day-number) {
-  color: burlywood;
+  color: var(--color-gold);
   text-decoration: none;
 }
 
 .btn-luxury-gold {
-  background: linear-gradient(to right, #d67a7a, #b35d5d);
-  color: white;
+  background: var(--gradient-pink-btn);
+  color: var(--color-text-primary);
   border: none;
   padding: 12px 25px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-weight: 600;
-  transition: 0.3s;
+  transition: var(--transition-base);
 }
 
 .btn-luxury-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(214, 122, 122, 0.4);
+  box-shadow: var(--shadow-pink);
 }
 
 .modal-overlay {
@@ -366,13 +366,13 @@ onMounted(fetchEvents);
 
 .modal-header-luxury {
   padding: 25px 30px;
-  border-bottom: 2px solid burlywood;
-  color: burlywood;
+  border-bottom: 2px solid var(--color-gold);
+  color: var(--color-gold);
 }
 
 .modal-title-luxury {
-  font-family: 'Playfair Display', serif;
-  color: burlywood;
+  font-family: var(--font-serif);
+  color: var(--color-gold);
   margin: 0;
   font-size: 1.5rem;
 }
@@ -385,34 +385,20 @@ onMounted(fetchEvents);
 
 .modal-footer-luxury {
   padding: 20px 0 0;
-  border-top: 2px solid burlywood;
+  border-top: 2px solid var(--color-gold);
   margin-top: 20px;
 }
 
 .modal-content-luxury,
 .modal-header-luxury,
 .modal-footer-luxury {
-  background-color: #272427;
-  background-image:
-    repeating-linear-gradient(
-      87deg,
-      rgba(255, 255, 255, 0.03) 0px,
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px,
-      transparent 2px
-    ),
-    repeating-linear-gradient(
-      168deg,
-      rgba(0, 0, 0, 0.05) 0px,
-      rgba(0, 0, 0, 0.05) 1px,
-      transparent 1px,
-      transparent 2px
-    );
+  background-color: var(--color-bg-primary);
+  background-image: var(--texture-subtle);
 }
 
 .label-luxury {
-  color: burlywood;
-  font-size: 11px;
+  color: var(--color-gold);
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 5px;
@@ -421,62 +407,62 @@ onMounted(fetchEvents);
 }
 
 .input-luxury {
-  background: #0a0a0a;
-  border: 1px solid rgba(212, 165, 116, 0.3);
-  color: white;
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-gold-border);
+  color: var(--color-text-primary);
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   margin-bottom: 10px;
 }
 
 .btn-cancel-luxury {
   background: transparent;
-  border: 1px solid #d67a7a;
-  color: #d67a7a;
+  border: 1px solid var(--color-pink-dark);
+  color: var(--color-pink-dark);
   padding: 10px 30px;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-base);
 }
 
 .btn-cancel-luxury:hover {
-  background: #d67a7a;
-  color: #121212;
+  background: var(--color-pink-dark);
+  color: var(--color-bg-card);
 }
 
 .btn-save-luxury {
   background: transparent;
-  border: 1px solid burlywood;
-  color: burlywood;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   font-weight: 600;
-  transition: 0.3s;
+  transition: var(--transition-base);
 }
 
 .btn-save-luxury:hover:not(:disabled) {
-  background: burlywood;
-  color: #121212;
+  background: var(--color-gold);
+  color: var(--color-bg-card);
 }
 
 .btn-delete-luxury {
   background: transparent;
-  border: 1px solid #c0392b;
-  color: #c0392b;
+  border: 1px solid var(--color-status-error-alt);
+  color: var(--color-status-error-alt);
   padding: 10px 20px;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-base);
 }
 
 .btn-delete-luxury:hover {
-  background: #c0392b;
+  background: var(--color-status-error-alt);
   color: #fff;
 }
 
 .close-button {
   background: transparent;
-  border: 1px solid rgba(222, 184, 135, 0.3);
-  border-radius: 8px;
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--radius-md);
   width: 40px;
   height: 40px;
   display: flex;
@@ -490,16 +476,16 @@ onMounted(fetchEvents);
 }
 
 .close-button:hover {
-  border-color: burlywood;
+  border-color: var(--color-gold);
 }
 
 .close-button .line {
   display: block;
   height: 2px;
   width: 100%;
-  background-color: burlywood;
+  background-color: var(--color-gold);
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
   transform-origin: center;
 }
 
@@ -521,12 +507,12 @@ onMounted(fetchEvents);
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--color-bg-input);
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: burlywood;
-  border-radius: 10px;
+  background: var(--color-gold);
+  border-radius: var(--radius-md);
 }
 
 @media (max-width: 768px) {

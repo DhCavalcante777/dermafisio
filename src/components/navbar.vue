@@ -80,39 +80,26 @@ onUnmounted(() => {
 }
 
 .background {
-  background-color: #272427;
-  background-image: repeating-linear-gradient(
-      87deg,
-      rgba(255, 255, 255, 0.03) 0px,
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px,
-      transparent 2px
-    ),
-    repeating-linear-gradient(
-      168deg,
-      rgba(0, 0, 0, 0.05) 0px,
-      rgba(0, 0, 0, 0.05) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-  background-size: 6px 6px;
+  background-color: var(--color-bg-primary);
+  background-image: var(--texture-subtle);
+  background-size: var(--texture-size);
   padding-bottom: 2px;
 }
 
 .font-navbar {
 	font-size: 22px;
-	color: burlywood;
+	color: var(--color-gold);
 	text-decoration: none;
 }
 
 .linha-burlywood {
   width: 100%;
   padding-bottom: 1px;
-  border-bottom: 2px solid burlywood;
+  border-bottom: 2px solid var(--color-gold);
 }
 
 .navbar-toggler {
-  border-color: burlywood;
+  border-color: var(--color-gold);
   padding: 8px;
 }
 
@@ -129,9 +116,9 @@ onUnmounted(() => {
   display: block;
   height: 2px;
   width: 100%;
-  background-color: burlywood;
+  background-color: var(--color-gold);
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
   transform-origin: center;
 }
 
@@ -154,7 +141,7 @@ onUnmounted(() => {
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: #212121;
+    background-color: var(--color-bg-navbar-mobile);
     z-index: 1000;
     height: 235px;
     display: flex;

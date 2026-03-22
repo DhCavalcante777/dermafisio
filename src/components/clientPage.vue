@@ -415,43 +415,43 @@ onMounted(fetchClientes);
 
 <style scoped>
 .cliente-list-page {
-  color: #e0e0e0;
+  color: var(--color-text-light);
   padding-bottom: 50px;
 }
 
 .page-title {
-  font-family: 'Playfair Display', serif;
-  color: #f6aeb8;
+  font-family: var(--font-serif);
+  color: var(--color-pink);
   font-style: italic;
-  font-size: 32px;
+  font-size: var(--font-size-3xl);
 }
 
 .text-muted-luxury {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
+  color: var(--color-text-50);
+  font-size: var(--font-size-sm);
 }
 
 .btn-luxury-gold {
-  background: linear-gradient(to right, #d67a7a, #b35d5d);
-  color: #fff;
+  background: var(--gradient-pink-btn);
+  color: var(--color-text-primary);
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   font-weight: 600;
-  transition: 0.3s;
+  transition: var(--transition-base);
 }
 
 .btn-luxury-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(214, 122, 122, 0.4);
+  box-shadow: var(--shadow-pink);
 }
 
 /* Filtros */
 .search-wrapper {
   position: relative;
-  background: #1a1a1a;
-  border-radius: 5px;
-  border: 1px solid rgba(212, 165, 116, 0.3);
+  background: var(--color-bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-gold-border);
 }
 
 .search-icon {
@@ -467,79 +467,79 @@ onMounted(fetchClientes);
   background: transparent;
   border: none;
   padding: 10px 15px 10px 45px;
-  color: #fff;
+  color: var(--color-text-primary);
   outline: none;
 }
 
 .results-count {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 14px;
+  color: var(--color-text-40);
+  font-size: var(--font-size-sm);
   white-space: nowrap;
 }
 
 /* Cards de Cliente */
 .cliente-card {
-  background: #121212;
+  background: var(--color-bg-card);
   border: 1px solid rgba(212, 165, 116, 0.1);
   border-radius: 10px;
   padding: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
   border-left: 4px solid transparent;
 }
 
 .cliente-card:hover {
-  border-left-color: burlywood;
-  background: rgba(212, 165, 116, 0.08);
+  border-left-color: var(--color-gold);
+  background: var(--color-gold-bg-hover);
   transform: translateX(5px);
 }
 
 .cliente-avatar {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, burlywood, #b38b6d);
-  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-gold), #b38b6d);
+  border-radius: var(--radius-circle);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #121212;
+  color: var(--color-bg-card);
   font-weight: bold;
   font-size: 20px;
 }
 
 .cliente-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
+  font-family: var(--font-serif);
+  font-size: var(--font-size-lg);
   margin: 0;
-  color: #e0e0e0;
+  color: var(--color-text-light);
 }
 
 .cliente-id {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-40);
 }
 
 .info-item {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-70);
   margin-bottom: 8px;
 }
 
 .info-item i {
   width: 20px;
-  color: burlywood;
+  color: var(--color-gold);
 }
 
 .last-visit {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-40);
 }
 
 .btn-view-profile {
   background: transparent;
   border: none;
-  color: burlywood;
-  font-size: 13px;
+  color: var(--color-gold);
+  font-size: var(--font-size-xs);
   font-weight: 500;
 }
 
@@ -559,24 +559,10 @@ onMounted(fetchClientes);
 }
 
 .luxury-modal {
-  background-color: #272427;
-  background-image:
-    repeating-linear-gradient(
-      87deg,
-      rgba(255, 255, 255, 0.03) 0px,
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px,
-      transparent 2px
-    ),
-    repeating-linear-gradient(
-      168deg,
-      rgba(0, 0, 0, 0.05) 0px,
-      rgba(0, 0, 0, 0.05) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-  border: 1px solid burlywood;
-  border-radius: 15px;
+  background-color: var(--color-bg-primary);
+  background-image: var(--texture-subtle);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-lg);
   width: 90%;
   max-width: 900px;
   max-height: 90vh;
@@ -598,9 +584,9 @@ onMounted(fetchClientes);
 }
 
 .modal-title-luxury {
-  font-family: 'Playfair Display', serif;
-  color: burlywood;
-  font-size: 24px;
+  font-family: var(--font-serif);
+  color: var(--color-gold);
+  font-size: var(--font-size-2xl);
   font-style: italic;
   margin: 0;
 }
@@ -608,16 +594,16 @@ onMounted(fetchClientes);
 .modal-header-luxury {
   padding-bottom: 20px;
   margin-bottom: 20px;
-  border-bottom: 2px solid burlywood;
+  border-bottom: 2px solid var(--color-gold);
 }
 
 .text-gold-subtle {
   color: rgba(222, 184, 135, 0.6);
-  font-size: 14px;
+  font-size: var(--font-size-sm);
 }
 
 .border-gold {
-  border-color: burlywood !important;
+  border-color: var(--color-gold) !important;
 }
 
 .border-gold-subtle {
@@ -633,38 +619,38 @@ onMounted(fetchClientes);
 .cliente-avatar-large {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, burlywood, #b38b6d);
-  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-gold), #b38b6d);
+  border-radius: var(--radius-circle);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #121212;
+  color: var(--color-bg-card);
   font-size: 32px;
   font-weight: bold;
 }
 
 .section-title-luxury {
-  font-family: 'Playfair Display', serif;
-  color: burlywood;
-  font-size: 18px;
+  font-family: var(--font-serif);
+  color: var(--color-gold);
+  font-size: var(--font-size-lg);
   font-style: italic;
-  border-bottom: 1px solid burlywood;
+  border-bottom: 1px solid var(--color-gold);
   padding-bottom: 5px;
 }
 
 .detail-item label {
   display: block;
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
-  color: burlywood;
+  color: var(--color-gold);
   opacity: 0.8;
   letter-spacing: 1px;
   margin-bottom: 4px;
 }
 
 .detail-item p {
-  font-size: 15px;
-  color: #e0e0e0;
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
   margin: 0;
 }
 
@@ -695,9 +681,9 @@ onMounted(fetchClientes);
   top: 5px;
   width: 9px;
   height: 9px;
-  background: burlywood;
-  border-radius: 50%;
-  box-shadow: 0 0 8px burlywood;
+  background: var(--color-gold);
+  border-radius: var(--radius-circle);
+  box-shadow: var(--shadow-appt-dot);
 }
 
 .timeline-content {
@@ -708,35 +694,35 @@ onMounted(fetchClientes);
 }
 
 .ficha-title {
-  font-size: 15px;
-  color: #e0e0e0;
+  font-size: var(--font-size-base);
+  color: var(--color-text-light);
   margin: 0;
 }
 
 .ficha-date {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-40);
 }
 
 .ficha-queixa {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-70);
   margin: 10px 0;
 }
 
 .btn-link-gold {
   background: transparent;
   border: 1px solid rgba(222, 184, 135, 0.4);
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 12px;
   padding: 5px 14px;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-base);
 }
 
 .btn-link-gold:hover {
-  background: burlywood;
-  color: #121212;
+  background: var(--color-gold);
+  color: var(--color-bg-card);
 }
 
 .btn-close-modal {
@@ -745,70 +731,70 @@ onMounted(fetchClientes);
   right: 20px;
   background: transparent;
   border: none;
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 30px;
   cursor: pointer;
   line-height: 1;
-  transition: color 0.2s;
+  transition: var(--transition-color);
 }
 
 .btn-close-modal:hover {
-  color: #f6aeb8;
+  color: var(--color-pink);
 }
 
 /* Formulário */
 .form-label-luxury {
   display: block;
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: burlywood;
+  color: var(--color-gold);
   opacity: 0.8;
   margin-bottom: 6px;
 }
 
 .input-luxury {
   width: 100%;
-  background: #0a0a0a;
-  border: 1px solid rgba(212, 165, 116, 0.3);
-  color: #e0e0e0;
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-gold-border);
+  color: var(--color-text-light);
   padding: 10px 14px;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   outline: none;
   transition: border-color 0.2s;
 }
 
 .input-luxury:focus {
-  border-color: burlywood;
+  border-color: var(--color-gold);
 }
 
 .btn-cancel-modal {
   background: transparent;
-  border: 1px solid #d67a7a;
-  color: #d67a7a;
+  border: 1px solid var(--color-pink-dark);
+  color: var(--color-pink-dark);
   padding: 10px 28px;
-  border-radius: 5px;
-  transition: 0.3s;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-base);
 }
 
 .btn-cancel-modal:hover {
-  background: #d67a7a;
-  color: #121212;
+  background: var(--color-pink-dark);
+  color: var(--color-bg-card);
 }
 
 .btn-save-modal {
   background: transparent;
-  border: 1px solid burlywood;
-  color: burlywood;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
   padding: 10px 28px;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   font-weight: 600;
-  transition: 0.3s;
+  transition: var(--transition-base);
 }
 
 .btn-save-modal:hover:not(:disabled) {
-  background: burlywood;
-  color: #121212;
+  background: var(--color-gold);
+  color: var(--color-bg-card);
 }
 
 .btn-save-modal:disabled {
@@ -817,8 +803,8 @@ onMounted(fetchClientes);
 }
 
 .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-.custom-scrollbar::-webkit-scrollbar-track { background: #0a0a0a; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: burlywood; border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: var(--color-bg-input); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: var(--radius-md); }
 
 /* Footer do modal de detalhes */
 .modal-footer-details {
@@ -830,15 +816,15 @@ onMounted(fetchClientes);
 }
 .btn-delete-cliente {
   background: transparent;
-  border: 1px solid #c0392b;
-  color: #c0392b;
+  border: 1px solid var(--color-status-error-alt);
+  color: var(--color-status-error-alt);
   padding: 9px 20px;
-  border-radius: 5px;
-  font-size: 13px;
-  transition: 0.3s;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  transition: var(--transition-base);
 }
 .btn-delete-cliente:hover {
-  background: #c0392b;
+  background: var(--color-status-error-alt);
   color: #fff;
 }
 
@@ -848,7 +834,7 @@ onMounted(fetchClientes);
   inset: 0;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(6px);
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -861,12 +847,12 @@ onMounted(fetchClientes);
 }
 .confirm-delete-icon {
   font-size: 40px;
-  color: #c0392b;
+  color: var(--color-status-error-alt);
   margin-bottom: 16px;
 }
 .confirm-delete-title {
-  font-family: 'Playfair Display', serif;
-  color: #e0e0e0;
+  font-family: var(--font-serif);
+  color: var(--color-text-light);
   font-size: 22px;
   margin-bottom: 12px;
 }
@@ -876,19 +862,19 @@ onMounted(fetchClientes);
   line-height: 1.6;
 }
 .confirm-delete-text strong {
-  color: burlywood;
+  color: var(--color-gold);
 }
 .btn-confirm-delete {
   background: transparent;
-  border: 1px solid #c0392b;
-  color: #c0392b;
+  border: 1px solid var(--color-status-error-alt);
+  color: var(--color-status-error-alt);
   padding: 10px 28px;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   font-weight: 600;
-  transition: 0.3s;
+  transition: var(--transition-base);
 }
 .btn-confirm-delete:hover:not(:disabled) {
-  background: #c0392b;
+  background: var(--color-status-error-alt);
   color: #fff;
 }
 .btn-confirm-delete:disabled {
@@ -901,26 +887,26 @@ onMounted(fetchClientes);
   max-width: 800px;
 }
 .ficha-section-title {
-  color: burlywood;
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
+  color: var(--color-gold);
+  font-family: var(--font-serif);
+  font-size: var(--font-size-lg);
   font-style: italic;
   margin-bottom: 16px;
-  border-bottom: 1px solid burlywood;
+  border-bottom: 1px solid var(--color-gold);
   padding-bottom: 5px;
 }
 .ficha-label {
   display: block;
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: burlywood;
+  color: var(--color-gold);
   opacity: 0.8;
   margin-bottom: 4px;
 }
 .ficha-value {
-  color: #e0e0e0;
-  font-size: 15px;
+  color: var(--color-text-light);
+  font-size: var(--font-size-base);
   margin-bottom: 12px;
 }
 </style>

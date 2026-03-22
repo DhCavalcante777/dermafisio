@@ -34,58 +34,34 @@
 }
 
 .background {
-  background-color: #272427;
-  background-image:
-    repeating-linear-gradient(
-      87deg,
-      rgba(255, 255, 255, 0.03) 0px,
-      rgba(255, 255, 255, 0.03) 1px,
-      transparent 1px,
-      transparent 2px
-    ),
-    repeating-linear-gradient(
-      168deg,
-      rgba(0, 0, 0, 0.05) 0px,
-      rgba(0, 0, 0, 0.05) 1px,
-      transparent 1px,
-      transparent 2px
-    );
-  background-size: 6px 6px;
+  background-color: var(--color-bg-primary);
+  background-image: var(--texture-subtle);
+  background-size: var(--texture-size);
 }
 
 .title {
-  color: burlywood;
-  font-size: 35px;
-  font-family: "Great Vibes", cursive;
+  color: var(--color-gold);
+  font-size: var(--font-size-4xl);
+  font-family: var(--font-display);
   margin: 0;
 }
 
 .highlight {
-  color: #d4a574;
+  color: var(--color-gold-mid);
   font-weight: 500;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-serif);
   letter-spacing: 2px;
   padding-left: 10px;
 }
 
 .left-line {
   height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    burlywood 30%,
-    burlywood 100%
-  );
+  background: linear-gradient(to right, transparent 0%, var(--color-gold) 30%, var(--color-gold) 100%);
 }
 
 .right-line {
   height: 1px;
-  background: linear-gradient(
-    to left,
-    transparent 0%,
-    burlywood 30%,
-    burlywood 100%
-  );
+  background: linear-gradient(to left, transparent 0%, var(--color-gold) 30%, var(--color-gold) 100%);
 }
 
 .answer-item {
@@ -96,19 +72,19 @@
 }
 
 .check-icon {
-  color: burlywood;
-  font-size: 18px;
+  color: var(--color-gold);
+  font-size: var(--font-size-lg);
   font-weight: bold;
 }
 
 .answer-text {
-  color: burlywood;
-  font-size: 18px;
-  font-family: "Poppins", sans-serif;
+  color: var(--color-gold);
+  font-size: var(--font-size-lg);
+  font-family: var(--font-body);
 }
 
 .line-bottom {
-    border-bottom: 1px solid burlywood;
+    border-bottom: 1px solid var(--color-gold);
 }
 
 @media (max-width: 768px) {
@@ -117,7 +93,7 @@
   }
 
   .answer-text {
-    font-size: 16px;
+    font-size: var(--font-size-md);
   }
 
   .row.pb-4 {

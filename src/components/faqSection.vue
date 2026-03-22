@@ -56,17 +56,15 @@ const faqs = [
 
 <style scoped>
 .faq-section {
-  background-color: #272427;
-  background-image:
-    repeating-linear-gradient(87deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px),
-    repeating-linear-gradient(168deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 2px);
-  background-size: 6px 6px;
+  background-color: var(--color-bg-primary);
+  background-image: var(--texture-subtle);
+  background-size: var(--texture-size);
 }
 
 /* Título e Ornamentos */
 .section-title {
-  color: burlywood;
-  font-family: "Great Vibes", cursive;
+  color: var(--color-gold);
+  font-family: var(--font-display);
   font-size: 42px;
   margin: 0;
   word-spacing: 8px;
@@ -75,22 +73,22 @@ const faqs = [
 .ornament-line {
   height: 1px;
   width: 80px;
-  background: linear-gradient(to right, transparent, burlywood, transparent);
+  background: var(--gradient-ornament);
 }
 
 /* Estilo do Acordeão */
 .custom-faq-item {
   background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(222, 184, 135, 0.2);
-  border-radius: 4px !important;
+  border: 1px solid var(--color-gold-glow);
+  border-radius: var(--radius-sm) !important;
   overflow: hidden;
 }
 
 .custom-faq-button {
   background-color: transparent !important;
-  color: white !important;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
+  color: var(--color-text-primary) !important;
+  font-family: var(--font-body);
+  font-size: var(--font-size-md);
   padding: 20px;
   box-shadow: none !important;
   display: flex;
@@ -99,26 +97,26 @@ const faqs = [
 }
 
 .custom-faq-button::after {
-  display: none; /* Remove a seta padrão do Bootstrap */
+  display: none;
 }
 
 .plus-icon {
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 24px;
   font-weight: 300;
 }
 
 .custom-faq-body {
-  color: rgba(255, 255, 255, 0.8);
-  font-family: "Poppins", sans-serif;
+  color: var(--color-text-80);
+  font-family: var(--font-body);
   padding: 0 20px 20px 20px;
 }
 
 /* Seção CTA */
 .cta-title {
-  color: burlywood;
-  font-family: "Great Vibes", cursive;
-  font-size: 54px;
+  color: var(--color-gold);
+  font-family: var(--font-display);
+  font-size: var(--font-size-6xl);
   margin-bottom: 10px;
   word-spacing: 8px;
 }
@@ -126,27 +124,27 @@ const faqs = [
 .cta-line {
   height: 2px;
   width: 100%;
-  background: linear-gradient(to right, transparent, burlywood, transparent);
+  background: var(--gradient-ornament);
 }
 
 .btn-agendar {
-  background-color: #c9a86c;
-  color: white;
+  background-color: var(--color-gold-cta);
+  color: var(--color-text-primary);
   border: none;
   padding: 15px 60px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: var(--font-size-lg);
   letter-spacing: 2px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-base);
   text-decoration: none;
   display: inline-block;
 }
 
 .btn-agendar:hover {
-  background-color: #b8975b;
+  background-color: var(--color-gold-cta-hover);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(201, 168, 108, 0.4);
+  box-shadow: var(--shadow-cta-hover);
   filter: brightness(1.1);
 }
 

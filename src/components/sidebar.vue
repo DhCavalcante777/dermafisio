@@ -66,14 +66,12 @@ const handleLogout = () => {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap');
-
 .sidebar {
   width: 260px;
   min-width: 260px;
-  transition: all 0.3s ease;
-  background: #050505;
-  border-right: 1px solid rgba(212, 165, 116, 0.2);
+  transition: var(--transition-base);
+  background: var(--color-bg-sidebar);
+  border-right: 1px solid var(--color-gold-border);
   height: 100vh;
   position: sticky;
   top: 0;
@@ -81,9 +79,9 @@ const handleLogout = () => {
 }
 
 .logo-sl {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-serif);
   font-size: 48px;
-  background: linear-gradient(135deg, #d4af37 0%, #f9e4b7 50%, #b8860b 100%);
+  background: var(--gradient-gold-text);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   line-height: 1;
@@ -91,57 +89,57 @@ const handleLogout = () => {
 }
 
 .brand-name {
-  color: #d4af37;
+  color: var(--color-gold-dark);
   letter-spacing: 5px;
-  font-size: 11px;
-  margin-top: 8px;
-  font-family: 'Poppins', sans-serif;
+  font-size: var(--font-size-xs);
+  margin-top: var(--spacing-xs);
+  font-family: var(--font-body);
   font-weight: 300;
 }
 
 .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--color-text-50);
   padding: 18px 30px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: var(--transition-smooth);
   border-left: 4px solid transparent;
   text-decoration: none;
-  font-size: 14px;
-  font-family: 'Poppins', sans-serif;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
   display: flex;
   align-items: center;
 }
 
 .nav-link i {
-  font-size: 18px;
+  font-size: var(--font-size-lg);
   width: 25px;
 }
 
 .nav-link:hover {
-  color: burlywood;
-  background: rgba(212, 165, 116, 0.05);
+  color: var(--color-gold);
+  background: var(--color-gold-bg-subtle);
 }
 
 .nav-link.active {
-  color: burlywood;
+  color: var(--color-gold);
   background: linear-gradient(to right, rgba(212, 165, 116, 0.12), transparent);
-  border-left-color: burlywood;
+  border-left-color: var(--color-gold);
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(212, 165, 116, 0.2);
+  text-shadow: 0 0 10px var(--color-gold-glow);
 }
 
 .btn-logout {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-40);
   padding: 10px 25px;
-  border-radius: 30px;
-  font-size: 13px;
-  transition: 0.3s;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  transition: var(--transition-base);
 }
 
 .btn-logout:hover {
-  border-color: #d67a7a;
-  color: #d67a7a;
+  border-color: var(--color-pink-dark);
+  color: var(--color-pink-dark);
 }
 
 .hamburger-btn,
@@ -162,9 +160,9 @@ const handleLogout = () => {
   display: block;
   height: 2px;
   width: 100%;
-  background-color: burlywood;
+  background-color: var(--color-gold);
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
   transform-origin: center;
 }
 
@@ -200,7 +198,7 @@ const handleLogout = () => {
   }
   .btn-logout {
     padding: 10px 25px 10px 20px;
-    border-radius: 30px;
+    border-radius: var(--radius-pill);
     width: auto;
     height: auto;
     display: flex;
@@ -255,13 +253,13 @@ const handleLogout = () => {
     z-index: 1050;
     width: 44px;
     height: 44px;
-    border-radius: 10px;
-    background: #050505;
-    border: 1px solid rgba(212, 165, 116, 0.3);
-    color: #d4af37;
-    font-size: 18px;
+    border-radius: var(--radius-md);
+    background: var(--color-bg-sidebar);
+    border: 1px solid var(--color-gold-border);
+    color: var(--color-gold-dark);
+    font-size: var(--font-size-lg);
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-sm);
   }
 
   .btn-close-sidebar {
@@ -275,15 +273,15 @@ const handleLogout = () => {
     height: 36px;
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    color: rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-circle);
+    color: var(--color-text-50);
     font-size: 16px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: var(--transition-base);
   }
   .btn-close-sidebar:hover {
-    border-color: #d67a7a;
-    color: #d67a7a;
+    border-color: var(--color-pink-dark);
+    color: var(--color-pink-dark);
   }
 
 
@@ -298,7 +296,7 @@ const handleLogout = () => {
   .btn-logout {
     width: auto;
     height: auto;
-    border-radius: 30px;
+    border-radius: var(--radius-pill);
     padding: 10px 25px 10px 20px;
     margin: auto;
   }

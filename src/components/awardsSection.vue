@@ -87,14 +87,13 @@ const closeModal = () => {
 
 <style scoped>
 .background {
-  background-color: #272427;
-  background-image: repeating-linear-gradient(87deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px),
-                    repeating-linear-gradient(168deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 2px);
-  background-size: 6px 6px;
+  background-color: var(--color-bg-primary);
+  background-image: var(--texture-subtle);
+  background-size: var(--texture-size);
 }
 
-.section-title { color: burlywood; font-family: "Great Vibes", cursive; font-size: 38px; }
-.ornament-line { height: 1px; width: 60px; background: linear-gradient(to right, transparent, burlywood, transparent); }
+.section-title { color: var(--color-gold); font-family: var(--font-display); font-size: 38px; }
+.ornament-line { height: 1px; width: 60px; background: var(--gradient-ornament); }
 
 .slider-container {
   width: 100%;
@@ -143,7 +142,7 @@ const closeModal = () => {
   filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
 }
 
-.award-label { color: burlywood; margin-top: 10px; font-family: "Playfair Display", serif; }
+.award-label { color: var(--color-gold); margin-top: 10px; font-family: var(--font-serif); }
 
 .modal-overlay {
   position: fixed;
@@ -155,27 +154,27 @@ const closeModal = () => {
 }
 
 .modal-content-custom {
-  background: #272427;
-  border: 1px solid burlywood;
-  border-radius: 20px;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-xl);
   padding: 40px;
   max-width: 800px;
   width: 90%;
   position: relative;
-  box-shadow: 0 0 50px rgba(222, 184, 135, 0.2);
+  box-shadow: var(--shadow-gold-glow-lg);
 }
 
 .close-btn {
   position: absolute; top: 15px; right: 20px;
-  background: none; border: none; color: burlywood;
+  background: none; border: none; color: var(--color-gold);
   font-size: 35px; cursor: pointer;
 }
 
 .modal-img { width: 100%; max-width: 250px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
-.modal-title { color: #d4a574; font-family: "Playfair Display", serif; font-size: 32px; }
-.modal-year { color: burlywood; opacity: 0.7; }
-.modal-line { height: 2px; background: linear-gradient(to right, burlywood, transparent); }
-.modal-description { color: rgba(255, 255, 255, 0.8); line-height: 1.6; font-family: "Poppins", sans-serif; }
+.modal-title { color: var(--color-gold-mid); font-family: var(--font-serif); font-size: var(--font-size-3xl); }
+.modal-year { color: var(--color-gold); opacity: 0.7; }
+.modal-line { height: 2px; background: linear-gradient(to right, var(--color-gold), transparent); }
+.modal-description { color: var(--color-text-80); line-height: 1.6; font-family: var(--font-body); }
 
 /* Animação do Modal */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
