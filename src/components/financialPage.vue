@@ -253,8 +253,8 @@ const chartData = computed(() => {
   return {
     labels: sorted.map(k => monthMap[k].label),
     datasets: [
-      { label: 'Receitas', backgroundColor: '#d4af37', data: sorted.map(k => monthMap[k].income), borderRadius: 5 },
-      { label: 'Despesas', backgroundColor: '#b35d5d', data: sorted.map(k => monthMap[k].expense), borderRadius: 5 },
+      { label: 'Receitas', backgroundColor: '#deb887', data: sorted.map(k => monthMap[k].income), borderRadius: 5 },
+      { label: 'Despesas', backgroundColor: '#c0736e', data: sorted.map(k => monthMap[k].expense), borderRadius: 5 },
     ],
   };
 });
@@ -267,7 +267,7 @@ const chartOptions = {
     tooltip: {
       backgroundColor: '#0a0a0a',
       titleFont: { family: 'Playfair Display' },
-      borderColor: '#d4af37',
+      borderColor: '#deb887',
       borderWidth: 1,
       callbacks: {
         label: (ctx) => ` R$ ${Number(ctx.raw).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
@@ -310,48 +310,48 @@ onMounted(fetchTransactions);
 }
 
 .date-range-display {
-  color: rgba(212, 165, 116, 0.7);
+  color: rgba(222, 184, 135, 0.7);
   font-size: 13px;
-  border: 1px solid rgba(212, 165, 116, 0.2);
+  border: 1px solid rgba(222, 184, 135, 0.2);
   padding: 6px 14px;
   border-radius: 20px;
 }
 
 .finance-card {
-  background: #0a0a0a;
-  border: 1px solid rgba(212, 165, 116, 0.2);
+  background: #121212;
+  border: 1px solid rgba(222, 184, 135, 0.15);
   padding: 40px;
   border-radius: 15px;
   text-align: center;
 }
-.card-header-luxury { color: #d4af37; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
-.card-value-luxury { font-family: 'Playfair Display', serif; font-size: 40px; color: #f9e4b7; }
-.card-sub-luxury { color: rgba(212, 165, 116, 0.45); font-size: 12px; margin-top: 8px; }
+.card-header-luxury { color: burlywood; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+.card-value-luxury { font-family: 'Playfair Display', serif; font-size: 40px; color: #f6aeb8; }
+.card-sub-luxury { color: rgba(222, 184, 135, 0.45); font-size: 12px; margin-top: 8px; }
 .expense-text { color: #d67a7a; }
 
 .chart-container-luxury, .transactions-container {
-  background: #0a0a0a;
-  border: 1px solid rgba(212, 165, 116, 0.1);
+  background: #121212;
+  border: 1px solid rgba(222, 184, 135, 0.1);
   padding: 40px;
   border-radius: 15px;
 }
 .chart-wrapper { height: 350px; }
-.section-title-luxury { font-family: 'Playfair Display', serif; color: #d4af37; font-style: italic; font-size: 24px; }
+.section-title-luxury { font-family: 'Playfair Display', serif; color: #f6aeb8; font-style: italic; font-size: 24px; }
 .legend-item { font-size: 12px; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 8px; }
 .dot { width: 10px; height: 10px; border-radius: 50%; }
-.income-dot { background: #d4af37; }
-.expense-dot { background: #b35d5d; }
+.income-dot { background: burlywood; }
+.expense-dot { background: #c0736e; }
 
 .custom-finance-table { margin-bottom: 0; }
-.custom-finance-table th { color: #d4af37; border-bottom: 1px solid rgba(212, 165, 116, 0.2); padding: 15px; font-size: 12px; text-transform: uppercase; }
+.custom-finance-table th { color: burlywood; border-bottom: 1px solid rgba(222, 184, 135, 0.2); padding: 15px; font-size: 12px; text-transform: uppercase; }
 .custom-finance-table td { padding: 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); font-size: 14px; vertical-align: middle; }
-.text-gold { color: #d4af37; }
+.text-gold { color: burlywood; }
 .text-expense { color: #d67a7a; }
 
 .method-badge {
   font-size: 12px;
-  color: rgba(212, 165, 116, 0.8);
-  border: 1px solid rgba(212, 165, 116, 0.2);
+  color: rgba(222, 184, 135, 0.8);
+  border: 1px solid rgba(222, 184, 135, 0.2);
   padding: 3px 10px;
   border-radius: 20px;
 }
@@ -371,8 +371,8 @@ onMounted(fetchTransactions);
 
 .btn-icon-luxury {
   background: transparent;
-  border: 1px solid rgba(212, 165, 116, 0.3);
-  color: rgba(212, 165, 116, 0.7);
+  border: 1px solid rgba(222, 184, 135, 0.3);
+  color: rgba(222, 184, 135, 0.7);
   width: 32px;
   height: 32px;
   border-radius: 6px;
@@ -400,25 +400,22 @@ onMounted(fetchTransactions);
   width: 90%;
   max-width: 540px;
   border-radius: 15px;
-  border: 1px solid #d4af37;
+  border: 1px solid burlywood;
   overflow: hidden;
-  background-color: #272427;
-  background-image:
-    repeating-linear-gradient(87deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px),
-    repeating-linear-gradient(168deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 2px);
+  background-color: #121212;
 }
 .modal-header-luxury {
   padding: 25px 30px;
-  border-bottom: 2px solid burlywood;
+  border-bottom: 1px solid rgba(222, 184, 135, 0.3);
   color: burlywood;
-  background-color: #272427;
+  background-color: #121212;
 }
 .modal-title-luxury { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; margin: 0; }
 
 .label-luxury { color: burlywood; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; opacity: 0.8; }
 .input-luxury {
-  background: #0a0a0a;
-  border: 1px solid rgba(212, 165, 116, 0.3);
+  background: #0d0d0d;
+  border: 1px solid rgba(222, 184, 135, 0.3);
   color: white;
   width: 100%;
   padding: 10px;

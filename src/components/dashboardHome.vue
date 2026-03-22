@@ -40,7 +40,7 @@
         <div class="chart-card shadow-lg">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="section-title-luxury m-0">Performance de Atendimentos</h3>
-            <div class="chart-period">Próximos 30 dias</div>
+            <div class="chart-period">30 dias anteriores e 30 dias futuros</div>
           </div>
           <div class="chart-wrapper">
             <div v-if="chartLoading" class="text-center py-5">
@@ -64,7 +64,10 @@
               <p class="text-muted-luxury">Nenhum atendimento agendado.</p>
             </div>
             <div v-else v-for="appt in nextAppointments" :key="appt.id" class="appointment-item">
-              <div class="appt-time">{{ appt.time }}</div>
+              <div class="appt-time">
+                <div>{{ appt.date }}</div>
+                <div>{{ appt.time }}</div>
+              </div>
               <div class="appt-info">
                 <div class="appt-name">{{ appt.name }}</div>
                 <div class="appt-service">{{ appt.service }}</div>
@@ -147,7 +150,13 @@ const performanceOptions = {
     },
     x: {
       grid: { display: false },
-      ticks: { color: 'rgba(255, 255, 255, 0.4)', font: { size: 10 } }
+      ticks: {
+        font: (ctx) => ({
+          size: ctx.tick?.label === 'Hoje' ? 11 : 10,
+          weight: ctx.tick?.label === 'Hoje' ? 'bold' : 'normal'
+        }),
+        color: (ctx) => ctx.tick?.label === 'Hoje' ? '#f6aeb8' : 'rgba(255, 255, 255, 0.4)'
+      }
     }
   }
 };
@@ -162,19 +171,30 @@ const formatTime = (isoDate) => {
   return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 };
 
+const formatDate = (isoDate) => {
+  if (!isoDate) return '';
+  const date = new Date(isoDate);
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(today.getDate() + 1);
+  if (date.toDateString() === today.toDateString()) return 'Hoje';
+  if (date.toDateString() === tomorrow.toDateString()) return 'Amanhã';
+  return date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+};
+
 const fetchNextAppointments = async () => {
   loading.value = true;
   try {
     const response = await CalendarService.getAll();
     const now = new Date();
     
-    // Filtra apenas atendimentos futuros e ordena por data
     const futureAppointments = response.data
       .filter(appt => new Date(appt.dataInicio) >= now)
       .sort((a, b) => new Date(a.dataInicio) - new Date(b.dataInicio))
       .slice(0, 5)
       .map(appt => ({
         id: appt.id,
+        date: formatDate(appt.dataInicio),
         time: formatTime(appt.dataInicio),
         name: appt.nomeCliente,
         service: appt.procedimento
@@ -192,26 +212,20 @@ const fetchPerformanceData = async () => {
   chartLoading.value = true;
   try {
     const response = await CalendarService.getAll();
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    
-    const thirtyDaysLater = new Date();
-    thirtyDaysLater.setDate(now.getDate() + 30);
-    
-    // Cria um mapa com os próximos 30 dias
+
     const daysMap = {};
     const labels = [];
-    
-    for (let i = 0; i < 30; i++) {
+
+    for (let i = -30; i <= 30; i++) {
       const date = new Date();
-      date.setDate(now.getDate() + i);
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() + i);
       const dateKey = date.toISOString().split('T')[0];
-      const dayLabel = date.getDate().toString();
+      const dayLabel = i === 0 ? 'Hoje' : `${date.getDate()}/${date.getMonth() + 1}`;
       daysMap[dateKey] = 0;
       labels.push(dayLabel);
     }
     
-    // Conta atendimentos por dia
     response.data.forEach(appt => {
       const apptDate = new Date(appt.dataInicio);
       const apptDateKey = apptDate.toISOString().split('T')[0];
@@ -220,7 +234,6 @@ const fetchPerformanceData = async () => {
       }
     });
     
-    // Atualiza o gráfico
     const data = Object.values(daysMap);
     performanceData.value.labels = labels;
     performanceData.value.datasets[0].data = data;
@@ -264,7 +277,6 @@ onMounted(() => {
   font-size: 13px;
 }
 
-/* KPI Cards */
 .kpi-card {
   background: #121212;
   border: 1px solid rgba(212, 165, 116, 0.1);
@@ -280,7 +292,6 @@ onMounted(() => {
 .positive { color: #81c784; }
 .neutral { color: rgba(255, 255, 255, 0.4); }
 
-/* Chart & Appointments Cards */
 .chart-card, .appointments-card {
   background: #121212;
   border: 1px solid rgba(212, 165, 116, 0.1);
@@ -315,7 +326,7 @@ onMounted(() => {
   border-left-color: burlywood;
 }
 
-.appt-time { font-size: 12px; color: burlywood; width: 80px; font-weight: 600; }
+.appt-time { font-size: 11px; color: burlywood; width: 70px; font-weight: 600; line-height: 1.6; }
 .appt-info { flex-grow: 1; }
 .appt-name { font-size: 15px; color: #e0e0e0; font-weight: 500; }
 .appt-service { font-size: 12px; color: rgba(255, 255, 255, 0.4); }
@@ -335,12 +346,10 @@ onMounted(() => {
 }
 .btn-view-all:hover { background: burlywood; color: #121212; }
 
-/* Custom Scrollbar */
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: burlywood; border-radius: 10px; }
 
-/* Responsivo Mobile */
 @media (max-width: 768px) {
   .dashboard-home {
     padding: 0 10px;
