@@ -42,36 +42,55 @@
 }
 
 .background {
-  background-color: var(--color-bg-primary);
-  background-image: var(--texture-subtle);
-  background-size: var(--texture-size);
+  background-color: #272427;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      168deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  background-size: 6px 6px;
 }
 
+/* Linha Burlywood com Gradiente */
 .top-line {
   width: 100%;
-  border-bottom: 2px solid var(--color-gold);
+  border-bottom: 2px solid burlywood;
+  /*height: 2px;
+  background: linear-gradient(to right, transparent, burlywood, transparent);
+  background: linear-gradient(to right, transparent, burlywood, transparent);*/
 }
 
 .footer-title {
-  color: var(--color-gold-mid);
-  font-family: var(--font-serif);
-  font-size: var(--font-size-2xl);
+  color: #d4a574;
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: 20px;
   letter-spacing: 1px;
 }
 
 .contact-info p {
-  color: var(--color-gold);
-  font-family: var(--font-body);
-  font-size: var(--font-size-md);
+  color: burlywood;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
   margin-bottom: 8px;
 }
 
 .contact-info strong {
-  color: var(--color-gold-mid);
+  color: #d4a574;
 }
 
+/* Estilo dos Ícones Sociais */
 .social-icons {
   display: flex;
   gap: 15px;
@@ -86,9 +105,9 @@
 .social-icon {
   width: 40px;
   height: 40px;
-  background-color: var(--color-gold);
-  color: var(--color-bg-primary);
-  border-radius: var(--radius-circle);
+  background-color: burlywood;
+  color: #272427;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,16 +122,16 @@
 
 .social-icon:hover {
   transform: translateY(-3px);
-  background-color: var(--color-gold-mid);
+  background-color: #d4a574;
   color: white;
 }
 
 .copyright {
   color: rgba(222, 184, 135, 0.5);
-  font-size: var(--font-size-xs);
-  font-family: var(--font-body);
+  font-size: 12px;
+  font-family: "Poppins", sans-serif;
   border-top: 1px solid rgba(222, 184, 135, 0.1);
-  padding-top: var(--spacing-md);
+  padding-top: 20px;
 }
 
 @media (max-width: 768px) {

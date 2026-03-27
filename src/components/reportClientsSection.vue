@@ -92,15 +92,29 @@ const testimonials = [
 <style scoped>
 /* Background Texturizado Padrão */
 .background {
-  background-color: var(--color-bg-primary);
-  background-image: var(--texture-subtle);
-  background-size: var(--texture-size);
+  background-color: #272427;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      168deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  background-size: 6px 6px;
 }
 
 /* Título e Ornamentos */
 .section-title {
-  color: var(--color-gold);
-  font-family: var(--font-display);
+  color: burlywood;
+  font-family: "Great Vibes", cursive;
   font-size: 38px;
   margin: 0;
 }
@@ -108,13 +122,13 @@ const testimonials = [
 .ornament-line {
   height: 1px;
   width: 60px;
-  background: var(--gradient-ornament);
+  background: linear-gradient(to right, transparent, burlywood, transparent);
 }
 
 /* Cards de Depoimentos */
 .testimonial-card {
   padding: 15px;
-  transition: var(--transition-base);
+  transition: transform 0.3s ease;
 }
 
 .testimonial-card:hover {
@@ -125,51 +139,51 @@ const testimonials = [
   width: 150px;
   height: 150px;
   margin: 0 auto;
-  border-radius: var(--radius-circle);
-  border: 2px solid var(--color-gold);
+  border-radius: 50%;
+  border: 2px solid burlywood;
   padding: 4px;
-  background: var(--color-gold-bg-hover);
+  background: rgba(222, 184, 135, 0.1);
 }
 
 .avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: var(--radius-circle);
+  border-radius: 50%;
 }
 
 .stars {
-  color: var(--color-gold-mid);
-  font-size: var(--font-size-md);
+  color: #d4a574;
+  font-size: 16px;
   letter-spacing: 2px;
 }
 
 .testimonial-text {
-  color: var(--color-text-80);
-  font-family: var(--font-body);
-  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.5;
   min-height: 60px;
 }
 
 .testimonial-name {
-  color: var(--color-gold);
-  font-family: var(--font-serif);
+  color: burlywood;
+  font-family: "Playfair Display", serif;
   font-weight: bold;
-  font-size: var(--font-size-md);
+  font-size: 16px;
   margin-top: 10px;
 }
 
 /* Seção Especialista */
 .specialist-container {
   background-color: rgba(0, 0, 0, 0.25);
-  border-radius: var(--radius-xl);
+  border-radius: 20px;
   padding: 35px;
   border: 1px solid rgba(222, 184, 135, 0.15);
   display: flex;
   align-items: center;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 	
 }
 
@@ -184,15 +198,15 @@ const testimonials = [
 }
 
 .specialist-subtitle {
-  color: var(--color-gold);
-  font-family: var(--font-display);
+  color: burlywood;
+  font-family: "Great Vibes", cursive;
   font-size: 30px;
   margin: 0;
 }
 
 .specialist-title {
-  color: var(--color-gold-mid);
-  font-family: var(--font-serif);
+  color: #d4a574;
+  font-family: "Playfair Display", serif;
   font-size: 40px;
   font-weight: 700;
   margin-top: -10px;
@@ -202,20 +216,20 @@ const testimonials = [
 .specialist-line {
   height: 2px;
   width: 100%;
-  background: linear-gradient(to right, var(--color-gold), transparent);
+  background: linear-gradient(to right, burlywood, transparent);
 }
 
 .specialist-name-tag {
-  color: var(--color-text-primary);
-  font-family: var(--font-body);
+  color: white;
+  font-family: "Poppins", sans-serif;
   font-weight: 600;
-  font-size: var(--font-size-lg);
+  font-size: 18px;
   margin-bottom: 2px;
 }
 
 .specialist-role {
-  color: var(--color-gold);
-  font-size: var(--font-size-sm);
+  color: burlywood;
+  font-size: 14px;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -223,19 +237,19 @@ const testimonials = [
 }
 
 .specialist-bio {
-  color: var(--color-text-70);
-  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
   line-height: 1.6;
-  font-family: var(--font-body);
+  font-family: "Poppins", sans-serif;
 }
 
 .specialist-img {
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   object-fit: cover;
   box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.6);
-  border: 1px solid var(--color-gold-glow);
+  border: 1px solid rgba(222, 184, 135, 0.2);
 }
 
 /* Responsividade */
@@ -251,7 +265,7 @@ const testimonials = [
     margin-bottom: 25px;
   }
   .specialist-line {
-    background: var(--gradient-ornament);
+    background: linear-gradient(to right, transparent, burlywood, transparent);
   }
   .specialist-img {
     width: 300px;
@@ -268,7 +282,7 @@ const testimonials = [
 }
 
 .line-bottom {
-    border-bottom: 1px solid var(--color-gold);
+    border-bottom: 1px solid burlywood;
 }
 
 @media (max-width: 576px) {

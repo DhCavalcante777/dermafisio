@@ -41,10 +41,10 @@
 .content {
     position: relative;
     z-index: 1;
-    color: var(--color-text-primary);
+    color: white;
     width: 100%;
     text-align: center;
-    padding: var(--spacing-md);
+    padding: 20px;
 
     @media (min-width: 769px) {
         max-width: 600px;
@@ -60,10 +60,10 @@
 }
 
 .content p {
-    font-family: var(--font-display);
-    font-size: var(--font-size-5xl);
+    font-family: 'Great Vibes', cursive;
+    font-size: 45px;
     margin: 0;
-    background: var(--gradient-headline);
+    background: linear-gradient(90deg, rgb(192, 133, 57) 0%, #c4978a 50%, #c465db 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -78,17 +78,17 @@
 }
 
 .btn-agendar {
-    background-color: var(--color-gold-cta);
-    color: var(--color-text-primary);
+    background-color: #c9a86c;
+    color: white;
     border: none;
     cursor: pointer;
-    border-radius: var(--radius-sm);
-    transition: var(--transition-base);
+    border-radius: 5px;
+    transition: all 0.3s ease;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 15px;
-    font-size: var(--font-size-lg);
+    font-size: 18px;
     padding: 12px 30px;
     text-decoration: none;
     display: inline-block;
@@ -100,13 +100,13 @@
 }
 
 .btn-agendar:hover {
-    background-color: var(--color-gold-cta-hover);
+    background-color: #b8975b;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-cta-hover);
+    box-shadow: 0 4px 15px rgba(201, 168, 108, 0.4);
 }
 
 .line-bottom {
-    border-bottom: 2px solid var(--color-gold);
+    border-bottom: 2px solid burlywood;
 }
 
 </style>

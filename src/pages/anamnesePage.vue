@@ -444,96 +444,110 @@ const submitForm = async () => {
 }
 
 .background {
-  background-color: var(--color-bg-primary);
-  background-image: var(--texture-subtle);
-  background-size: var(--texture-size);
+  background-color: #272427;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      168deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  background-size: 6px 6px;
 }
 
 .page-title {
-  color: var(--color-gold);
-  font-family: var(--font-display);
-  font-size: var(--font-size-5xl);
+  color: burlywood;
+  font-family: "Great Vibes", cursive;
+  font-size: 45px;
   margin-bottom: 5px;
 }
 .brand-name {
-  color: var(--color-gold-mid);
-  font-family: var(--font-serif);
+  color: #d4a574;
+  font-family: "Playfair Display", serif;
   letter-spacing: 3px;
-  font-size: var(--font-size-sm);
+  font-size: 14px;
 }
 .title-line {
   width: 100px;
   height: 2px;
-  background: var(--gradient-ornament);
+  background: linear-gradient(to right, transparent, burlywood, transparent);
   margin-bottom: 10px;
 }
 
 .form-section {
   background: rgba(255, 255, 255, 0.02);
-  padding: var(--spacing-lg);
-  border-radius: var(--radius-lg);
+  padding: 30px;
+  border-radius: 15px;
   border: 1px solid rgba(222, 184, 135, 0.1);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .section-subtitle {
-  color: var(--color-gold-mid);
-  font-family: var(--font-serif);
-  font-size: var(--font-size-2xl);
+  color: #d4a574;
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
   margin-bottom: 25px;
   border-bottom: 1px solid rgba(212, 165, 116, 0.2);
   padding-bottom: 10px;
 }
 
 .form-label {
-  color: var(--color-gold);
-  font-family: var(--font-body);
-  font-size: var(--font-size-sm);
-  margin-bottom: var(--spacing-xs);
+  color: burlywood;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  margin-bottom: 8px;
 }
 
 .custom-input {
   width: 100%;
   background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--color-gold-glow);
-  border-radius: var(--radius-md);
+  border: 1px solid rgba(222, 184, 135, 0.2);
+  border-radius: 8px;
   padding: 12px 15px;
-  color: var(--color-text-primary);
-  font-family: var(--font-body);
-  transition: var(--transition-base);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
 }
 
 .custom-input:focus {
   outline: none;
-  border-color: var(--color-gold);
+  border-color: burlywood;
   box-shadow: 0 0 10px rgba(222, 184, 135, 0.1);
 }
 
 .radio-label {
-  color: var(--color-text-primary);
+  color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 5px;
-  font-family: var(--font-body);
+  font-family: "Poppins", sans-serif;
 }
 
 .btn-enviar {
-  background-color: var(--color-gold-cta);
-  color: var(--color-text-primary);
+  background-color: #c9a86c;
+  color: white;
   border: none;
   padding: 15px 60px;
-  font-family: var(--font-serif);
+  font-family: "Playfair Display", serif;
   font-weight: bold;
-  font-size: var(--font-size-lg);
-  border-radius: var(--radius-sm);
+  font-size: 18px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: var(--transition-base);
+  transition: all 0.3s ease;
 }
 
 .btn-enviar:hover:not(:disabled) {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
   filter: brightness(1.1);
 }
 .btn-enviar:disabled {

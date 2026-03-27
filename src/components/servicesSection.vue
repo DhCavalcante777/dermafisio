@@ -59,16 +59,30 @@
   max-width: 100%;
 }
 .background {
-  background-color: var(--color-bg-primary);
-  background-image: var(--texture-subtle);
-  background-size: var(--texture-size);
+  background-color: #272427;
+  background-image:
+    repeating-linear-gradient(
+      87deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      168deg,
+      rgba(0, 0, 0, 0.05) 0px,
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+  background-size: 6px 6px;
   padding-bottom: 2px;
 }
 
 .title {
-  color: var(--color-gold);
-  font-size: var(--font-size-4xl);
-  font-family: var(--font-display);
+  color: burlywood;
+  font-size: 35px;
+  font-family: "Great Vibes", cursive;
   margin: 0;
   word-spacing: 8px;
 }
@@ -78,8 +92,8 @@
   background: linear-gradient(
     to right,
     transparent 0%,
-    var(--color-gold) 30%,
-    var(--color-gold) 100%
+    burlywood 30%,
+    burlywood 100%
   );
 }
 
@@ -88,8 +102,8 @@
   background: linear-gradient(
     to left,
     transparent 0%,
-    var(--color-gold) 30%,
-    var(--color-gold) 100%
+    burlywood 30%,
+    burlywood 100%
   );
 }
 
@@ -119,10 +133,10 @@
 }
 
 .description {
-  color: var(--color-gold);
-  font-family: var(--font-display);
+  color: burlywood;
+  font-family: "Great Vibes", cursive;
   font-size: 40px;
-  margin-top: var(--spacing-md);
+  margin-top: 20px;
   word-spacing: 8px;
 }
 
@@ -159,6 +173,6 @@
 }
 
 .line-bottom {
-    border-bottom: 1px solid var(--color-gold);
+    border-bottom: 1px solid burlywood;
 }
 </style>

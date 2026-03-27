@@ -251,50 +251,52 @@ onMounted(() => {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap' );
+
 .dashboard-home { 
-  font-family: var(--font-body); 
-  color: var(--color-text-primary); 
+  font-family: 'Poppins', sans-serif; 
+  color: white; 
   overflow-x: hidden;
   max-width: 100%;
 }
 
 .page-title {
-  font-family: var(--font-serif);
-  color: var(--color-pink);
+  font-family: "Playfair Display", serif;
+  color: #f6aeb8;
   font-style: italic;
 }
 
-.text-muted-luxury { color: var(--color-text-50); font-size: var(--font-size-sm); }
+.text-muted-luxury { color: rgba(255, 255, 255, 0.5); font-size: 14px; }
 
 .current-date-badge {
-  background: var(--color-gold-bg-hover);
-  border: 1px solid var(--color-gold-border);
-  color: var(--color-gold);
+  background: rgba(222, 184, 135, 0.1);
+  border: 1px solid rgba(222, 184, 135, 0.3);
+  color: burlywood;
   padding: 8px 20px;
-  border-radius: var(--radius-pill);
-  font-size: var(--font-size-sm);
+  border-radius: 30px;
+  font-size: 13px;
 }
 
 .kpi-card {
-  background: var(--color-bg-card);
+  background: #121212;
   border: 1px solid rgba(212, 165, 116, 0.1);
   padding: 30px;
-  border-radius: var(--radius-lg);
-  transition: var(--transition-base);
+  border-radius: 15px;
+  transition: transform 0.3s;
 }
-.kpi-card:hover { transform: translateY(-5px); border-color: var(--color-gold); }
+.kpi-card:hover { transform: translateY(-5px); border-color: burlywood; }
 
-.kpi-label { color: var(--color-gold); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-.kpi-value { font-family: var(--font-serif); font-size: 42px; color: var(--color-pink); margin-bottom: 5px; }
-.kpi-trend { font-size: var(--font-size-xs); font-weight: 600; }
-.positive { color: var(--color-status-success-light); }
-.neutral { color: var(--color-text-40); }
+.kpi-label { color: burlywood; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+.kpi-value { font-family: 'Playfair Display', serif; font-size: 42px; color: #f6aeb8; margin-bottom: 5px; }
+.kpi-trend { font-size: 11px; font-weight: 600; }
+.positive { color: #81c784; }
+.neutral { color: rgba(255, 255, 255, 0.4); }
 
 .chart-card, .appointments-card {
-  background: var(--color-bg-card);
+  background: #121212;
   border: 1px solid rgba(212, 165, 116, 0.1);
   padding: 35px;
-  border-radius: var(--radius-lg);
+  border-radius: 15px;
   height: 100%;
   box-sizing: border-box;
   max-width: 100%;
@@ -305,8 +307,8 @@ onMounted(() => {
   width: 100%;
   max-width: 100%;
 }
-.section-title-luxury { font-family: var(--font-serif); color: var(--color-pink); font-style: italic; font-size: 22px; }
-.chart-period { font-size: 12px; color: var(--color-text-40); }
+.section-title-luxury { font-family: 'Playfair Display', serif; color: #f6aeb8; font-style: italic; font-size: 22px; }
+.chart-period { font-size: 12px; color: rgba(255, 255, 255, 0.4); }
 
 /* Appointment List */
 .appointment-list { max-height: 320px; overflow-y: auto; padding-right: 10px; }
@@ -315,38 +317,38 @@ onMounted(() => {
   align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: var(--transition-base);
+  transition: 0.3s;
   border-left: 4px solid transparent;
 }
 .appointment-item:hover { 
-  background: var(--color-gold-bg-hover); 
+  background: rgba(222, 184, 135, 0.08); 
   padding-left: 10px;
-  border-left-color: var(--color-gold);
+  border-left-color: burlywood;
 }
 
-.appt-time { font-size: var(--font-size-xs); color: var(--color-gold); width: 70px; font-weight: 600; line-height: 1.6; }
+.appt-time { font-size: 11px; color: burlywood; width: 70px; font-weight: 600; line-height: 1.6; }
 .appt-info { flex-grow: 1; }
-.appt-name { font-size: var(--font-size-base); color: var(--color-text-light); font-weight: 500; }
-.appt-service { font-size: 12px; color: var(--color-text-40); }
-.appt-status-dot { width: 8px; height: 8px; background: var(--color-gold); border-radius: var(--radius-circle); box-shadow: var(--shadow-appt-dot); }
+.appt-name { font-size: 15px; color: #e0e0e0; font-weight: 500; }
+.appt-service { font-size: 12px; color: rgba(255, 255, 255, 0.4); }
+.appt-status-dot { width: 8px; height: 8px; background: burlywood; border-radius: 50%; box-shadow: 0 0 8px burlywood; }
 
 .btn-view-all {
   width: 100%;
   background: transparent;
-  border: 1px solid var(--color-gold);
-  color: var(--color-gold);
+  border: 1px solid burlywood;
+  color: burlywood;
   padding: 12px;
-  border-radius: var(--radius-md);
+  border-radius: 8px;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: var(--transition-base);
+  transition: 0.3s;
 }
-.btn-view-all:hover { background: var(--color-gold); color: var(--color-bg-card); }
+.btn-view-all:hover { background: burlywood; color: #121212; }
 
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: var(--radius-md); }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: burlywood; border-radius: 10px; }
 
 @media (max-width: 768px) {
   .dashboard-home {
