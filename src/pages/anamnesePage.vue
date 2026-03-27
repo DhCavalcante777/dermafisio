@@ -444,19 +444,19 @@ const submitForm = async () => {
 }
 
 .background {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(
       87deg,
-      rgba(255, 255, 255, 0.03) 0px,
-      rgba(255, 255, 255, 0.03) 1px,
+      var(--color-pattern-light) 0px,
+      var(--color-pattern-light) 1px,
       transparent 1px,
       transparent 2px
     ),
     repeating-linear-gradient(
       168deg,
-      rgba(0, 0, 0, 0.05) 0px,
-      rgba(0, 0, 0, 0.05) 1px,
+      var(--color-pattern-dark) 0px,
+      var(--color-pattern-dark) 1px,
       transparent 1px,
       transparent 2px
     );
@@ -464,13 +464,13 @@ const submitForm = async () => {
 }
 
 .page-title {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Great Vibes", cursive;
   font-size: 45px;
   margin-bottom: 5px;
 }
 .brand-name {
-  color: #d4a574;
+  color: var(--color-gold-muted);
   font-family: "Playfair Display", serif;
   letter-spacing: 3px;
   font-size: 14px;
@@ -478,29 +478,29 @@ const submitForm = async () => {
 .title-line {
   width: 100px;
   height: 2px;
-  background: linear-gradient(to right, transparent, burlywood, transparent);
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
   margin-bottom: 10px;
 }
 
 .form-section {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--color-text-dim);
   padding: 30px;
   border-radius: 15px;
-  border: 1px solid rgba(222, 184, 135, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-gold-border-subtle);
+  box-shadow: 0 10px 30px var(--shadow-light);
 }
 
 .section-subtitle {
-  color: #d4a574;
+  color: var(--color-gold-muted);
   font-family: "Playfair Display", serif;
   font-size: 24px;
   margin-bottom: 25px;
-  border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+  border-bottom: 1px solid var(--color-tan-border);
   padding-bottom: 10px;
 }
 
 .form-label {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   margin-bottom: 8px;
@@ -508,23 +508,23 @@ const submitForm = async () => {
 
 .custom-input {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(222, 184, 135, 0.2);
+  background: var(--shadow-light);
+  border: 1px solid var(--color-gold-border);
   border-radius: 8px;
   padding: 12px 15px;
-  color: white;
+  color: var(--color-white);
   font-family: "Poppins", sans-serif;
   transition: all 0.3s ease;
 }
 
 .custom-input:focus {
   outline: none;
-  border-color: burlywood;
-  box-shadow: 0 0 10px rgba(222, 184, 135, 0.1);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 10px var(--color-gold-border-subtle);
 }
 
 .radio-label {
-  color: white;
+  color: var(--color-white);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -533,8 +533,8 @@ const submitForm = async () => {
 }
 
 .btn-enviar {
-  background-color: #c9a86c;
-  color: white;
+  background-color: var(--color-gold-medium);
+  color: var(--color-white);
   border: none;
   padding: 15px 60px;
   font-family: "Playfair Display", serif;

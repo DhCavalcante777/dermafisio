@@ -228,7 +228,7 @@ const redirectToPayment = () => {
 }
 
 .background-ebook {
-  background-color: #313131;
+  background-color: var(--color-bg-alt);
   padding: 20px 0;
 }
 
@@ -238,8 +238,8 @@ const redirectToPayment = () => {
 }
 
 .button-sl {
-  background-color: #fa5894;
-  color: #fff;
+  background-color: var(--color-hot-pink);
+  color: var(--color-white);
   font-size: 20px;
   font-weight: bold;
   border-radius: 5px;
@@ -248,17 +248,17 @@ const redirectToPayment = () => {
 }
 
 .button-sl:hover {
-  background-color: #fa5894;
-  color: #f6daeb;
+  background-color: var(--color-hot-pink);
+  color: var(--color-pink-light);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 .button-sl:focus {
   outline: none;
-  box-shadow: 0 0 0 0.2rem rgba(250, 88, 148, 0.5);
+  box-shadow: 0 0 0 0.2rem var(--color-hot-pink-glow);
 }
 
 .ebook-content {
-  background-color: #f6daeb;
+  background-color: var(--color-pink-light);
   padding: 20px;
   border-radius: 5px;
 }
@@ -274,7 +274,7 @@ const redirectToPayment = () => {
 }
 
 .ebook-promotion {
-  background-color: #313131;
+  background-color: var(--color-bg-alt);
   padding: 20px;
   border-radius: 5px;
 }
@@ -305,13 +305,13 @@ const redirectToPayment = () => {
 
 .benefits-list li::before {
   content: "✔";
-  color: #28a745;
+  color: var(--color-success);
   margin-right: 10px;
   font-weight: bold;
 }
 
 .gift-ebook {
-  background-color: #fff;
+  background-color: var(--color-white);
   padding: 20px;
 }
 
@@ -319,17 +319,17 @@ const redirectToPayment = () => {
   font-size: 25px;
   margin-top: 20px;
   margin-bottom: 20px;
-  color: #fa5894;
+  color: var(--color-hot-pink);
 }
 
 .gift-ebook-description {
   font-size: 20px;
   margin-bottom: 20px;
-  color: #fa5894;
+  color: var(--color-hot-pink);
 }
 
 .payment-proof-section {
-  background-color: #f6daeb;
+  background-color: var(--color-pink-light);
   padding: 20px;
 }
 

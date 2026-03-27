@@ -87,14 +87,14 @@ const closeModal = () => {
 
 <style scoped>
 .background {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image: repeating-linear-gradient(87deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px),
                     repeating-linear-gradient(168deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 2px);
   background-size: 6px 6px;
 }
 
-.section-title { color: burlywood; font-family: "Great Vibes", cursive; font-size: 38px; }
-.ornament-line { height: 1px; width: 60px; background: linear-gradient(to right, transparent, burlywood, transparent); }
+.section-title { color: var(--color-gold); font-family: "Great Vibes", cursive; font-size: 38px; }
+.ornament-line { height: 1px; width: 60px; background: linear-gradient(to right, transparent, var(--color-gold), transparent); }
 
 .slider-container {
   width: 100%;
@@ -140,42 +140,42 @@ const closeModal = () => {
 .award-img {
   width: 100%;
   max-width: 160px;
-  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+  filter: drop-shadow(0 5px 15px var(--shadow-filter));
 }
 
-.award-label { color: burlywood; margin-top: 10px; font-family: "Playfair Display", serif; }
+.award-label { color: var(--color-gold); margin-top: 10px; font-family: "Playfair Display", serif; }
 
 .modal-overlay {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  background: var(--color-overlay);
   display: flex; align-items: center; justify-content: center;
   z-index: 9999;
   backdrop-filter: blur(5px);
 }
 
 .modal-content-custom {
-  background: #272427;
-  border: 1px solid burlywood;
+  background: var(--color-bg-page);
+  border: 1px solid var(--color-gold);
   border-radius: 20px;
   padding: 40px;
   max-width: 800px;
   width: 90%;
   position: relative;
-  box-shadow: 0 0 50px rgba(222, 184, 135, 0.2);
+  box-shadow: 0 0 50px var(--color-gold-border);
 }
 
 .close-btn {
   position: absolute; top: 15px; right: 20px;
-  background: none; border: none; color: burlywood;
+  background: none; border: none; color: var(--color-gold);
   font-size: 35px; cursor: pointer;
 }
 
-.modal-img { width: 100%; max-width: 250px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
-.modal-title { color: #d4a574; font-family: "Playfair Display", serif; font-size: 32px; }
-.modal-year { color: burlywood; opacity: 0.7; }
-.modal-line { height: 2px; background: linear-gradient(to right, burlywood, transparent); }
-.modal-description { color: rgba(255, 255, 255, 0.8); line-height: 1.6; font-family: "Poppins", sans-serif; }
+.modal-img { width: 100%; max-width: 250px; filter: drop-shadow(0 10px 20px var(--shadow-filter)); }
+.modal-title { color: var(--color-gold-muted); font-family: "Playfair Display", serif; font-size: 32px; }
+.modal-year { color: var(--color-gold); opacity: 0.7; }
+.modal-line { height: 2px; background: linear-gradient(to right, var(--color-gold), transparent); }
+.modal-description { color: var(--color-text-soft); line-height: 1.6; font-family: "Poppins", sans-serif; }
 
 /* Animação do Modal */
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }

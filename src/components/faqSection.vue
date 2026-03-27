@@ -56,7 +56,7 @@ const faqs = [
 
 <style scoped>
 .faq-section {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(87deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px),
     repeating-linear-gradient(168deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 2px);
@@ -65,7 +65,7 @@ const faqs = [
 
 /* Título e Ornamentos */
 .section-title {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Great Vibes", cursive;
   font-size: 42px;
   margin: 0;
@@ -75,13 +75,13 @@ const faqs = [
 .ornament-line {
   height: 1px;
   width: 80px;
-  background: linear-gradient(to right, transparent, burlywood, transparent);
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
 }
 
 /* Estilo do Acordeão */
 .custom-faq-item {
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(222, 184, 135, 0.2);
+  background-color: var(--shadow-medium);
+  border: 1px solid var(--color-gold-border);
   border-radius: 4px !important;
   overflow: hidden;
 }
@@ -103,20 +103,20 @@ const faqs = [
 }
 
 .plus-icon {
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 24px;
   font-weight: 300;
 }
 
 .custom-faq-body {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-soft);
   font-family: "Poppins", sans-serif;
   padding: 0 20px 20px 20px;
 }
 
 /* Seção CTA */
 .cta-title {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Great Vibes", cursive;
   font-size: 54px;
   margin-bottom: 10px;
@@ -126,11 +126,11 @@ const faqs = [
 .cta-line {
   height: 2px;
   width: 100%;
-  background: linear-gradient(to right, transparent, burlywood, transparent);
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
 }
 
 .btn-agendar {
-  background-color: #c9a86c;
+  background-color: var(--color-gold-medium);
   color: white;
   border: none;
   padding: 15px 60px;
@@ -144,9 +144,9 @@ const faqs = [
 }
 
 .btn-agendar:hover {
-  background-color: #b8975b;
+  background-color: var(--color-gold-dark);
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(201, 168, 108, 0.4);
+  box-shadow: 0 6px 20px var(--color-tan-glow);
   filter: brightness(1.1);
 }
 

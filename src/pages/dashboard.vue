@@ -17,9 +17,9 @@ import sidebar from '@/components/sidebar.vue';
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap');
 
 .dashboard-container {
-  background-color: #0a0a0a;
+  background-color: var(--color-bg-input);
   min-height: 100vh;
-  color: #e0e0e0;
+  color: var(--color-text);
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
 }
@@ -30,7 +30,7 @@ import sidebar from '@/components/sidebar.vue';
 }
 
 .background {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(
       87deg,

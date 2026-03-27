@@ -63,7 +63,7 @@
     font-family: 'Great Vibes', cursive;
     font-size: 45px;
     margin: 0;
-    background: linear-gradient(90deg, rgb(192, 133, 57) 0%, #c4978a 50%, #c465db 100%);
+    background: linear-gradient(90deg, var(--color-gold-bronze) 0%, var(--color-gold-rose) 50%, var(--color-accent-purple) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -78,7 +78,7 @@
 }
 
 .btn-agendar {
-    background-color: #c9a86c;
+    background-color: var(--color-gold-medium);
     color: white;
     border: none;
     cursor: pointer;
@@ -100,13 +100,13 @@
 }
 
 .btn-agendar:hover {
-    background-color: #b8975b;
+    background-color: var(--color-gold-dark);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(201, 168, 108, 0.4);
+    box-shadow: 0 4px 15px var(--color-tan-glow);
 }
 
 .line-bottom {
-    border-bottom: 2px solid burlywood;
+    border-bottom: 2px solid var(--color-gold);
 }
 
 </style>

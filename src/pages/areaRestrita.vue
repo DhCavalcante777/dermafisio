@@ -93,7 +93,7 @@ const handleLogin = async () => {
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap");
 
 .login-page {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(
       87deg,
@@ -113,13 +113,13 @@ const handleLogin = async () => {
 }
 
 .login-card {
-  background: #121212;
+  background: var(--color-bg-card);
   width: 100%;
   max-width: 450px;
   padding: 50px 40px;
   border-radius: 15px;
-  border: 1px solid rgba(222, 184, 135, 0.2);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--color-gold-border-light);
+  box-shadow: 0 25px 50px var(--shadow-card);
   position: relative;
   overflow: hidden;
 }
@@ -140,23 +140,23 @@ const handleLogin = async () => {
 .input-group-custom {
   display: flex;
   align-items: center;
-  background: #0a0a0a;
-  border: 1px solid rgba(222, 184, 135, 0.3);
+  background: var(--color-bg-input);
+  border: 1px solid var(--color-gold-border);
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 .input-group-custom:focus-within {
-  border-color: burlywood;
-  box-shadow: 0 0 10px rgba(222, 184, 135, 0.2);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 10px var(--color-gold-glow);
 }
 
 .icon-box {
   padding: 12px 15px;
-  color: #f6aeb8;
+  color: var(--color-pink);
   font-size: 18px;
-  border-right: 1px solid rgba(222, 184, 135, 0.1);
+  border-right: 1px solid var(--color-gold-border-subtle);
 }
 
 .login-input {
@@ -164,7 +164,7 @@ const handleLogin = async () => {
   background: transparent;
   border: none;
   padding: 12px 15px;
-  color: #e0e0e0;
+  color: var(--color-text);
   font-size: 15px;
 }
 
@@ -173,14 +173,14 @@ const handleLogin = async () => {
 }
 
 .login-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--color-text-placeholder);
 }
 
 /* Botão de Login */
 .btn-login {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(to right, #d67a7a, #b35d5d);
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
   border: none;
   border-radius: 8px;
   color: white;
@@ -188,13 +188,13 @@ const handleLogin = async () => {
   font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 15px var(--shadow-btn);
 }
 
 .btn-login:hover {
   filter: brightness(1.1);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(214, 122, 122, 0.3);
+  box-shadow: 0 6px 20px var(--color-primary-glow);
 }
 .btn-login:disabled {
   opacity: 0.6;
@@ -203,13 +203,13 @@ const handleLogin = async () => {
 }
 
 .error-msg {
-  color: #d67a7a;
+  color: var(--color-primary);
   font-size: 14px;
   margin-bottom: 0;
 }
 
 .forgot-password {
-  color: #f6aeb8;
+  color: var(--color-pink);
   font-size: 13px;
   text-decoration: none;
   opacity: 0.8;
@@ -218,7 +218,7 @@ const handleLogin = async () => {
 
 .forgot-password:hover {
   opacity: 1;
-  color: burlywood;
+  color: var(--color-gold);
 }
 
 /* Decoração Inferior */
@@ -232,13 +232,13 @@ const handleLogin = async () => {
 .deco-line {
   height: 1px;
   flex: 1;
-  background: linear-gradient(to right, transparent, burlywood, transparent);
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
 }
 
 .deco-diamond {
   width: 8px;
   height: 8px;
-  background: burlywood;
+  background: var(--color-gold);
   transform: rotate(45deg);
 }
 

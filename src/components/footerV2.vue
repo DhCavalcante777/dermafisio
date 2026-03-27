@@ -42,7 +42,7 @@
 }
 
 .background {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(
       87deg,
@@ -64,14 +64,14 @@
 /* Linha Burlywood com Gradiente */
 .top-line {
   width: 100%;
-  border-bottom: 2px solid burlywood;
+  border-bottom: 2px solid var(--color-gold);
   /*height: 2px;
   background: linear-gradient(to right, transparent, burlywood, transparent);
   background: linear-gradient(to right, transparent, burlywood, transparent);*/
 }
 
 .footer-title {
-  color: #d4a574;
+  color: var(--color-gold-muted);
   font-family: "Playfair Display", serif;
   font-size: 24px;
   font-weight: 600;
@@ -80,14 +80,14 @@
 }
 
 .contact-info p {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   margin-bottom: 8px;
 }
 
 .contact-info strong {
-  color: #d4a574;
+  color: var(--color-gold-muted);
 }
 
 /* Estilo dos Ícones Sociais */
@@ -105,8 +105,8 @@
 .social-icon {
   width: 40px;
   height: 40px;
-  background-color: burlywood;
-  color: #272427;
+  background-color: var(--color-gold);
+  color: var(--color-bg-page);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -122,15 +122,15 @@
 
 .social-icon:hover {
   transform: translateY(-3px);
-  background-color: #d4a574;
+  background-color: var(--color-gold-muted);
   color: white;
 }
 
 .copyright {
-  color: rgba(222, 184, 135, 0.5);
+  color: var(--color-gold-border-heavy);
   font-size: 12px;
   font-family: "Poppins", sans-serif;
-  border-top: 1px solid rgba(222, 184, 135, 0.1);
+  border-top: 1px solid var(--color-gold-border-subtle);
   padding-top: 20px;
 }
 

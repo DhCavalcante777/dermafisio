@@ -296,13 +296,13 @@ onMounted(() => {
 
 .navbar-link {
   text-decoration: none;
-  color: #fa5894;
+  color: var(--color-hot-pink);
   font-weight: bold;
   transition: color 0.3s;
 }
 
 .navbar-link:hover {
-  color: #fee9a6;
+  color: var(--color-gold-light);
 }
 
 .firts-container {
@@ -364,7 +364,7 @@ onMounted(() => {
 .description {
   text-align: center;
   width: 254px;
-  color: #fa5894;
+  color: var(--color-hot-pink);
   font-size: 16px;
   margin-bottom: 5px;
 
@@ -375,8 +375,8 @@ onMounted(() => {
 }
 
 .primary-button {
-  background-color: #fa5894;
-  color: #fff;
+  background-color: var(--color-hot-pink);
+  color: var(--color-white);
   border: none;
   border-radius: 22px;
   padding: 10px 20px;
@@ -417,7 +417,7 @@ onMounted(() => {
 
 .description-about-us {
   font-size: 14px;
-  color: #000000;
+  color: var(--color-black);
   margin-top: 10px;
   width: 251px;
   margin: auto;
@@ -455,7 +455,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: linear-gradient(to bottom, #fa5894, #fac4d2);
+  background: linear-gradient(to bottom, var(--color-hot-pink), var(--color-hot-pink-pale));
   margin-top: -1px;
   padding-bottom: 80px;
 }
@@ -506,8 +506,8 @@ onMounted(() => {
   border-radius: 50%;
   object-fit: cover;
   object-position: center 20%;
-  border: 1px solid #fa589400;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: 1px solid transparent;
+  box-shadow: 0 4px 6px var(--shadow-light);
   margin: auto;
   margin-top: 44px;
 
@@ -526,7 +526,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  color: white;
+  color: var(--color-white);
   font-size: 17px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 15px;
@@ -579,7 +579,7 @@ onMounted(() => {
 }
 
 .premios {
-  background: white;
+  background: var(--color-white);
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -637,7 +637,7 @@ onMounted(() => {
 .results-title {
   font-size: 20px;
   text-align: center;
-  color: #ff9fba;
+  color: var(--color-hot-pink-muted);
 
   @media (min-width: 758px) {
     font-size: 30px;
@@ -646,7 +646,7 @@ onMounted(() => {
 
 .carousel {
   width: 300px;
-  border: 3px solid #fac0d0;
+  border: 3px solid var(--color-hot-pink-border);
   border-radius: 5px;
 
   @media (min-width: 758px) {
@@ -659,7 +659,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   padding: 100px 0 100px 0;
-  background-image: linear-gradient(#fa589426, #fa589426),
+  background-image: linear-gradient(var(--color-hot-pink-bg), var(--color-hot-pink-bg)),
     url(/src/assets/image/contactUs.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -679,10 +679,10 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   width: 294px;
-  border: 2px solid #fee9a6a3;
+  border: 2px solid var(--color-gold-light-border);
   border-radius: 31px;
-  box-shadow: 13px 13px 8px rgba(0, 0, 0, 0.2);
-  background: #fa589480;
+  box-shadow: 13px 13px 8px var(--shadow-light);
+  background: var(--color-hot-pink-glow);
   padding: 0px 46px 29px 46px;
   position: relative;
 
@@ -695,7 +695,7 @@ onMounted(() => {
   font-size: 23px;
   font-weight: 700;
   text-align: center;
-  color: #fff;
+  color: var(--color-white);
   padding-top: 25px;
 
   @media (min-width: 758px) {
@@ -706,7 +706,7 @@ onMounted(() => {
 .description-contact {
   font-size: 14px;
   text-align: center;
-  color: #fff;
+  color: var(--color-white);
   margin-bottom: 0px;
 
   @media (min-width: 758px) {
@@ -722,8 +722,8 @@ onMounted(() => {
   justify-content: center;
   width: 259px;
   bottom: -50px;
-  background: #9380b7;
-  border: 2px solid #fee9a6;
+  background: var(--color-purple-contact);
+  border: 2px solid var(--color-gold-light);
   border-radius: 39px;
 
   @media (min-width: 758px) {
@@ -734,7 +734,7 @@ onMounted(() => {
 .icons-title {
   font-size: 12px;
   text-align: center;
-  color: #fff;
+  color: var(--color-white);
   margin: 5px 0 0 0;
 
   @media (min-width: 758px) {

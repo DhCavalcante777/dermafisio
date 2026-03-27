@@ -59,7 +59,7 @@
   max-width: 100%;
 }
 .background {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(
       87deg,
@@ -80,7 +80,7 @@
 }
 
 .title {
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 35px;
   font-family: "Great Vibes", cursive;
   margin: 0;
@@ -92,8 +92,8 @@
   background: linear-gradient(
     to right,
     transparent 0%,
-    burlywood 30%,
-    burlywood 100%
+    var(--color-gold) 30%,
+    var(--color-gold) 100%
   );
 }
 
@@ -102,8 +102,8 @@
   background: linear-gradient(
     to left,
     transparent 0%,
-    burlywood 30%,
-    burlywood 100%
+    var(--color-gold) 30%,
+    var(--color-gold) 100%
   );
 }
 
@@ -126,14 +126,14 @@
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    #c4978a 30%,
-    #c4978a 70%,
+    var(--color-gold-rose) 30%,
+    var(--color-gold-rose) 70%,
     transparent 100%
   );
 }
 
 .description {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Great Vibes", cursive;
   font-size: 40px;
   margin-top: 20px;
@@ -165,14 +165,14 @@
     background: linear-gradient(
       to right,
       transparent 0%,
-      #c4978a 30%,
-      #c4978a 70%,
+      var(--color-gold-rose) 30%,
+      var(--color-gold-rose) 70%,
       transparent 100%
     );
   }
 }
 
 .line-bottom {
-    border-bottom: 1px solid burlywood;
+    border-bottom: 1px solid var(--color-gold);
 }
 </style>

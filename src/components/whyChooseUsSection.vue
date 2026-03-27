@@ -34,7 +34,7 @@
 }
 
 .background {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(
       87deg,
@@ -54,14 +54,14 @@
 }
 
 .title {
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 35px;
   font-family: "Great Vibes", cursive;
   margin: 0;
 }
 
 .highlight {
-  color: #d4a574;
+  color: var(--color-gold-muted);
   font-weight: 500;
   font-family: "Playfair Display", serif;
   letter-spacing: 2px;
@@ -73,8 +73,8 @@
   background: linear-gradient(
     to right,
     transparent 0%,
-    burlywood 30%,
-    burlywood 100%
+    var(--color-gold) 30%,
+    var(--color-gold) 100%
   );
 }
 
@@ -83,8 +83,8 @@
   background: linear-gradient(
     to left,
     transparent 0%,
-    burlywood 30%,
-    burlywood 100%
+    var(--color-gold) 30%,
+    var(--color-gold) 100%
   );
 }
 
@@ -96,19 +96,19 @@
 }
 
 .check-icon {
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 18px;
   font-weight: bold;
 }
 
 .answer-text {
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 18px;
   font-family: "Poppins", sans-serif;
 }
 
 .line-bottom {
-    border-bottom: 1px solid burlywood;
+    border-bottom: 1px solid var(--color-gold);
 }
 
 @media (max-width: 768px) {

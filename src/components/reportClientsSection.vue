@@ -92,19 +92,19 @@ const testimonials = [
 <style scoped>
 /* Background Texturizado Padrão */
 .background {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(
       87deg,
-      rgba(255, 255, 255, 0.03) 0px,
-      rgba(255, 255, 255, 0.03) 1px,
+      var(--color-pattern-light) 0px,
+      var(--color-pattern-light) 1px,
       transparent 1px,
       transparent 2px
     ),
     repeating-linear-gradient(
       168deg,
-      rgba(0, 0, 0, 0.05) 0px,
-      rgba(0, 0, 0, 0.05) 1px,
+      var(--color-pattern-dark) 0px,
+      var(--color-pattern-dark) 1px,
       transparent 1px,
       transparent 2px
     );
@@ -113,7 +113,7 @@ const testimonials = [
 
 /* Título e Ornamentos */
 .section-title {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Great Vibes", cursive;
   font-size: 38px;
   margin: 0;
@@ -122,7 +122,7 @@ const testimonials = [
 .ornament-line {
   height: 1px;
   width: 60px;
-  background: linear-gradient(to right, transparent, burlywood, transparent);
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
 }
 
 /* Cards de Depoimentos */
@@ -140,9 +140,9 @@ const testimonials = [
   height: 150px;
   margin: 0 auto;
   border-radius: 50%;
-  border: 2px solid burlywood;
+  border: 2px solid var(--color-gold);
   padding: 4px;
-  background: rgba(222, 184, 135, 0.1);
+  background: var(--color-gold-border);
 }
 
 .avatar-img {
@@ -153,13 +153,13 @@ const testimonials = [
 }
 
 .stars {
-  color: #d4a574;
+  color: var(--color-gold-muted);
   font-size: 16px;
   letter-spacing: 2px;
 }
 
 .testimonial-text {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-soft);
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: italic;
@@ -168,7 +168,7 @@ const testimonials = [
 }
 
 .testimonial-name {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Playfair Display", serif;
   font-weight: bold;
   font-size: 16px;
@@ -177,13 +177,13 @@ const testimonials = [
 
 /* Seção Especialista */
 .specialist-container {
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: var(--color-shadow-soft);
   border-radius: 20px;
   padding: 35px;
-  border: 1px solid rgba(222, 184, 135, 0.15);
+  border: 1px solid var(--color-gold-border-light);
   display: flex;
   align-items: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px var(--shadow-medium);
 	
 }
 
@@ -198,14 +198,14 @@ const testimonials = [
 }
 
 .specialist-subtitle {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Great Vibes", cursive;
   font-size: 30px;
   margin: 0;
 }
 
 .specialist-title {
-  color: #d4a574;
+  color: var(--color-gold-muted);
   font-family: "Playfair Display", serif;
   font-size: 40px;
   font-weight: 700;
@@ -216,7 +216,7 @@ const testimonials = [
 .specialist-line {
   height: 2px;
   width: 100%;
-  background: linear-gradient(to right, burlywood, transparent);
+  background: linear-gradient(to right, var(--color-gold), transparent);
 }
 
 .specialist-name-tag {
@@ -228,7 +228,7 @@ const testimonials = [
 }
 
 .specialist-role {
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 14px;
   font-weight: 300;
   text-transform: uppercase;
@@ -237,7 +237,7 @@ const testimonials = [
 }
 
 .specialist-bio {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-secondary);
   font-size: 14px;
   line-height: 1.6;
   font-family: "Poppins", sans-serif;
@@ -248,8 +248,8 @@ const testimonials = [
   height: 100%;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(222, 184, 135, 0.2);
+  box-shadow: 15px 15px 40px var(--shadow-heavy);
+  border: 1px solid var(--color-gold-border);
 }
 
 /* Responsividade */
@@ -265,7 +265,7 @@ const testimonials = [
     margin-bottom: 25px;
   }
   .specialist-line {
-    background: linear-gradient(to right, transparent, burlywood, transparent);
+    background: linear-gradient(to right, transparent, var(--color-gold), transparent);
   }
   .specialist-img {
     width: 300px;
@@ -282,7 +282,7 @@ const testimonials = [
 }
 
 .line-bottom {
-    border-bottom: 1px solid burlywood;
+    border-bottom: 1px solid var(--color-gold);
 }
 
 @media (max-width: 576px) {

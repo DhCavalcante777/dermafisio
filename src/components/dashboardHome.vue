@@ -255,46 +255,46 @@ onMounted(() => {
 
 .dashboard-home { 
   font-family: 'Poppins', sans-serif; 
-  color: white; 
+  color: var(--color-white); 
   overflow-x: hidden;
   max-width: 100%;
 }
 
 .page-title {
   font-family: "Playfair Display", serif;
-  color: #f6aeb8;
+  color: var(--color-pink);
   font-style: italic;
 }
 
-.text-muted-luxury { color: rgba(255, 255, 255, 0.5); font-size: 14px; }
+.text-muted-luxury { color: var(--color-text-muted); font-size: 14px; }
 
 .current-date-badge {
-  background: rgba(222, 184, 135, 0.1);
-  border: 1px solid rgba(222, 184, 135, 0.3);
-  color: burlywood;
+  background: var(--color-gold-border-subtle);
+  border: 1px solid var(--color-gold-border-medium);
+  color: var(--color-gold);
   padding: 8px 20px;
   border-radius: 30px;
   font-size: 13px;
 }
 
 .kpi-card {
-  background: #121212;
-  border: 1px solid rgba(212, 165, 116, 0.1);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-tan-border-subtle);
   padding: 30px;
   border-radius: 15px;
   transition: transform 0.3s;
 }
-.kpi-card:hover { transform: translateY(-5px); border-color: burlywood; }
+.kpi-card:hover { transform: translateY(-5px); border-color: var(--color-gold); }
 
-.kpi-label { color: burlywood; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
-.kpi-value { font-family: 'Playfair Display', serif; font-size: 42px; color: #f6aeb8; margin-bottom: 5px; }
+.kpi-label { color: var(--color-gold); font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+.kpi-value { font-family: 'Playfair Display', serif; font-size: 42px; color: var(--color-pink); margin-bottom: 5px; }
 .kpi-trend { font-size: 11px; font-weight: 600; }
-.positive { color: #81c784; }
-.neutral { color: rgba(255, 255, 255, 0.4); }
+.positive { color: var(--color-success-light); }
+.neutral { color: var(--color-text-placeholder); }
 
 .chart-card, .appointments-card {
-  background: #121212;
-  border: 1px solid rgba(212, 165, 116, 0.1);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-tan-border-subtle);
   padding: 35px;
   border-radius: 15px;
   height: 100%;
@@ -307,8 +307,8 @@ onMounted(() => {
   width: 100%;
   max-width: 100%;
 }
-.section-title-luxury { font-family: 'Playfair Display', serif; color: #f6aeb8; font-style: italic; font-size: 22px; }
-.chart-period { font-size: 12px; color: rgba(255, 255, 255, 0.4); }
+.section-title-luxury { font-family: 'Playfair Display', serif; color: var(--color-pink); font-style: italic; font-size: 22px; }
+.chart-period { font-size: 12px; color: var(--color-text-placeholder); }
 
 /* Appointment List */
 .appointment-list { max-height: 320px; overflow-y: auto; padding-right: 10px; }
@@ -316,27 +316,27 @@ onMounted(() => {
   display: flex;
   align-items: center;
   padding: 15px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--color-border-faint);
   transition: 0.3s;
   border-left: 4px solid transparent;
 }
 .appointment-item:hover { 
-  background: rgba(222, 184, 135, 0.08); 
+  background: var(--color-gold-bg); 
   padding-left: 10px;
-  border-left-color: burlywood;
+  border-left-color: var(--color-gold);
 }
 
-.appt-time { font-size: 11px; color: burlywood; width: 70px; font-weight: 600; line-height: 1.6; }
+.appt-time { font-size: 11px; color: var(--color-gold); width: 70px; font-weight: 600; line-height: 1.6; }
 .appt-info { flex-grow: 1; }
-.appt-name { font-size: 15px; color: #e0e0e0; font-weight: 500; }
-.appt-service { font-size: 12px; color: rgba(255, 255, 255, 0.4); }
-.appt-status-dot { width: 8px; height: 8px; background: burlywood; border-radius: 50%; box-shadow: 0 0 8px burlywood; }
+.appt-name { font-size: 15px; color: var(--color-text); font-weight: 500; }
+.appt-service { font-size: 12px; color: var(--color-text-placeholder); }
+.appt-status-dot { width: 8px; height: 8px; background: var(--color-gold); border-radius: 50%; box-shadow: 0 0 8px var(--color-gold); }
 
 .btn-view-all {
   width: 100%;
   background: transparent;
-  border: 1px solid burlywood;
-  color: burlywood;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
   padding: 12px;
   border-radius: 8px;
   font-size: 12px;
@@ -344,11 +344,11 @@ onMounted(() => {
   letter-spacing: 1px;
   transition: 0.3s;
 }
-.btn-view-all:hover { background: burlywood; color: #121212; }
+.btn-view-all:hover { background: var(--color-gold); color: var(--color-bg-card); }
 
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-.custom-scrollbar::-webkit-scrollbar-thumb { background: burlywood; border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 10px; }
 
 @media (max-width: 768px) {
   .dashboard-home {

@@ -55,7 +55,7 @@
 
 <style scoped>
 .background {
-  background-color: #272427;
+  background-color: var(--color-bg-page);
   background-image:
     repeating-linear-gradient(87deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 2px),
     repeating-linear-gradient(168deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 2px);
@@ -63,7 +63,7 @@
 }
 
 .results-title {
-  color: burlywood;
+  color: var(--color-gold);
   font-family: "Great Vibes", cursive;
   font-size: 48px;
   margin: 0;
@@ -76,7 +76,7 @@
 }
 
 .carousel-inner {
-  border: 1px solid rgba(222, 184, 135, 0.3);
+  border: 1px solid var(--color-gold-border-medium);
 }
 
 /* Customização das Setas */
@@ -90,19 +90,19 @@
 
 .carousel-control-prev-icon::before {
   content: '❮';
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 30px;
 }
 
 .carousel-control-next-icon::before {
   content: '❯';
-  color: burlywood;
+  color: var(--color-gold);
   font-size: 30px;
 }
 
 /* Customização dos Indicadores (Bolinhas) */
 .custom-indicators [data-bs-target] {
-  background-color: burlywood !important;
+  background-color: var(--color-gold) !important;
   width: 12px;
   height: 12px;
   border-radius: 50%;

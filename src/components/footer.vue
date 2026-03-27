@@ -25,7 +25,7 @@
 
 .footer-description {
   font-size: 12px;
-  color: #000000;
+  color: var(--color-black);
   margin: 0;
   text-align: center;
 }
