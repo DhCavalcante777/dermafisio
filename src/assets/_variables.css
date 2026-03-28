@@ -74,6 +74,12 @@
   --color-success-muted: #a8d8a8;
   --color-info: #7ec8e3;
 
+  /* === Agenda Status === */
+  --color-status-agendado: #d4a574;
+  --color-status-confirmado: #7986cb;
+  --color-status-concluido: #4caf93;
+  --color-status-cancelado: #e57373;
+
   /* === Accent === */
   --color-accent-purple: #c465db;
 

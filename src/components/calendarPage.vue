@@ -97,13 +97,18 @@ const showModal = ref(false);
 const isEditing = ref(false);
 const telefoneDisplay = ref('');
 const STATUS_OPTIONS = [
-  { value: 'agendado',   label: 'Agendado',   color: '#d4a574' },
-  { value: 'confirmado', label: 'Confirmado', color: '#4caf93' },
-  { value: 'concluido',  label: 'Concluído',  color: '#7986cb' },
-  { value: 'cancelado',  label: 'Cancelado',  color: '#e57373' },
+  { value: 'agendado',   label: 'Agendado',   color: 'var(--color-status-agendado)' },
+  { value: 'confirmado', label: 'Confirmado', color: 'var(--color-status-confirmado)' },
+  { value: 'concluido',  label: 'Concluído',  color: 'var(--color-status-concluido)' },
+  { value: 'cancelado',  label: 'Cancelado',  color: 'var(--color-status-cancelado)' },
 ];
 
-const STATUS_COLORS = Object.fromEntries(STATUS_OPTIONS.map(s => [s.value, s.color]));
+const STATUS_COLORS = {
+  agendado:   '#d4a574',
+  confirmado: '#7986cb',
+  concluido:  '#4caf93',
+  cancelado:  '#e57373',
+};
 
 const form = reactive({
   id: null,
