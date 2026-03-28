@@ -53,6 +53,22 @@
               <label class="label-luxury">Observações</label>
               <textarea v-model="form.observacoes" class="input-luxury" rows="3" placeholder="Anotações sobre o atendimento..."></textarea>
             </div>
+            <div class="mb-3">
+              <label class="label-luxury">Status</label>
+              <div class="status-selector">
+                <button
+                  v-for="opt in STATUS_OPTIONS"
+                  :key="opt.value"
+                  type="button"
+                  class="status-btn"
+                  :class="{ active: form.status === opt.value }"
+                  :style="form.status === opt.value ? { background: opt.color, borderColor: opt.color, color: '#121212' } : { borderColor: opt.color, color: opt.color }"
+                  @click="form.status = opt.value"
+                >
+                  {{ opt.label }}
+                </button>
+              </div>
+            </div>
             <div class="modal-footer-luxury d-flex justify-content-between align-items-center gap-3">
               <button v-if="isEditing" type="button" @click="deleteAppointment" class="btn-delete-luxury">
                 <i class="fas fa-trash me-1"></i> Excluir
@@ -80,6 +96,15 @@ import CalendarService from '@/services/calendarService';
 const showModal = ref(false);
 const isEditing = ref(false);
 const telefoneDisplay = ref('');
+const STATUS_OPTIONS = [
+  { value: 'agendado',   label: 'Agendado',   color: '#d4a574' },
+  { value: 'confirmado', label: 'Confirmado', color: '#4caf93' },
+  { value: 'concluido',  label: 'Concluído',  color: '#7986cb' },
+  { value: 'cancelado',  label: 'Cancelado',  color: '#e57373' },
+];
+
+const STATUS_COLORS = Object.fromEntries(STATUS_OPTIONS.map(s => [s.value, s.color]));
+
 const form = reactive({
   id: null,
   nomeCliente: '',
@@ -88,6 +113,7 @@ const form = reactive({
   dataFim: '',
   procedimento: '',
   observacoes: '',
+  status: 'agendado',
 });
 
 const calendarOptions = reactive({
@@ -104,6 +130,7 @@ const calendarOptions = reactive({
   slotMaxTime: '24:00:00',
   allDaySlot: false,
   events: [],
+  eventColor: STATUS_COLORS['agendado'],
   eventClick: (info) => handleEventClick(info),
   editable: true,
   eventDrop: (info) => handleEventDrop(info),
@@ -117,6 +144,7 @@ const fetchEvents = async () => {
       title: `${event.nomeCliente} - ${event.procedimento}`,
       start: event.dataInicio,
       end: event.dataFim,
+      color: STATUS_COLORS[event.status] || STATUS_COLORS['agendado'],
       extendedProps: { ...event }
     }));
   } catch (error) {
@@ -132,6 +160,7 @@ const resetForm = () => {
   form.dataFim = '';
   form.procedimento = '';
   form.observacoes = '';
+  form.status = 'agendado';
 };
 
 const openNewAppointmentModal = () => {
@@ -199,6 +228,7 @@ const handleEventClick = (info) => {
   form.dataFim = formatDateForInput(event.dataFim);
   form.procedimento = event.procedimento;
   form.observacoes = event.observacoes || '';
+  form.status = event.status || 'agendado';
   isEditing.value = true;
   showModal.value = true;
 };
@@ -242,6 +272,7 @@ const saveAppointment = async () => {
       dataFim: formatDateForMySQL(form.dataFim),
       procedimento: form.procedimento,
       observacoes: form.observacoes,
+      status: form.status,
     };
 
     if (isEditing.value) {
@@ -527,6 +558,27 @@ onMounted(fetchEvents);
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: var(--color-gold);
   border-radius: 10px;
+}
+
+.status-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.status-btn {
+  background: transparent;
+  border: 1px solid;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.status-btn:hover {
+  opacity: 0.85;
 }
 
 @media (max-width: 768px) {

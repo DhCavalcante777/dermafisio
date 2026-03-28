@@ -13,6 +13,9 @@ export default {
     update: appointment => {
         return api.put(`/calendar/${appointment.id}`, appointment);
     },
+    updateStatus: (id, status) => {
+        return api.patch(`/calendar/${id}/status`, { status });
+    },
     delete: id => {
         return api.delete(`/calendar/${id}`);
     }

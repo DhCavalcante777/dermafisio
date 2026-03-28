@@ -462,6 +462,7 @@ const handleUpdate = async () => {
     editableDataNasc.value = selectedCliente.value.dataNasc ? selectedCliente.value.dataNasc.split('T')[0] : '';
     isEditing.value = false;
     fetchClientes();
+    closeDetailsModal();
     alert('Cliente atualizada com sucesso!');
   } catch (error) {
     alert('Erro ao atualizar cliente.');
