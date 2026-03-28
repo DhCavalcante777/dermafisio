@@ -110,7 +110,12 @@
 
             <!-- Linha do Tempo de Anamneses -->
             <div class="col-md-8 ps-4">
-              <h4 class="section-title-luxury mb-3">Histórico de Anamneses</h4>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="section-title-luxury m-0">Histórico de Anamneses</h4>
+                <button v-if="!isEditing" class="btn-link-anamnese" @click="openLinkAnamneseModal">
+                  <i class="fas fa-link me-1"></i> Vincular Anamnese
+                </button>
+              </div>
               <div v-if="selectedCliente.historicoAnamneses && selectedCliente.historicoAnamneses.length > 0" class="timeline">
                 <div v-for="ficha in selectedCliente.historicoAnamneses" :key="ficha.id" class="timeline-item">
                   <div class="timeline-dot"></div>
@@ -306,6 +311,60 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal: Vincular Anamnese -->
+  <div v-if="showLinkAnamneseModal" class="luxury-modal-overlay" @click.self="closeLinkAnamneseModal">
+    <div class="luxury-modal luxury-modal-sm animate__animated animate__fadeInUp">
+      <button class="btn-close-modal" @click="closeLinkAnamneseModal">&times;</button>
+      <div class="mb-4 pb-4 border-bottom-gold">
+        <h2 class="modal-title-luxury mb-1">Vincular Anamnese</h2>
+        <p class="text-gold-subtle m-0">Selecione uma ficha não vinculada para associar a <strong>{{ selectedCliente?.nome }}</strong>.</p>
+      </div>
+
+      <!-- Confirmação -->
+      <div v-if="pendingAnamnese" class="confirm-link-anamnese-card">
+        <div class="confirm-link-anamnese-icon"><i class="fas fa-clipboard-list"></i></div>
+        <div class="confirm-link-anamnese-name">Ficha #{{ pendingAnamnese.id }} — {{ pendingAnamnese.nome }}</div>
+        <div class="confirm-link-anamnese-date">{{ formatDate(pendingAnamnese.dataCriacao) }}</div>
+        <p class="confirm-link-anamnese-question">Vincular esta ficha à cliente <strong>{{ selectedCliente?.nome }}</strong>?</p>
+        <div class="d-flex gap-3 justify-content-center mt-3">
+          <button class="btn-cancel-modal" @click="pendingAnamnese = null">Não, voltar</button>
+          <button class="btn-save-modal" @click="confirmLinkAnamnese" :disabled="linkingAnamnese">
+            {{ linkingAnamnese ? 'Vinculando...' : 'Sim, vincular' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Lista -->
+      <template v-else>
+        <div class="search-wrapper mb-3" style="position:relative">
+          <i class="fas fa-search search-icon"></i>
+          <input v-model="anamneseFilter" class="search-input" placeholder="Buscar por nome..." style="padding-left:38px" />
+        </div>
+        <div class="anamnese-link-list custom-scrollbar">
+          <div v-if="loadingAnamneses" class="text-center py-4">
+            <div class="spinner-border" role="status"></div>
+          </div>
+          <div
+            v-else
+            v-for="item in filteredUnlinkedAnamneses"
+            :key="item.id"
+            class="anamnese-link-item"
+            @click="pendingAnamnese = item"
+          >
+            <div class="anamnese-link-icon"><i class="fas fa-clipboard-list"></i></div>
+            <div>
+              <div class="anamnese-link-name">{{ item.nome }}</div>
+              <div class="anamnese-link-meta">{{ formatDate(item.dataCriacao) }} · {{ item.queixaPrincipal || 'Avaliação Geral' }}</div>
+            </div>
+          </div>
+          <div v-if="!loadingAnamneses && filteredUnlinkedAnamneses.length === 0" class="text-center text-muted py-4">
+            Nenhuma ficha disponível para vincular.
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -336,6 +395,13 @@ const isEditing = ref(false);
 const originalData = ref(null);
 const savingEdit = ref(false);
 const editableDataNasc = ref('');
+
+const showLinkAnamneseModal = ref(false);
+const unlinkedAnamneses = ref([]);
+const anamneseFilter = ref('');
+const loadingAnamneses = ref(false);
+const pendingAnamnese = ref(null);
+const linkingAnamnese = ref(false);
 
 const fetchClientes = async () => {
   try {
@@ -464,6 +530,53 @@ const handleDeleteCliente = async () => {
     deletingCliente.value = false;
   }
 };
+
+const openLinkAnamneseModal = async () => {
+  pendingAnamnese.value = null;
+  anamneseFilter.value = '';
+  showLinkAnamneseModal.value = true;
+  loadingAnamneses.value = true;
+  try {
+    const response = await AnamneseService.getAll();
+    unlinkedAnamneses.value = response.data.filter(a => !a.clienteId);
+  } catch (error) {
+    alert('Erro ao carregar anamneses.');
+    console.error(error);
+  } finally {
+    loadingAnamneses.value = false;
+  }
+};
+
+const closeLinkAnamneseModal = () => {
+  showLinkAnamneseModal.value = false;
+  pendingAnamnese.value = null;
+};
+
+const confirmLinkAnamnese = async () => {
+  if (!pendingAnamnese.value) return;
+  try {
+    linkingAnamnese.value = true;
+    const dataToSend = { ...pendingAnamnese.value, clienteId: selectedCliente.value.id };
+    delete dataToSend.dataCriacao;
+    await AnamneseService.update(dataToSend);
+    closeLinkAnamneseModal();
+    const response = await clientService.getOne(selectedCliente.value.id);
+    selectedCliente.value = response.data;
+    alert(`Ficha vinculada à cliente "${selectedCliente.value.nome}" com sucesso!`);
+  } catch (error) {
+    alert('Erro ao vincular anamnese.');
+    console.error(error);
+  } finally {
+    linkingAnamnese.value = false;
+  }
+};
+
+const filteredUnlinkedAnamneses = computed(() => {
+  if (!anamneseFilter.value) return unlinkedAnamneses.value;
+  return unlinkedAnamneses.value.filter(a =>
+    a.nome.toLowerCase().includes(anamneseFilter.value.toLowerCase())
+  );
+});
 
 const formatDate = (dateString) => {
   if (!dateString) return "---";
@@ -814,6 +927,98 @@ onMounted(fetchClientes);
 
 .btn-close-modal:hover {
   color: var(--color-pink);
+}
+
+.btn-link-anamnese {
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-link-anamnese:hover {
+  background: var(--color-gold);
+  color: var(--color-bg-card);
+}
+
+.anamnese-link-list {
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.anamnese-link-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-gold-border);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.anamnese-link-item:hover {
+  border-color: var(--color-gold);
+  background: var(--color-gold-bg-subtle);
+  transform: translateX(4px);
+}
+.anamnese-link-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-gold-bg-hover);
+  color: var(--color-gold);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.anamnese-link-name {
+  color: var(--color-text-light);
+  font-size: 14px;
+  font-weight: 600;
+}
+.anamnese-link-meta {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.confirm-link-anamnese-card {
+  border: 1px solid var(--color-gold-border);
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+}
+.confirm-link-anamnese-icon {
+  font-size: 36px;
+  color: var(--color-gold);
+  margin-bottom: 12px;
+}
+.confirm-link-anamnese-name {
+  color: var(--color-text-light);
+  font-size: 15px;
+  font-weight: 600;
+}
+.confirm-link-anamnese-date {
+  color: var(--color-text-muted);
+  font-size: 13px;
+  margin-top: 4px;
+}
+.confirm-link-anamnese-question {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin-top: 18px;
+  line-height: 1.6;
+}
+.confirm-link-anamnese-question strong {
+  color: var(--color-gold);
 }
 
 /* Formulário */
