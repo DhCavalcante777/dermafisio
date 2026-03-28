@@ -72,7 +72,8 @@
           <div class="d-flex align-items-center gap-4">
             <div class="cliente-avatar-large">{{ selectedCliente.nome.charAt(0).toUpperCase() }}</div>
             <div>
-              <h2 class="modal-title-luxury mb-1">{{ selectedCliente.nome }}</h2>
+              <input v-if="isEditing" v-model="selectedCliente.nome" class="input-luxury mb-1" style="font-size: 1.3rem;" />
+              <h2 v-else class="modal-title-luxury mb-1">{{ selectedCliente.nome }}</h2>
               <p class="text-gold-subtle m-0">Histórico Completo de Atendimentos</p>
             </div>
           </div>
@@ -84,19 +85,23 @@
               <h4 class="section-title-luxury mb-3">Dados Cadastrais</h4>
               <div class="detail-item mb-3">
                 <label>CPF</label>
-                <p>{{ selectedCliente.cpf || '---' }}</p>
+                <input v-if="isEditing" v-model="selectedCliente.cpf" class="input-luxury" placeholder="000.000.000-00" />
+                <p v-else>{{ selectedCliente.cpf || '---' }}</p>
               </div>
               <div class="detail-item mb-3">
                 <label>E-mail</label>
-                <p>{{ selectedCliente.email || '---' }}</p>
+                <input v-if="isEditing" v-model="selectedCliente.email" class="input-luxury" placeholder="email@exemplo.com" />
+                <p v-else>{{ selectedCliente.email || '---' }}</p>
               </div>
               <div class="detail-item mb-3">
                 <label>Telefone</label>
-                <p>{{ selectedCliente.telefone || '---' }}</p>
+                <input v-if="isEditing" v-model="selectedCliente.telefone" class="input-luxury" placeholder="(00) 00000-0000" />
+                <p v-else>{{ selectedCliente.telefone || '---' }}</p>
               </div>
               <div class="detail-item mb-3">
                 <label>Endereço</label>
-                <p>{{ selectedCliente.endereco || '---' }}</p>
+                <input v-if="isEditing" v-model="selectedCliente.endereco" class="input-luxury" placeholder="Rua, número, bairro..." />
+                <p v-else>{{ selectedCliente.endereco || '---' }}</p>
               </div>
             </div>
 
@@ -126,9 +131,18 @@
 
         <!-- Footer do modal -->
         <div class="modal-footer-details">
-          <button class="btn-delete-cliente" @click="showConfirmDelete = true">
+          <button v-if="!isEditing" class="btn-delete-cliente" @click="showConfirmDelete = true">
             <i class="fas fa-trash me-2"></i>Remover Cliente
           </button>
+          <div class="ms-auto d-flex gap-3">
+            <button v-if="!isEditing" class="btn-edit-luxury" @click="startEdit">
+              <i class="fas fa-edit me-1"></i> Editar Cliente
+            </button>
+            <button v-if="isEditing" class="btn-cancel-modal" @click="cancelEdit">Cancelar</button>
+            <button v-if="isEditing" class="btn-save-modal" @click="handleUpdate" :disabled="savingEdit">
+              {{ savingEdit ? 'Salvando...' : 'Salvar Alterações' }}
+            </button>
+          </div>
         </div>
 
         <!-- Confirmação de exclusão (inline) -->
@@ -311,6 +325,10 @@ const selectedFicha = ref(null);
 const showConfirmDelete = ref(false);
 const deletingCliente = ref(false);
 
+const isEditing = ref(false);
+const originalData = ref(null);
+const savingEdit = ref(false);
+
 const fetchClientes = async () => {
   try {
     loading.value = true;
@@ -334,6 +352,7 @@ const viewClienteDetails = async (cliente) => {
   try {
     const response = await clientService.getOne(cliente.id);
     selectedCliente.value = response.data;
+    originalData.value = { ...response.data };
     showDetailsModal.value = true;
   } catch (error) {
     alert("Erro ao carregar detalhes da cliente.");
@@ -343,6 +362,33 @@ const viewClienteDetails = async (cliente) => {
 const closeDetailsModal = () => {
   showDetailsModal.value = false;
   selectedCliente.value = null;
+  isEditing.value = false;
+};
+
+const startEdit = () => {
+  originalData.value = { ...selectedCliente.value };
+  isEditing.value = true;
+};
+
+const cancelEdit = () => {
+  selectedCliente.value = { ...originalData.value };
+  isEditing.value = false;
+};
+
+const handleUpdate = async () => {
+  try {
+    savingEdit.value = true;
+    await clientService.update(selectedCliente.value);
+    originalData.value = { ...selectedCliente.value };
+    isEditing.value = false;
+    fetchClientes();
+    alert('Cliente atualizada com sucesso!');
+  } catch (error) {
+    alert('Erro ao atualizar cliente.');
+    console.error(error);
+  } finally {
+    savingEdit.value = false;
+  }
 };
 
 const openNewClienteModal = () => {
@@ -922,5 +968,21 @@ onMounted(fetchClientes);
   color: var(--color-text);
   font-size: 15px;
   margin-bottom: 12px;
+}
+
+.btn-edit-luxury {
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  padding: 10px 28px;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btn-edit-luxury:hover {
+  background: var(--color-gold);
+  color: var(--color-bg-card);
 }
 </style>
