@@ -25,6 +25,44 @@
 
         <div class="modal-body-luxury custom-scrollbar">
           <form @submit.prevent="saveAppointment">
+
+            <!-- Busca de cliente -->
+            <div class="mb-3">
+              <label class="label-luxury">Buscar Cliente <span class="label-optional">(opcional)</span></label>
+              <div class="client-search-wrapper">
+                <div v-if="selectedClientChip" class="selected-client-chip">
+                  <div class="chip-avatar">{{ selectedClientChip.nome.charAt(0).toUpperCase() }}</div>
+                  <span class="chip-name">{{ selectedClientChip.nome }}</span>
+                  <button type="button" class="chip-clear" @click="clearClientSelection">&times;</button>
+                </div>
+                <div v-else style="position: relative">
+                  <input
+                    v-model="clientSearch"
+                    @input="showClientDropdown = true"
+                    @focus="showClientDropdown = true"
+                    @blur="hideDropdownDelayed"
+                    type="text"
+                    class="input-luxury"
+                    placeholder="Digite o nome da cliente..."
+                  />
+                  <div v-if="showClientDropdown && filteredClients.length > 0" class="client-dropdown custom-scrollbar">
+                    <div
+                      v-for="client in filteredClients"
+                      :key="client.id"
+                      class="client-dropdown-item"
+                      @mousedown="selectClient(client)"
+                    >
+                      <div class="client-dropdown-avatar">{{ client.nome.charAt(0).toUpperCase() }}</div>
+                      <div>
+                        <div class="client-dropdown-name">{{ client.nome }}</div>
+                        <div class="client-dropdown-phone">{{ client.telefone || 'Sem telefone' }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="label-luxury">Nome da Cliente</label>
@@ -86,16 +124,22 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted, reactive, computed } from 'vue';
 import FullCalendar from '@fullcalendar/vue3';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import CalendarService from '@/services/calendarService';
+import clientService from '@/services/clientService';
 
 const showModal = ref(false);
 const isEditing = ref(false);
 const telefoneDisplay = ref('');
+
+const clients = ref([]);
+const clientSearch = ref('');
+const showClientDropdown = ref(false);
+const selectedClientChip = ref(null);
 const STATUS_OPTIONS = [
   { value: 'agendado',   label: 'Agendado',   color: 'var(--color-status-agendado)' },
   { value: 'confirmado', label: 'Confirmado', color: 'var(--color-status-confirmado)' },
@@ -141,6 +185,41 @@ const calendarOptions = reactive({
   eventDrop: (info) => handleEventDrop(info),
 });
 
+const filteredClients = computed(() => {
+  if (!clientSearch.value.trim()) return clients.value.slice(0, 8);
+  const q = clientSearch.value.toLowerCase();
+  return clients.value.filter(c => c.nome.toLowerCase().includes(q)).slice(0, 8);
+});
+
+const selectClient = (client) => {
+  selectedClientChip.value = client;
+  form.nomeCliente = client.nome;
+  form.telefoneCliente = client.telefone ? client.telefone.replace(/\D/g, '') : '';
+  telefoneDisplay.value = formatTelefoneDisplay(client.telefone || '');
+  showClientDropdown.value = false;
+  clientSearch.value = '';
+};
+
+const clearClientSelection = () => {
+  selectedClientChip.value = null;
+  form.nomeCliente = '';
+  form.telefoneCliente = '';
+  telefoneDisplay.value = '';
+};
+
+const hideDropdownDelayed = () => {
+  setTimeout(() => { showClientDropdown.value = false; }, 200);
+};
+
+const fetchClients = async () => {
+  try {
+    const response = await clientService.getAll();
+    clients.value = response.data;
+  } catch (error) {
+    console.error('Erro ao buscar clientes:', error);
+  }
+};
+
 const fetchEvents = async () => {
   try {
     const response = await CalendarService.getAll();
@@ -166,6 +245,9 @@ const resetForm = () => {
   form.procedimento = '';
   form.observacoes = '';
   form.status = 'agendado';
+  clientSearch.value = '';
+  selectedClientChip.value = null;
+  showClientDropdown.value = false;
 };
 
 const openNewAppointmentModal = () => {
@@ -234,6 +316,9 @@ const handleEventClick = (info) => {
   form.procedimento = event.procedimento;
   form.observacoes = event.observacoes || '';
   form.status = event.status || 'agendado';
+  selectedClientChip.value = null;
+  clientSearch.value = '';
+  showClientDropdown.value = false;
   isEditing.value = true;
   showModal.value = true;
 };
@@ -294,7 +379,10 @@ const saveAppointment = async () => {
   }
 };
 
-onMounted(fetchEvents);
+onMounted(() => {
+  fetchEvents();
+  fetchClients();
+});
 </script>
 
 <style scoped>
@@ -466,6 +554,11 @@ onMounted(fetchEvents);
   margin-bottom: 10px;
 }
 
+.input-luxury::-webkit-calendar-picker-indicator {
+  filter: brightness(0) invert(1);
+  cursor: pointer;
+}
+
 .btn-cancel-luxury {
   background: transparent;
   border: 1px solid var(--color-primary);
@@ -584,6 +677,116 @@ onMounted(fetchEvents);
 
 .status-btn:hover {
   opacity: 0.85;
+}
+
+.label-optional {
+  font-size: 10px;
+  opacity: 0.5;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+.client-search-wrapper {
+  position: relative;
+}
+
+.client-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-gold-border);
+  border-radius: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.client-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.client-dropdown-item:hover {
+  background: var(--color-gold-bg-subtle);
+}
+
+.client-dropdown-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-gold-bg-hover);
+  color: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.client-dropdown-name {
+  font-size: 14px;
+  color: var(--color-text-light);
+  font-weight: 600;
+}
+
+.client-dropdown-phone {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.selected-client-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-gold-bg-subtle);
+  border: 1px solid var(--color-gold-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.chip-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: var(--color-bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.chip-name {
+  flex-grow: 1;
+  color: var(--color-text-light);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.chip-clear {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.chip-clear:hover {
+  color: var(--color-danger);
 }
 
 @media (max-width: 768px) {
