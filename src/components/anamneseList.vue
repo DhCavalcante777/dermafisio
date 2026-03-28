@@ -109,7 +109,7 @@
       </div>
     </div>
 
-    <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
+    <div v-if="showModal" class="modal-overlay">
       <div class="modal-content-luxury shadow-lg">
         <div
           class="modal-header-luxury d-flex justify-content-between align-items-center"
