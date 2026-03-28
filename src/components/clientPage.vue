@@ -108,31 +108,82 @@
               </div>
             </div>
 
-            <!-- Linha do Tempo de Anamneses -->
+            <!-- Histórico: Tabs -->
             <div class="col-md-8 ps-4">
-              <div class="d-flex justify-content-between align-items-center mb-3">
-                <h4 class="section-title-luxury m-0">Histórico de Anamneses</h4>
-                <button v-if="!isEditing" class="btn-link-anamnese" @click="openLinkAnamneseModal">
-                  <i class="fas fa-link me-1"></i> Vincular Anamnese
+              <!-- Tab Switcher -->
+              <div class="d-flex gap-3 mb-4 align-items-center">
+                <button
+                  class="btn-tab-history"
+                  :class="{ active: activeHistoryTab === 'anamnese' }"
+                  @click="activeHistoryTab = 'anamnese'"
+                >
+                  <i class="fas fa-clipboard-list me-1"></i> Anamneses
+                  <span class="tab-count">{{ (selectedCliente.historicoAnamneses || []).length }}</span>
+                </button>
+                <button
+                  class="btn-tab-history"
+                  :class="{ active: activeHistoryTab === 'tratamento' }"
+                  @click="activeHistoryTab = 'tratamento'"
+                >
+                  <i class="fas fa-spa me-1"></i> Tratamentos
+                  <span class="tab-count">{{ (selectedCliente.historicoTratamentos || []).length }}</span>
                 </button>
               </div>
-              <div v-if="selectedCliente.historicoAnamneses && selectedCliente.historicoAnamneses.length > 0" class="timeline">
-                <div v-for="ficha in selectedCliente.historicoAnamneses" :key="ficha.id" class="timeline-item">
-                  <div class="timeline-dot"></div>
-                  <div class="timeline-content shadow-sm">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                      <h5 class="ficha-title">Ficha de Anamnese #{{ ficha.id }}</h5>
-                      <span class="ficha-date">{{ formatDate(ficha.dataCriacao) }}</span>
+
+              <!-- Anamneses Tab -->
+              <template v-if="activeHistoryTab === 'anamnese'">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="section-title-luxury m-0">Histórico de Anamneses</h4>
+                  <button v-if="!isEditing" class="btn-link-anamnese" @click="openLinkAnamneseModal">
+                    <i class="fas fa-link me-1"></i> Vincular Anamnese
+                  </button>
+                </div>
+                <div v-if="selectedCliente.historicoAnamneses && selectedCliente.historicoAnamneses.length > 0" class="timeline">
+                  <div v-for="ficha in selectedCliente.historicoAnamneses" :key="ficha.id" class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content shadow-sm">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="ficha-title">Ficha de Anamnese #{{ ficha.id }}</h5>
+                        <span class="ficha-date">{{ formatDate(ficha.dataCriacao) }}</span>
+                      </div>
+                      <p class="ficha-queixa"><strong>Queixa:</strong> {{ ficha.queixaPrincipal || 'Não informada' }}</p>
+                      <button @click="verFichaCompleta(ficha.id)" class="btn-link-gold">Ver Ficha Completa <i class="fas fa-external-link-alt ms-1"></i></button>
                     </div>
-                    <p class="ficha-queixa"><strong>Queixa:</strong> {{ ficha.queixaPrincipal || 'Não informada' }}</p>
-                    <button @click="verFichaCompleta(ficha.id)" class="btn-link-gold">Ver Ficha Completa <i class="fas fa-external-link-alt ms-1"></i></button>
                   </div>
                 </div>
-              </div>
-              <div v-else class="text-center py-5 opacity-50">
-                <i class="fas fa-clipboard-list fa-3x mb-3"></i>
-                <p>Nenhuma ficha de anamnese vinculada a esta cliente.</p>
-              </div>
+                <div v-else class="text-center py-5 opacity-50">
+                  <i class="fas fa-clipboard-list fa-3x mb-3"></i>
+                  <p>Nenhuma ficha de anamnese vinculada a esta cliente.</p>
+                </div>
+              </template>
+
+              <!-- Tratamentos Tab -->
+              <template v-if="activeHistoryTab === 'tratamento'">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="section-title-luxury m-0">Histórico de Tratamentos</h4>
+                  <button v-if="!isEditing" class="btn-link-anamnese" @click="openLinkTratamentoModal">
+                    <i class="fas fa-link me-1"></i> Vincular Tratamento
+                  </button>
+                </div>
+                <div v-if="selectedCliente.historicoTratamentos && selectedCliente.historicoTratamentos.length > 0" class="timeline">
+                  <div v-for="trat in selectedCliente.historicoTratamentos" :key="trat.id" class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content shadow-sm">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="ficha-title">{{ trat.procedimento || 'Tratamento #' + trat.id }}</h5>
+                        <span class="ficha-date">{{ formatDate(trat.data || trat.dataCriacao) }}</span>
+                      </div>
+                      <p class="ficha-queixa" v-if="trat.tratamento"><strong>Tratamento:</strong> {{ trat.tratamento }}</p>
+                      <p class="ficha-queixa" v-if="trat.resultado"><strong>Resultado:</strong> {{ trat.resultado }}</p>
+                      <button @click="verTratamentoCompleto(trat.id)" class="btn-link-gold mt-2">Ver Tratamento Completo <i class="fas fa-external-link-alt ms-1"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <div v-else class="text-center py-5 opacity-50">
+                  <i class="fas fa-spa fa-3x mb-3"></i>
+                  <p>Nenhum tratamento vinculado a esta cliente.</p>
+                </div>
+              </template>
             </div>
           </div>
         </div>
@@ -213,6 +264,60 @@
       </div>
     </div>
   </div>
+  <!-- Modal: Vincular Tratamento -->
+  <div v-if="showLinkTratamentoModal" class="luxury-modal-overlay" @click.self="closeLinkTratamentoModal">
+    <div class="luxury-modal luxury-modal-sm animate__animated animate__fadeInUp">
+      <button class="btn-close-modal" @click="closeLinkTratamentoModal">&times;</button>
+      <div class="mb-4 pb-4 border-bottom-gold">
+        <h2 class="modal-title-luxury mb-1">Vincular Tratamento</h2>
+        <p class="text-gold-subtle m-0">Selecione um tratamento não vinculado para associar a <strong>{{ selectedCliente?.nome }}</strong>.</p>
+      </div>
+
+      <!-- Confirmação -->
+      <div v-if="pendingTratamento" class="confirm-link-anamnese-card">
+        <div class="confirm-link-anamnese-icon"><i class="fas fa-spa"></i></div>
+        <div class="confirm-link-anamnese-name">{{ pendingTratamento.procedimento || 'Tratamento #' + pendingTratamento.id }}</div>
+        <div class="confirm-link-anamnese-date">{{ formatDate(pendingTratamento.data || pendingTratamento.dataCriacao) }}</div>
+        <p class="confirm-link-anamnese-question">Vincular este tratamento à cliente <strong>{{ selectedCliente?.nome }}</strong>?</p>
+        <div class="d-flex gap-3 justify-content-center mt-3">
+          <button class="btn-cancel-modal" @click="pendingTratamento = null">Não, voltar</button>
+          <button class="btn-save-modal" @click="confirmLinkTratamento" :disabled="linkingTratamento">
+            {{ linkingTratamento ? 'Vinculando...' : 'Sim, vincular' }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Lista -->
+      <template v-else>
+        <div class="search-wrapper mb-3" style="position:relative">
+          <i class="fas fa-search search-icon"></i>
+          <input v-model="tratamentoFilter" class="search-input" placeholder="Buscar por procedimento..." style="padding-left:38px" />
+        </div>
+        <div class="anamnese-link-list custom-scrollbar">
+          <div v-if="loadingTratamentos" class="text-center py-4">
+            <div class="spinner-border" role="status"></div>
+          </div>
+          <div
+            v-else
+            v-for="item in filteredUnlinkedTratamentos"
+            :key="item.id"
+            class="anamnese-link-item"
+            @click="pendingTratamento = item"
+          >
+            <div class="anamnese-link-icon"><i class="fas fa-spa"></i></div>
+            <div>
+              <div class="anamnese-link-name">{{ item.procedimento || 'Tratamento #' + item.id }}</div>
+              <div class="anamnese-link-meta">{{ formatDate(item.data || item.dataCriacao) }} · {{ item.tratamento ? item.tratamento.substring(0, 40) + '...' : 'Sem descrição' }}</div>
+            </div>
+          </div>
+          <div v-if="!loadingTratamentos && filteredUnlinkedTratamentos.length === 0" class="text-center text-muted py-4">
+            Nenhum tratamento disponível para vincular.
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+
   <!-- Modal: Ficha de Anamnese -->
   <div v-if="showFichaModal && selectedFicha" class="luxury-modal-overlay" @click.self="closeFichaModal">
     <div class="luxury-modal luxury-modal-ficha animate__animated animate__fadeInUp">
@@ -224,7 +329,6 @@
       </div>
 
       <div class="modal-body-luxury custom-scrollbar pt-4">
-
         <div class="ficha-section-title">Dados Pessoais</div>
         <div class="row g-3 mb-4">
           <div class="col-md-6">
@@ -312,6 +416,38 @@
     </div>
   </div>
 
+  <!-- Modal: Ficha de Tratamento -->
+  <div v-if="showTratamentoModal && selectedTratamento" class="luxury-modal-overlay" @click.self="closeTratamentoModal">
+    <div class="luxury-modal luxury-modal-ficha animate__animated animate__fadeInUp">
+      <button class="btn-close-modal" @click="closeTratamentoModal">&times;</button>
+      <div class="modal-header-luxury">
+        <h2 class="modal-title-luxury">Tratamento #{{ selectedTratamento.id }}</h2>
+        <p class="text-gold-subtle m-0">{{ selectedTratamento.procedimento || 'Tratamento' }} &mdash; {{ formatDate(selectedTratamento.data || selectedTratamento.dataCriacao) }}</p>
+      </div>
+      <div class="modal-body-luxury custom-scrollbar pt-4">
+        <div class="ficha-section-title">Informações do Tratamento</div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="ficha-label">Procedimento</label>
+            <p class="ficha-value">{{ selectedTratamento.procedimento || '---' }}</p>
+          </div>
+          <div class="col-md-6">
+            <label class="ficha-label">Data</label>
+            <p class="ficha-value">{{ formatDate(selectedTratamento.data || selectedTratamento.dataCriacao) }}</p>
+          </div>
+          <div class="col-12">
+            <label class="ficha-label">Tratamento</label>
+            <p class="ficha-value">{{ selectedTratamento.tratamento || '---' }}</p>
+          </div>
+          <div class="col-12">
+            <label class="ficha-label">Resultado</label>
+            <p class="ficha-value">{{ selectedTratamento.resultado || '---' }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: Vincular Anamnese -->
   <div v-if="showLinkAnamneseModal" class="luxury-modal-overlay" @click.self="closeLinkAnamneseModal">
     <div class="luxury-modal luxury-modal-sm animate__animated animate__fadeInUp">
@@ -372,6 +508,7 @@ import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import clientService from '@/services/clientService';
 import AnamneseService from '@/services/anamneseService';
+import TratamentoService from '@/services/tratamentoService';
 
 const router = useRouter();
 
@@ -380,6 +517,7 @@ const loading = ref(true);
 const searchQuery = ref('');
 const showDetailsModal = ref(false);
 const selectedCliente = ref(null);
+const activeHistoryTab = ref('anamnese');
 
 const showNewClienteModal = ref(false);
 const savingCliente = ref(false);
@@ -387,6 +525,9 @@ const newCliente = ref({ nome: '', telefone: '', email: '', cpf: '', endereco: '
 
 const showFichaModal = ref(false);
 const selectedFicha = ref(null);
+
+const showTratamentoModal = ref(false);
+const selectedTratamento = ref(null);
 
 const showConfirmDelete = ref(false);
 const deletingCliente = ref(false);
@@ -402,6 +543,13 @@ const anamneseFilter = ref('');
 const loadingAnamneses = ref(false);
 const pendingAnamnese = ref(null);
 const linkingAnamnese = ref(false);
+
+const showLinkTratamentoModal = ref(false);
+const unlinkedTratamentos = ref([]);
+const tratamentoFilter = ref('');
+const loadingTratamentos = ref(false);
+const pendingTratamento = ref(null);
+const linkingTratamento = ref(false);
 
 const fetchClientes = async () => {
   try {
@@ -428,6 +576,7 @@ const viewClienteDetails = async (cliente) => {
     selectedCliente.value = response.data;
     originalData.value = { ...response.data };
     editableDataNasc.value = response.data.dataNasc ? response.data.dataNasc.split('T')[0] : '';
+    activeHistoryTab.value = 'anamnese';
     showDetailsModal.value = true;
   } catch (error) {
     alert("Erro ao carregar detalhes da cliente.");
@@ -516,6 +665,22 @@ const closeFichaModal = () => {
   selectedFicha.value = null;
 };
 
+const verTratamentoCompleto = async (tratamentoId) => {
+  try {
+    const response = await TratamentoService.getOne(tratamentoId);
+    selectedTratamento.value = response.data;
+    showTratamentoModal.value = true;
+  } catch (error) {
+    alert('Erro ao carregar o tratamento.');
+    console.error(error);
+  }
+};
+
+const closeTratamentoModal = () => {
+  showTratamentoModal.value = false;
+  selectedTratamento.value = null;
+};
+
 const handleDeleteCliente = async () => {
   try {
     deletingCliente.value = true;
@@ -576,6 +741,54 @@ const filteredUnlinkedAnamneses = computed(() => {
   if (!anamneseFilter.value) return unlinkedAnamneses.value;
   return unlinkedAnamneses.value.filter(a =>
     a.nome.toLowerCase().includes(anamneseFilter.value.toLowerCase())
+  );
+});
+
+const openLinkTratamentoModal = async () => {
+  pendingTratamento.value = null;
+  tratamentoFilter.value = '';
+  showLinkTratamentoModal.value = true;
+  loadingTratamentos.value = true;
+  try {
+    const response = await TratamentoService.getAll();
+    unlinkedTratamentos.value = response.data.filter(t => !t.clienteId);
+  } catch (error) {
+    alert('Erro ao carregar tratamentos.');
+    console.error(error);
+  } finally {
+    loadingTratamentos.value = false;
+  }
+};
+
+const closeLinkTratamentoModal = () => {
+  showLinkTratamentoModal.value = false;
+  pendingTratamento.value = null;
+};
+
+const confirmLinkTratamento = async () => {
+  if (!pendingTratamento.value) return;
+  try {
+    linkingTratamento.value = true;
+    const dataToSend = { ...pendingTratamento.value, clienteId: selectedCliente.value.id };
+    delete dataToSend.dataCriacao;
+    await TratamentoService.update(dataToSend);
+    closeLinkTratamentoModal();
+    const response = await clientService.getOne(selectedCliente.value.id);
+    selectedCliente.value = response.data;
+    alert(`Tratamento vinculado à cliente "${selectedCliente.value.nome}" com sucesso!`);
+  } catch (error) {
+    alert('Erro ao vincular tratamento.');
+    console.error(error);
+  } finally {
+    linkingTratamento.value = false;
+  }
+};
+
+const filteredUnlinkedTratamentos = computed(() => {
+  if (!tratamentoFilter.value) return unlinkedTratamentos.value;
+  return unlinkedTratamentos.value.filter(t =>
+    (t.procedimento && t.procedimento.toLowerCase().includes(tratamentoFilter.value.toLowerCase())) ||
+    (t.tratamento && t.tratamento.toLowerCase().includes(tratamentoFilter.value.toLowerCase()))
   );
 });
 
@@ -1204,5 +1417,40 @@ onMounted(fetchClientes);
 .btn-edit-luxury:hover {
   background: var(--color-gold);
   color: var(--color-bg-card);
+}
+
+/* History Tabs */
+.btn-tab-history {
+  background: transparent;
+  border: 1px solid var(--color-gold-border);
+  color: var(--color-text-muted);
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: 0.25s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-tab-history:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+.btn-tab-history.active {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-bg-card);
+  font-weight: 600;
+}
+.tab-count {
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 11px;
+}
+.btn-tab-history.active .tab-count {
+  background: rgba(0,0,0,0.3);
 }
 </style>

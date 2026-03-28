@@ -38,6 +38,9 @@
       <router-link to="/dashboard/anamnese" class="nav-link" active-class="active" @click="isOpen = false">
         <i class="fas fa-clock me-3"></i> <span>Anamneses</span>
       </router-link>
+      <router-link to="/dashboard/tratamentos" class="nav-link" active-class="active" @click="isOpen = false">
+        <i class="fas fa-spa me-3"></i> <span>Tratamentos</span>
+      </router-link>
       <router-link to="/dashboard/financial" class="nav-link" active-class="active" @click="isOpen = false">
         <i class="fas fa-wallet me-3"></i> <span>Financeiro</span>
       </router-link>
