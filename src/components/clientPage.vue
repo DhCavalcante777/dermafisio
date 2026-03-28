@@ -96,8 +96,11 @@
               <div class="detail-item mb-3">
                 <label>Telefone</label>
                 <input v-if="isEditing" v-model="selectedCliente.telefone" class="input-luxury" placeholder="(00) 00000-0000" />
-                <p v-else>{{ selectedCliente.telefone || '---' }}</p>
-              </div>
+                <p v-else>{{ selectedCliente.telefone || '---' }}</p>              </div>
+              <div class="detail-item mb-3">
+                <label>Data de Nascimento</label>
+                <input v-if="isEditing" v-model="editableDataNasc" type="date" class="input-luxury" />
+                <p v-else>{{ selectedCliente.dataNasc ? formatDate(selectedCliente.dataNasc) : '---' }}</p>              </div>
               <div class="detail-item mb-3">
                 <label>Endereço</label>
                 <input v-if="isEditing" v-model="selectedCliente.endereco" class="input-luxury" placeholder="Rua, número, bairro..." />
@@ -191,6 +194,10 @@
         <div class="col-12">
           <label class="form-label-luxury">Endereço</label>
           <input v-model="newCliente.endereco" class="input-luxury" placeholder="Rua, número, bairro..." />
+        </div>
+        <div class="col-md-6">
+          <label class="form-label-luxury">Data de Nascimento</label>
+          <input v-model="newCliente.dataNasc" type="date" class="input-luxury" />
         </div>
       </div>
       <div class="d-flex gap-3 justify-content-end mt-4">
@@ -317,7 +324,7 @@ const selectedCliente = ref(null);
 
 const showNewClienteModal = ref(false);
 const savingCliente = ref(false);
-const newCliente = ref({ nome: '', telefone: '', email: '', cpf: '', endereco: '' });
+const newCliente = ref({ nome: '', telefone: '', email: '', cpf: '', endereco: '', dataNasc: '' });
 
 const showFichaModal = ref(false);
 const selectedFicha = ref(null);
@@ -328,6 +335,7 @@ const deletingCliente = ref(false);
 const isEditing = ref(false);
 const originalData = ref(null);
 const savingEdit = ref(false);
+const editableDataNasc = ref('');
 
 const fetchClientes = async () => {
   try {
@@ -353,6 +361,7 @@ const viewClienteDetails = async (cliente) => {
     const response = await clientService.getOne(cliente.id);
     selectedCliente.value = response.data;
     originalData.value = { ...response.data };
+    editableDataNasc.value = response.data.dataNasc ? response.data.dataNasc.split('T')[0] : '';
     showDetailsModal.value = true;
   } catch (error) {
     alert("Erro ao carregar detalhes da cliente.");
@@ -372,14 +381,19 @@ const startEdit = () => {
 
 const cancelEdit = () => {
   selectedCliente.value = { ...originalData.value };
+  editableDataNasc.value = originalData.value.dataNasc ? originalData.value.dataNasc.split('T')[0] : '';
   isEditing.value = false;
 };
 
 const handleUpdate = async () => {
   try {
     savingEdit.value = true;
-    await clientService.update(selectedCliente.value);
+    const dataToSend = { ...selectedCliente.value };
+    dataToSend.dataNasc = editableDataNasc.value ? editableDataNasc.value + 'T00:00:00.000Z' : null;
+    await clientService.update(dataToSend);
+    selectedCliente.value.dataNasc = dataToSend.dataNasc;
     originalData.value = { ...selectedCliente.value };
+    editableDataNasc.value = selectedCliente.value.dataNasc ? selectedCliente.value.dataNasc.split('T')[0] : '';
     isEditing.value = false;
     fetchClientes();
     alert('Cliente atualizada com sucesso!');
@@ -392,7 +406,7 @@ const handleUpdate = async () => {
 };
 
 const openNewClienteModal = () => {
-  newCliente.value = { nome: '', telefone: '', email: '', cpf: '', endereco: '' };
+  newCliente.value = { nome: '', telefone: '', email: '', cpf: '', endereco: '', dataNasc: '' };
   showNewClienteModal.value = true;
 };
 
